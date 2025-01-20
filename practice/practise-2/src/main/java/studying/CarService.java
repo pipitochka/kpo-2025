@@ -16,7 +16,15 @@ public class CarService implements ICarProvider{
 
         var filteredCars = cars.stream().filter(car -> car.isCompatible(customer)).toList();
 
-        return filteredCars.isEmpty() ? null : filteredCars.removeFirst();
+        if (filteredCars.isEmpty()) {
+            return null;
+        }
+
+        var firstCar = filteredCars.stream().findFirst().get();
+
+        cars.remove(firstCar);
+
+        return firstCar;
     }
 
     public <TParams> void addCar(ICarFactory<TParams> carFactory, TParams carParams)
