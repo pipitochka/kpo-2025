@@ -1,43 +1,34 @@
 package studying;
 
-import studying.domains.Customer;
-import studying.factories.HandCarFactory;
-import studying.factories.PedalCarFactory;
-import studying.params.EmptyEngineParams;
-import studying.params.PedalEngineParams;
-import studying.services.CarService;
-import studying.services.CustomerStorage;
-import studying.services.HseCarService;
-
 public class Main {
     public static void main(String[] args) {
         System.out.println("HSE");
+        CarService carService = new CarService();
+        CustomerStorage customerStorage = new CustomerStorage();
+        HseCarService hseCarService = new HseCarService(carService, customerStorage);
+        PedalCarFactory pedalCarFactory = new PedalCarFactory();
+        HandCarFactory handCarFactory = new HandCarFactory();
 
-        var carService = new CarService();
+        customerStorage.addCustomer(new Customer("1", 6, 4));
+        customerStorage.addCustomer(new Customer("2", 4, 6));
+        customerStorage.addCustomer(new Customer("3", 6, 6));
+        customerStorage.addCustomer(new Customer("4", 4, 4));
 
-        var customerStorage = new CustomerStorage();
+        carService.addCar(pedalCarFactory, new PedalEngineParams(2));
+        carService.addCar(pedalCarFactory, new PedalEngineParams(2));
+        carService.addCar(handCarFactory, new EmptyEngineParams());
+        carService.addCar(handCarFactory, new EmptyEngineParams());
 
-        var hseCarService = new HseCarService(carService, customerStorage);
-
-        var pedalCarFactory = new PedalCarFactory();
-
-        var handCarFactory = new HandCarFactory();
-
-        customerStorage.addCustomer(new Customer("Ivan1",6,4));
-        customerStorage.addCustomer(new Customer("Maksim",4,6));
-        customerStorage.addCustomer(new Customer("Petya",6,6));
-        customerStorage.addCustomer(new Customer("Nikita",4,4));
-
-        carService.addCar(pedalCarFactory, new PedalEngineParams(6));
-        carService.addCar(pedalCarFactory, new PedalEngineParams(6));
-
-        carService.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
-        carService.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
-
-        customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
+        for (Customer customer : customerStorage.getCustomers()) {
+            System.out.println(customer);
+        }
 
         hseCarService.sellCars();
 
-        customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
+        for (Customer customer : customerStorage.getCustomers()) {
+            System.out.println(customer);
+        }
+
+
     }
 }
