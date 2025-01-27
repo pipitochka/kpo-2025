@@ -148,3 +148,6 @@ CustomersStorage o-- Customer
 @enduml
 ```
 </details>
+
+
+апруваю
