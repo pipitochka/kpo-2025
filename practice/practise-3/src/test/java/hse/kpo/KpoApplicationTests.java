@@ -1,7 +1,6 @@
 package hse.kpo;
 
 import hse.kpo.domains.Customer;
-import hse.kpo.factories.FlyingCarFactory;
 import hse.kpo.factories.HandCarFactory;
 import hse.kpo.factories.PedalCarFactory;
 import hse.kpo.params.EmptyEngineParams;
@@ -24,9 +23,6 @@ class KpoApplicationTests {
 	private CustomerStorage customerStorage;
 
 	@Autowired
-	private FlyingCarFactory flyingCarFactory;
-
-	@Autowired
 	private HseCarService hseCarService;
 
 	@Autowired
@@ -42,9 +38,6 @@ class KpoApplicationTests {
 		customerStorage.addCustomer(new Customer("Maksim",4,6));
 		customerStorage.addCustomer(new Customer("Petya",6,6));
 		customerStorage.addCustomer(new Customer("Nikita",4,4));
-		customerStorage.addCustomer(new Customer("Artem",4,4, 350));
-
-		carService.addCar(flyingCarFactory, EmptyEngineParams.DEFAULT);
 
 		carService.addCar(pedalCarFactory, new PedalEngineParams(6));
 		carService.addCar(pedalCarFactory, new PedalEngineParams(6));
