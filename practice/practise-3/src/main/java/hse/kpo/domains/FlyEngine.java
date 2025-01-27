@@ -1,13 +1,10 @@
 package hse.kpo.domains;
 
 import hse.kpo.interfaces.IEngine;
-import lombok.Getter;
 import lombok.ToString;
 
 @ToString
-@Getter
-public class PedalEngine implements IEngine {
-    private final int size;
+public class FlyEngine implements IEngine {
 
     /**
      * Проверяет подходит ли двигатель покупателю
@@ -16,14 +13,6 @@ public class PedalEngine implements IEngine {
      */
     @Override
     public boolean isCompatible(Customer customer) {
-        return customer.getLegPower() > 5;
-    }
-
-    /**
-     * Создает педальный двигатель
-     * @param size
-     */
-    public PedalEngine(int size) {
-        this.size = size;
+        return customer.getIq() > 300;
     }
 }

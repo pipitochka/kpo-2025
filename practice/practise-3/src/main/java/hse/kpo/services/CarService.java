@@ -24,15 +24,6 @@ public class CarService implements ICarProvider {
         firstCar.ifPresent(cars::remove);
 
         return firstCar.orElse(null);
-        if (filteredCars.isEmpty()) {
-            return null;
-        }
-
-        var firstCar = filteredCars.stream().findFirst().get();
-
-        cars.remove(firstCar);
-
-        return firstCar;
     }
 
     public <TParams> void addCar(ICarFactory<TParams> carFactory, TParams carParams)
