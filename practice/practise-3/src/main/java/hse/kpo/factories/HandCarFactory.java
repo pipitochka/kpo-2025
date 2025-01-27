@@ -8,6 +8,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HandCarFactory implements ICarFactory<EmptyEngineParams> {
+
+    /**
+     * Создает фабрику ручных машин
+     * @param carParams
+     * @param carNumber
+     * @return
+     */
     @Override
     public Car createCar(EmptyEngineParams carParams, int carNumber) {
         var engine = new HandEngine(); // Создаем двигатель без каких-либо параметров
