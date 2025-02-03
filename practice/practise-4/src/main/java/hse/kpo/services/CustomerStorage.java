@@ -9,7 +9,7 @@ import java.util.List;
 
 @Component
 public class CustomerStorage implements ICustomerProvider {
-    private final List<Customer> customers = new ArrayList<>();
+    private List<Customer> customers = new ArrayList<>();
 
     @Override
     public List<Customer> getCustomers() {
