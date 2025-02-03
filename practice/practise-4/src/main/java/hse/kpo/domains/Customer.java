@@ -4,9 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- * class of customer.
- */
 @Getter
 @ToString
 public class Customer {
@@ -23,12 +20,11 @@ public class Customer {
     private final int iq;
 
     /**
-     * Constructor with iq.
-     *
-     * @param name person name.
-     * @param legPower person leg power.
-     * @param handPower person hand power.
-     * @param iq person iq.
+     * Конструктор человека без iq
+     * @param name
+     * @param legPower
+     * @param handPower
+     * @param iq
      */
     public Customer(String name, int legPower, int handPower, int iq) {
         this.name = name;
@@ -38,11 +34,10 @@ public class Customer {
     }
 
     /**
-     * Constructor without iq.
-     *
-     * @param name person name.
-     * @param legPower person leg power.
-     * @param handPower person hand power.
+     * Конструктор человека со всеми параметрами
+     * @param name
+     * @param legPower
+     * @param handPower
      */
     public Customer(String name, int legPower, int handPower) {
         this.name = name;

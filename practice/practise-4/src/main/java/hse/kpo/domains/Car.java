@@ -1,36 +1,31 @@
 package hse.kpo.domains;
 
-import hse.kpo.interfaces.EngineInterface;
+import hse.kpo.interfaces.IEngine;
 import lombok.Getter;
 import lombok.ToString;
 
-/**
- * class to makes cars.
- */
 @ToString
 public class Car {
 
-    private EngineInterface engine;
+    private IEngine engine;
 
     @Getter
-    private int vin;
+    private int VIN;
 
     /**
-     * Создает автомобиль.
-     *
-     * @param vin unique number of a car.
-     * @param engine engine witch will be used for a car.
+     * Создает автомобиль
+     * @param VIN
+     * @param engine
      */
-    public Car(int vin, EngineInterface engine) {
-        this.vin = vin;
+    public Car(int VIN, IEngine engine) {
+        this.VIN = VIN;
         this.engine = engine;
     }
 
     /**
-     * Проверяет подходит ли человек машине.
-     *
-     * @param customer customer who would buy a car.
-     * @return true если подходят, false - иначе.
+     * Проверяет подходит ли человек машине
+     * @param customer
+     * @return true если подходят, false - иначе
      */
     public boolean isCompatible(Customer customer) {
         return this.engine.isCompatible(customer); // внутри метода просто вызываем соответствующий метод двигателя
