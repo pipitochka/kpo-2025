@@ -1,24 +1,25 @@
 package hse.kpo.factories;
 
 import hse.kpo.domains.Car;
+import hse.kpo.domains.FlyEngine;
 import hse.kpo.domains.HandEngine;
 import hse.kpo.interfaces.ICarFactory;
 import hse.kpo.params.EmptyEngineParams;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HandCarFactory implements ICarFactory<EmptyEngineParams> {
+public class FlyingCarFactory implements ICarFactory<EmptyEngineParams> {
 
     /**
-     * Создает фабрику ручных машин
+     * Создает фабрику летающих бибик
      * @param carParams
      * @param carNumber
      * @return
      */
     @Override
     public Car createCar(EmptyEngineParams carParams, int carNumber) {
-        var engine = new HandEngine(); // Создаем двигатель без каких-либо параметров
+        var engine = new FlyEngine();
 
-        return new Car(carNumber, engine); // создаем автомобиль с ручным приводом
+        return new Car(carNumber, engine);
     }
 }
