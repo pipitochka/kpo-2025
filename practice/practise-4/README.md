@@ -1,41 +1,43 @@
-# Занятие 4. Testing
-Много тестов - меньше стресса. Реализуем тесты на все что только можно.
+# Занятие 3. IoC
+После расширения фабрик по производству автомобилей в НИУ ВШЭ было принято решение упростить их внедрение в работу. Для этого стажер архитектор нашел интересную вещь: Весну. Однако ему все еще непонятно что это за di и ioc. Попробуем реализовать мечту стажера и внедрим Spring в наше приложение.
 ## Функциональные требования
 1. Ничего не должно сломаться.
 ## Требования к реализации
-1. В папке practise-4 перенести проект из 3 практики.
-2. Дописать тесты на все классы, используя, [правила](../../FAQ/testing/UNIT.md).
-3. Добавить jacoco плагин.
+1. В папке practise-3 перенести проект из 2 практики с использованием springBoot и запустить main:
+2. Внедрить создание классов с помощью бинов.
+3. Реализовать unit test с помощью DI с тем же функционалом.
+4. Поставить плагин checkstyle и исправить все несоответствия стилю кода.
 
 ## Тестирование
-1. Запустить тесты.
-   - Все тесты пройдут успешно.
-2. Сгенерировать отчет по тестовому покрытию.
-   - Покрытие тестов должно быть больше 90% в отчете.
-3. Запуск задачи checkstyleTest выдает успешный результат
+1. Запустить main в окружении springBoot без DI.
+   - Приложение запускается и выводит тот же ответ.
+2. Запустить unit тест с помощью внедрения бинов.
+   - Тест запускается и выводит тот же ответ.
+3. Запуск задачи checkstyleMain выдает успешный результат
 ## Задание на доработку
-1. Поставить к себе на ноутбук/сервер приложение, которое будет делать историю гитхаба зеленой 
-(делать много коммитов, желательно с java)
+1. Написать unit-тесты на все public методы
 ## Пояснения к реализации
-Для внедрения плагина jacoco необходимо добавить идентификатор с его конфигурацией в build gradle:
+Чтобы сделать сервис видимым контексту spring, нужно добавить аннотацию @Component, которая создает его бин.
+Для внедрения бина нужно написать конструктор | аннотацию над классом @RequiredArgsConstructor
+| аннотацию над полем @Autowired
+Для внедрения плагина checkstyle необходимо добавить идентификатор с его конфигурацией в build gradle:
 <details>
-<summary>Jacoco</summary>
+<summary>Checkstyle</summary>
 ```
 plugins {
-	jacoco
+	checkstyle
 }
-tasks.test {
-	finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
-}
-tasks.jacocoTestReport {
-	dependsOn(tasks.test) // tests are required to run before generating the report
+checkstyle {
+toolVersion = "10.13.0"
+isIgnoreFailures = false
+maxWarnings = 0
+maxErrors = 0
 }
 ```
 </details>
-Для его запуска нужно пройти в gradle.Tasks.verification.jacocoTestReport.
 <details> 
 <summary>Ссылки</summary>
-1. https://docs.gradle.org/current/userguide/jacoco_plugin.html#sec:configuring_the_jacoco_plugin
-2. https://javarush.com/groups/posts/2590-top-50-java-core-voprosov-i-otvetov-na-sobesedovanii-chastjh-1 
-3. https://javarush.com/groups/posts/2592-top-50-java-core-voprosov-iotvetov-na-sobesedovanii-chastjh-2
+1. https://topjava.ru/blog/back-to-basics-dependency-injection
+2. https://start.spring.io/
+3. https://checkstyle.sourceforge.io/
 </details>
