@@ -1,9 +1,11 @@
 package hse.kpo.interfaces;
 
-
 import hse.kpo.domains.Customer;
 
-public interface IEngine {
+/**
+ * Interface of car engine.
+ */
+public interface EngineInterface {
 
     /**
      * Метод для проверки совместимости двигателя с покупателем.

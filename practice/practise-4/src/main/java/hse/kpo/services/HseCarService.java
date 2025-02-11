@@ -1,27 +1,29 @@
 package hse.kpo.services;
 
-import hse.kpo.interfaces.ICarProvider;
-import hse.kpo.interfaces.ICustomerProvider;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
+import hse.kpo.interfaces.CarProviderInterface;
+import hse.kpo.interfaces.CustomerProviderInterface;
 import java.util.Objects;
+import org.springframework.stereotype.Component;
 
+/**
+ * class of car service.
+ */
 @Component
 public class HseCarService {
 
-    private final ICarProvider carProvider;
+    private final CarProviderInterface carProvider;
 
-    private final ICustomerProvider customerProvider;
+    private final CustomerProviderInterface customerProvider;
 
-    public HseCarService(ICarProvider carProvider, ICustomerProvider customersProvider)
-    {
+    public HseCarService(CarProviderInterface carProvider, CustomerProviderInterface customersProvider) {
         this.carProvider = carProvider;
         this.customerProvider = customersProvider;
     }
 
-    public void sellCars()
-    {
+    /**
+     * function to sell all cars to all customers.
+     */
+    public void sellCars() {
         // получаем список покупателей
         var customers = customerProvider.getCustomers();
         // пробегаемся по полученному списку

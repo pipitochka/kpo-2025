@@ -1,15 +1,18 @@
 package hse.kpo.domains;
 
-import hse.kpo.interfaces.IEngine;
+import hse.kpo.interfaces.EngineInterface;
 import lombok.ToString;
 
+/**
+ * class of hand engine.
+ */
 @ToString
-public class HandEngine implements IEngine {
+public class HandEngineInterface implements EngineInterface {
 
     /**
-     * Проверяет подходит ли двигатель покупателю
+     * Проверяет подходит ли двигатель покупателю.
+     *
      * @param customer - покупатель, с которым мы сравниваем двигатель
-     * @return
      */
     @Override
     public boolean isCompatible(Customer customer) {
