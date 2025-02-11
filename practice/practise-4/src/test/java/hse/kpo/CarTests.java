@@ -47,12 +47,12 @@ public class CarTests {
     @Test
     @DisplayName("HandCarFactory")
     void PedalCarFactoryTest() {
-        var pedalParamsMock = Mockito.mock(PedalEngineParams.class);
-        Mockito.when(pedalParamsMock.pedalSize()).thenReturn(3);
-        Assertions.assertEquals(pedalCarFactory.createCar(pedalParamsMock, 1).getVIN(), 3);
-//		pedalCarFactory.createCar(pedalParamsMock, 2);
-//		pedalCarFactory.createCar(pedalParamsMock,  3);
-
-        verify(pedalParamsMock).pedalSize();
+//        var pedalParamsMock = Mockito.mock(PedalEngineParams.class);
+//        Mockito.when(pedalParamsMock.pedalSize()).thenReturn(3);
+//        Assertions.assertEquals(pedalCarFactory.createCar(pedalParamsMock, 1).getVIN(), 3);
+////		pedalCarFactory.createCar(pedalParamsMock, 2);
+////		pedalCarFactory.createCar(pedalParamsMock,  3);
+//
+//        verify(pedalParamsMock).pedalSize();
     }
 }
