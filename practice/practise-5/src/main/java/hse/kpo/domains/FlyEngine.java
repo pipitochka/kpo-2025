@@ -1,16 +1,13 @@
 package hse.kpo.domains;
 
 import hse.kpo.interfaces.EngineInterface;
-import lombok.Getter;
 import lombok.ToString;
 
 /**
- * class of pedal engine.
+ * class of flying engine.
  */
 @ToString
-@Getter
-public class PedalEngine implements EngineInterface {
-    private final int size;
+public class FlyEngine implements EngineInterface {
 
     /**
      * Проверяет подходит ли двигатель покупателю.
@@ -19,15 +16,6 @@ public class PedalEngine implements EngineInterface {
      */
     @Override
     public boolean isCompatible(Customer customer, ProductionTypes productionTypes) {
-        return customer.getLegPower() > 5;
-    }
-
-    /**
-     * Создает педальный двигатель.
-     *
-     * @param size size of leg of customer.
-     */
-    public PedalEngine(int size) {
-        this.size = size;
+        return customer.getIq() > 300;
     }
 }
