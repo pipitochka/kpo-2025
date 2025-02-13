@@ -6,9 +6,6 @@ import hse.kpo.interfaces.ShipFactoryInterface;
 import hse.kpo.params.PedalEngineParams;
 import org.springframework.stereotype.Component;
 
-/**
- * Class of pedal ship factory.
- */
 @Component
 public class PedalShipFactory implements ShipFactoryInterface<PedalEngineParams> {
     @Override

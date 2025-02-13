@@ -1,14 +1,12 @@
 package hse.kpo;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 import hse.kpo.domains.Customer;
-import hse.kpo.domains.ReportBuilder;
 import hse.kpo.factories.FlyingCarFactory;
 import hse.kpo.factories.HandCarFactory;
 import hse.kpo.factories.PedalCarFactory;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
+import hse.kpo.domains.ReportBuilder;
 import hse.kpo.services.CarService;
 import hse.kpo.services.CustomerStorage;
 import hse.kpo.services.HseCarService;
@@ -18,9 +16,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- * tests of reports.
- */
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @SpringBootTest
 public class ReportTests {
 
