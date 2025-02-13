@@ -1,16 +1,14 @@
 package hse.kpo.domains;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Класс, описывающий покупателя.
+ * class of customer.
  */
 @Getter
 @ToString
-@Builder
 public class Customer {
     private final String name;
 
@@ -18,15 +16,43 @@ public class Customer {
 
     private final int handPower;
 
-    private final int iq;
-
     @Setter
+    @Getter
     private Car car;
 
+    @Setter
+    @Getter
+    private Ship ship;
+
+    @Getter
+    private final int iq;
+
+    /**
+     * Constructor with iq.
+     *
+     * @param name person name.
+     * @param legPower person leg power.
+     * @param handPower person hand power.
+     * @param iq person iq.
+     */
     public Customer(String name, int legPower, int handPower, int iq) {
         this.name = name;
         this.legPower = legPower;
         this.handPower = handPower;
         this.iq = iq;
+    }
+
+    /**
+     * Constructor without iq.
+     *
+     * @param name person name.
+     * @param legPower person leg power.
+     * @param handPower person hand power.
+     */
+    public Customer(String name, int legPower, int handPower) {
+        this.name = name;
+        this.legPower = legPower;
+        this.handPower = handPower;
+        this.iq = 0;
     }
 }
