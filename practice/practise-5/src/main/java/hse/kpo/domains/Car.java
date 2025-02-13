@@ -33,7 +33,6 @@ public class Car {
      * @return true если подходят, false - иначе.
      */
     public boolean isCompatible(Customer customer) {
-        return this.engine.isCompatible(customer, ProductionTypes.CAR); // внутри метода
-        // просто вызываем соответствующий метод двигателя
+        return this.engine.isCompatible(customer, ProductionTypes.CAR); // внутри метода просто вызываем соответствующий метод двигателя
     }
 }
