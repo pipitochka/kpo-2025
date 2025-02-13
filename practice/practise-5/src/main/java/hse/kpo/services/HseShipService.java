@@ -3,10 +3,12 @@ package hse.kpo.services;
 import hse.kpo.interfaces.CarProviderInterface;
 import hse.kpo.interfaces.CustomerProviderInterface;
 import hse.kpo.interfaces.ShipProviderInterface;
+import java.util.Objects;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
-
+/**
+ * class of hse ship service.
+ */
 @Component
 public class HseShipService {
 
