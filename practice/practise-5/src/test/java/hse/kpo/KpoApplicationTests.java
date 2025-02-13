@@ -1,63 +1,66 @@
 package hse.kpo;
 
+import static org.mockito.Mockito.verify;
+
 import hse.kpo.domains.Customer;
-import hse.kpo.factories.cars.HandCarFactory;
-import hse.kpo.factories.cars.PedalCarFactory;
+import hse.kpo.factories.FlyingCarFactory;
+import hse.kpo.factories.HandCarFactory;
+import hse.kpo.factories.PedalCarFactory;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
-import hse.kpo.services.CarStorage;
+import hse.kpo.services.CarService;
 import hse.kpo.services.CustomerStorage;
 import hse.kpo.services.HseCarService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+/**
+ * full application test.
+ */
 @SpringBootTest
 class KpoApplicationTests {
 
-	@Autowired
-	private CarStorage carStorage;
+    @Autowired
+    private CarService carService;
 
-	@Autowired
-	private CustomerStorage customerStorage;
+    @Autowired
+    private CustomerStorage customerStorage;
 
-	@Autowired
-	private HseCarService hseCarService;
+    @Autowired
+    private FlyingCarFactory flyingCarFactory;
 
-	@Autowired
-	private PedalCarFactory pedalCarFactory;
+    @Autowired
+    private HseCarService hseCarService;
 
-	@Autowired
-	private HandCarFactory handCarFactory;
+    @Autowired
+    private PedalCarFactory pedalCarFactory;
 
-	@Test
-	@DisplayName("Тест загрузки контекста")
-	void contextLoads() {
-		Assertions.assertNotNull(carStorage);
-		Assertions.assertNotNull(customerStorage);
-		Assertions.assertNotNull(hseCarService);
-	}
+    @Autowired
+    private HandCarFactory handCarFactory;
 
-	@Test
-	@DisplayName("Тест загрузки контекста")
-	void hseCarServiceTest() {
-		customerStorage.addCustomer(new Customer("Ivan1",6,4, 80));
-		customerStorage.addCustomer(new Customer("Maksim",4,6, 50));
-		customerStorage.addCustomer(new Customer("Petya",6,6, 120));
-		customerStorage.addCustomer(new Customer("Nikita",4,4, 100));
+    @Test
+    @DisplayName("Тест загрузки контекста")
+    void contextLoads() {
+        customerStorage.addCustomer(new Customer("Ivan1", 6, 4));
+        customerStorage.addCustomer(new Customer("Maksim", 4, 6));
+        customerStorage.addCustomer(new Customer("Petya", 6, 6));
+        customerStorage.addCustomer(new Customer("Nikita", 4, 4));
+        customerStorage.addCustomer(new Customer("Artem", 4, 4, 350));
 
-		carStorage.addCar(pedalCarFactory, new PedalEngineParams(6));
-		carStorage.addCar(pedalCarFactory, new PedalEngineParams(6));
+        carService.addCar(flyingCarFactory, EmptyEngineParams.DEFAULT);
 
-		carStorage.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
-		carStorage.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
-		customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
+        carService.addCar(pedalCarFactory, new PedalEngineParams(6));
+        carService.addCar(pedalCarFactory, new PedalEngineParams(6));
 
-		hseCarService.sellCars();
+        carService.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
+        carService.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
 
-		customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
-	}
+        customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
 
+        hseCarService.sellCars();
+
+        customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
+    }
 }
