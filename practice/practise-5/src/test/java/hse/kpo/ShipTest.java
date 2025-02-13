@@ -1,31 +1,19 @@
 package hse.kpo;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 import hse.kpo.domains.Customer;
 import hse.kpo.domains.ReportBuilder;
-import hse.kpo.factories.FlyingCarFactory;
-import hse.kpo.factories.FlyingShipFactory;
-import hse.kpo.factories.HandCarFactory;
-import hse.kpo.factories.HandShipFactory;
-import hse.kpo.factories.PedalCarFactory;
-import hse.kpo.factories.PedalShipFactory;
+import hse.kpo.factories.*;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
-import hse.kpo.services.CarService;
-import hse.kpo.services.CustomerStorage;
-import hse.kpo.services.HseCarService;
-import hse.kpo.services.HseShipService;
-import hse.kpo.services.ShipService;
+import hse.kpo.services.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- * tests of ships.
- */
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @SpringBootTest
 public class ShipTest {
 
