@@ -1,0 +1,8 @@
+Monkey 10 1 7
+Rabbit 20 2 5
+Tiger 30 3
+Wolf 40 4
+Monkey 10 1 3
+Rabbit 20 2 9
+Computer 1
+Table 2
