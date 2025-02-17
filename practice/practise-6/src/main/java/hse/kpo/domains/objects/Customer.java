@@ -1,4 +1,4 @@
-package hse.kpo.domains.objects;
+package hse.kpo.domains;
 
 import lombok.Getter;
 import lombok.Setter;
