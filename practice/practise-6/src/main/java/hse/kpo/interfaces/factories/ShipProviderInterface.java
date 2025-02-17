@@ -1,7 +1,7 @@
-package hse.kpo.interfaces.factories;
+package hse.kpo.interfaces;
 
-import hse.kpo.domains.objects.Customer;
-import hse.kpo.domains.objects.Ship;
+import hse.kpo.domains.Customer;
+import hse.kpo.domains.Ship;
 
 /**
  * interface of ship provider.

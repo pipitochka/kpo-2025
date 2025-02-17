@@ -2,9 +2,9 @@ package hse.kpo;
 
 import static org.mockito.Mockito.verify;
 
-import hse.kpo.factories.car.FlyingCarFactory;
-import hse.kpo.factories.car.HandCarFactory;
-import hse.kpo.factories.car.PedalCarFactory;
+import hse.kpo.factories.FlyingCarFactory;
+import hse.kpo.factories.HandCarFactory;
+import hse.kpo.factories.PedalCarFactory;
 import hse.kpo.params.EmptyEngineParams;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
