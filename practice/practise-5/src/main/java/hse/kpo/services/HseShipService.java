@@ -4,6 +4,8 @@ import hse.kpo.interfaces.CarProviderInterface;
 import hse.kpo.interfaces.CustomerProviderInterface;
 import hse.kpo.interfaces.ShipProviderInterface;
 import java.util.Objects;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class HseShipService {
 
+    private static final Logger logger = LoggerFactory.getLogger(HseShipService.class);
+
     private final ShipProviderInterface shipProvider;
 
     private final CustomerProviderInterface customerProvider;
@@ -19,6 +23,7 @@ public class HseShipService {
     public HseShipService(ShipProviderInterface shipProvider, CustomerProviderInterface customersProvider) {
         this.shipProvider = shipProvider;
         this.customerProvider = customersProvider;
+        logger.info("Hse Ship Service created");
     }
 
     /**
@@ -33,6 +38,7 @@ public class HseShipService {
                     var car = shipProvider.takeShip(customer);
                     if (Objects.nonNull(car)) {
                         customer.setShip(car);
+                        logger.info(customer + " take ship " + car);
                     }
                 });
     }
