@@ -1,6 +1,8 @@
-package hse.kpo.domains;
+package hse.kpo.domains.engines;
 
-import hse.kpo.interfaces.EngineInterface;
+import hse.kpo.domains.objects.Customer;
+import hse.kpo.domains.ProductionTypes;
+import hse.kpo.interfaces.engines.EngineInterface;
 import lombok.Getter;
 import lombok.ToString;
 
