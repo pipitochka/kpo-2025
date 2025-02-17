@@ -1,9 +1,9 @@
-package hse.kpo.services.services;
+package hse.kpo.services;
 
-import hse.kpo.domains.objects.Customer;
-import hse.kpo.domains.objects.Ship;
-import hse.kpo.interfaces.factories.ShipFactoryInterface;
-import hse.kpo.interfaces.factories.ShipProviderInterface;
+import hse.kpo.domains.Customer;
+import hse.kpo.domains.Ship;
+import hse.kpo.interfaces.ShipFactoryInterface;
+import hse.kpo.interfaces.ShipProviderInterface;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;

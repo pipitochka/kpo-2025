@@ -1,7 +1,8 @@
-package hse.kpo.services.hseServices;
+package hse.kpo.services;
 
-import hse.kpo.interfaces.providers.CarProviderInterface;
-import hse.kpo.interfaces.providers.CustomerProviderInterface;
+import hse.kpo.domains.Customer;
+import hse.kpo.interfaces.CarProviderInterface;
+import hse.kpo.interfaces.CustomerProviderInterface;
 import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
