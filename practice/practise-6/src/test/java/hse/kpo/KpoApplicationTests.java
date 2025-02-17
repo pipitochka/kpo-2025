@@ -2,15 +2,15 @@ package hse.kpo;
 
 import static org.mockito.Mockito.verify;
 
-import hse.kpo.domains.Customer;
-import hse.kpo.factories.FlyingCarFactory;
-import hse.kpo.factories.HandCarFactory;
-import hse.kpo.factories.PedalCarFactory;
+import hse.kpo.domains.objects.Customer;
+import hse.kpo.factories.car.FlyingCarFactory;
+import hse.kpo.factories.car.HandCarFactory;
+import hse.kpo.factories.car.PedalCarFactory;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
-import hse.kpo.services.CarService;
-import hse.kpo.services.CustomerStorage;
-import hse.kpo.services.HseCarService;
+import hse.kpo.services.services.CarService;
+import hse.kpo.services.storage.CustomerStorage;
+import hse.kpo.services.hseServices.HseCarService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

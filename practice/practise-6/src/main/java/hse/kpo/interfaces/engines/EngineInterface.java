@@ -1,6 +1,6 @@
-package hse.kpo.interfaces;
+package hse.kpo.interfaces.engines;
 
-import hse.kpo.domains.Customer;
+import hse.kpo.domains.objects.Customer;
 import hse.kpo.domains.ProductionTypes;
 
 /**

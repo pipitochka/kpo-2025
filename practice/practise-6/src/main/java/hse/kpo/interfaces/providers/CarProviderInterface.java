@@ -1,7 +1,7 @@
-package hse.kpo.interfaces;
+package hse.kpo.interfaces.providers;
 
-import hse.kpo.domains.Car;
-import hse.kpo.domains.Customer;
+import hse.kpo.domains.objects.Car;
+import hse.kpo.domains.objects.Customer;
 
 /**
  * interface of car provider.
