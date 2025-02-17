@@ -1,8 +1,8 @@
-package hse.kpo.factories;
+package hse.kpo.factories.ship;
 
-import hse.kpo.domains.PedalEngine;
-import hse.kpo.domains.Ship;
-import hse.kpo.interfaces.ShipFactoryInterface;
+import hse.kpo.domains.engines.PedalEngine;
+import hse.kpo.domains.objects.Ship;
+import hse.kpo.interfaces.factories.ShipFactoryInterface;
 import hse.kpo.params.PedalEngineParams;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
-package hse.kpo.interfaces;
+package hse.kpo.interfaces.factories;
 
-import hse.kpo.domains.Car;
+import hse.kpo.domains.objects.Car;
 
 /**
  * inteface of car factory.
