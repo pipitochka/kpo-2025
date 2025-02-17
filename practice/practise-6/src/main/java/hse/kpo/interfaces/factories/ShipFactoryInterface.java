@@ -1,6 +1,6 @@
-package hse.kpo.interfaces;
+package hse.kpo.interfaces.factories;
 
-import hse.kpo.domains.Ship;
+import hse.kpo.domains.objects.Ship;
 
 /**
  * interface of ship factory.
