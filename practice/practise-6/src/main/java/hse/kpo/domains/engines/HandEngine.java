@@ -1,6 +1,8 @@
-package hse.kpo.domains;
+package hse.kpo.domains.engines;
 
-import hse.kpo.interfaces.EngineInterface;
+import hse.kpo.domains.objects.Customer;
+import hse.kpo.enums.ProductionTypes;
+import hse.kpo.interfaces.engines.EngineInterface;
 import lombok.ToString;
 
 /**
@@ -17,8 +19,8 @@ public class HandEngine implements EngineInterface {
     @Override
     public boolean isCompatible(Customer customer, ProductionTypes type) {
         return switch (type) {
-            case hse.kpo.domains.ProductionTypes.CAR -> customer.getHandPower() > 5;
-            case hse.kpo.domains.ProductionTypes.CATAMARAN -> customer.getHandPower() > 2;
+            case hse.kpo.enums.ProductionTypes.CAR -> customer.getHandPower() > 5;
+            case hse.kpo.enums.ProductionTypes.CATAMARAN -> customer.getHandPower() > 2;
             case null, default -> throw new RuntimeException("This type of production doesn't exist");
         };
     }
