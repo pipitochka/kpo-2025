@@ -12,11 +12,11 @@ import hse.kpo.factories.car.PedalCarFactory;
 import hse.kpo.factories.ship.PedalShipFactory;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
-import hse.kpo.services.services.CarService;
+import hse.kpo.services.services.CarStorage;
+import hse.kpo.services.services.ShipStorage;
 import hse.kpo.services.storage.CustomerStorage;
-import hse.kpo.services.hseServices.HseCarService;
-import hse.kpo.services.hseServices.HseShipService;
-import hse.kpo.services.services.ShipService;
+import hse.kpo.services.HseCarService;
+import hse.kpo.services.HseShipService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,7 +45,7 @@ public class ShipTest {
     private CustomerStorage customerStorage;
 
     @Autowired
-    private ShipService shipService;
+    private ShipStorage shipStorage;
 
     @Autowired
     private HseShipService hseShipService;
@@ -63,16 +63,16 @@ public class ShipTest {
     private HandCarFactory handCarFactory;
 
     @Autowired
-    private CarService carService;
+    private CarStorage carStorage;
 
     @BeforeEach
     void setUp() {
         reportBuilder = new ReportBuilder();
         customerStorage = new CustomerStorage();
-        carService = new CarService();
-        shipService = new ShipService();
-        hseCarService = new HseCarService(carService, customerStorage);
-        hseShipService = new HseShipService(shipService, customerStorage);
+        carStorage = new CarStorage();
+        shipStorage = new ShipStorage();
+        hseCarService = new HseCarService(carStorage, customerStorage);
+        hseShipService = new HseShipService(shipStorage, customerStorage);
     }
 
     @Test
@@ -98,9 +98,9 @@ public class ShipTest {
         customerStorage.addCustomer(new Customer("Petya", 6, 6));
         customerStorage.addCustomer(new Customer("Ilya", 6, 6, 320));
 
-        shipService.addShip(flyingShipFactory, EmptyEngineParams.DEFAULT);
-        shipService.addShip(handShipFactory, EmptyEngineParams.DEFAULT);
-        shipService.addShip(pedalShipFactory, new PedalEngineParams(3));
+        shipStorage.addShip(flyingShipFactory, EmptyEngineParams.DEFAULT);
+        shipStorage.addShip(handShipFactory, EmptyEngineParams.DEFAULT);
+        shipStorage.addShip(pedalShipFactory, new PedalEngineParams(3));
 
         reportBuilder.addOperation("add customers")
                 .addCustomers(customerStorage.getCustomers());
@@ -131,13 +131,13 @@ public class ShipTest {
         customerStorage.addCustomer(new Customer("Petya", 6, 6));
         customerStorage.addCustomer(new Customer("Ilya", 6, 6, 320));
 
-        shipService.addShip(flyingShipFactory, EmptyEngineParams.DEFAULT);
-        shipService.addShip(handShipFactory, EmptyEngineParams.DEFAULT);
-        shipService.addShip(pedalShipFactory, new PedalEngineParams(3));
+        shipStorage.addShip(flyingShipFactory, EmptyEngineParams.DEFAULT);
+        shipStorage.addShip(handShipFactory, EmptyEngineParams.DEFAULT);
+        shipStorage.addShip(pedalShipFactory, new PedalEngineParams(3));
 
-        carService.addCar(flyingCarFactory, EmptyEngineParams.DEFAULT);
-        carService.addCar(pedalCarFactory, new PedalEngineParams(6));
-        carService.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
+        carStorage.addCar(flyingCarFactory, EmptyEngineParams.DEFAULT);
+        carStorage.addCar(pedalCarFactory, new PedalEngineParams(6));
+        carStorage.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
 
         reportBuilder.addOperation("add customers")
                 .addCustomers(customerStorage.getCustomers());

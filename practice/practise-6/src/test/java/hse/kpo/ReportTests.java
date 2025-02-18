@@ -9,18 +9,20 @@ import hse.kpo.factories.car.HandCarFactory;
 import hse.kpo.factories.car.PedalCarFactory;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
-import hse.kpo.services.services.CarService;
+import hse.kpo.services.services.CarStorage;
 import hse.kpo.services.storage.CustomerStorage;
-import hse.kpo.services.hseServices.HseCarService;
+import hse.kpo.services.HseCarService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 /**
  * tests of reports.
  */
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @SpringBootTest
 public class ReportTests {
 
@@ -31,7 +33,7 @@ public class ReportTests {
     HseCarService hseCarService;
 
     @Autowired
-    CarService carService;
+    CarStorage carService;
 
     @Autowired
     HandCarFactory handCarFactory;
@@ -44,13 +46,6 @@ public class ReportTests {
 
     @Autowired
     ReportBuilder reportBuilder;
-
-    @BeforeEach
-    void setUp() {
-        carService = new CarService();
-        customerStorage = new CustomerStorage();
-        hseCarService = new HseCarService(carService, customerStorage);
-    }
 
     @Test
     @DisplayName("Reports test")

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * class of car service.
  */
 @Component
-public class CarService implements CarProviderInterface {
+public class CarStorage implements CarProviderInterface {
 
     private final List<Car> cars = new ArrayList<>();
 
