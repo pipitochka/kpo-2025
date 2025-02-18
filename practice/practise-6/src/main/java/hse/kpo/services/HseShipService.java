@@ -1,4 +1,4 @@
-package hse.kpo.services.hseServices;
+package hse.kpo.services;
 
 import hse.kpo.interfaces.providers.CustomerProviderInterface;
 import hse.kpo.interfaces.factories.ShipProviderInterface;
