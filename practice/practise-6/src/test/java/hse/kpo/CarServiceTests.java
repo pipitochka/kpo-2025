@@ -9,7 +9,7 @@ import hse.kpo.factories.car.HandCarFactory;
 import hse.kpo.factories.car.PedalCarFactory;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
-import hse.kpo.services.services.CarService;
+import hse.kpo.services.services.CarStorage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -22,7 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class CarServiceTests {
     @Autowired
-    private CarService carService;
+    private CarStorage carStorage;
 
     @Test
     @DisplayName("CarService")
@@ -36,8 +36,8 @@ public class CarServiceTests {
         var flyingCarFactoryMock = Mockito.spy(FlyingCarFactory.class);
         Mockito.when(flyingCarFactoryMock.createCar(Mockito.any(EmptyEngineParams.class),
                 Mockito.anyInt())).thenReturn(new Car(1, new FlyEngine()));
-        carService.addCar(handCarFactoryMock, EmptyEngineParams.DEFAULT);
-        carService.addCar(flyingCarFactoryMock, EmptyEngineParams.DEFAULT);
+        carStorage.addCar(handCarFactoryMock, EmptyEngineParams.DEFAULT);
+        carStorage.addCar(flyingCarFactoryMock, EmptyEngineParams.DEFAULT);
     }
 
 }
