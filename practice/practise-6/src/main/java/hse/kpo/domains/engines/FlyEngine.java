@@ -1,7 +1,7 @@
 package hse.kpo.domains.engines;
 
 import hse.kpo.domains.objects.Customer;
-import hse.kpo.domains.ProductionTypes;
+import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.engines.EngineInterface;
 import lombok.ToString;
 
