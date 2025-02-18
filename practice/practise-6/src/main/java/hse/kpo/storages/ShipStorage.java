@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * class of ship service.
  */
 @Component
-public class ShipService implements ShipProviderInterface {
+public class ShipStorage implements ShipProviderInterface {
 
     private final List<Ship> ships = new ArrayList<>();
 
