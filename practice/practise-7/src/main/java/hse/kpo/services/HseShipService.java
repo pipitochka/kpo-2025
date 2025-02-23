@@ -1,8 +1,17 @@
 package hse.kpo.services;
 
+import hse.kpo.domains.objects.Customer;
+import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.factories.ShipProviderInterface;
 import hse.kpo.interfaces.providers.CustomerProviderInterface;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import hse.kpo.interfaces.sales.Observable;
+import hse.kpo.interfaces.sales.SalesObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -11,7 +20,9 @@ import org.springframework.stereotype.Component;
  * class of hse ship service.
  */
 @Component
-public class HseShipService {
+public class HseShipService implements Observable {
+
+    private final List<SalesObserver> observers = new ArrayList<>();
 
     private static final Logger logger = LoggerFactory.getLogger(HseShipService.class);
 
@@ -43,8 +54,24 @@ public class HseShipService {
                     var car = shipProvider.takeShip(customer);
                     if (Objects.nonNull(car)) {
                         customer.setShip(car);
+                        notifyObserversForSale(customer, ProductionTypes.CATAMARAN, car.getVin());
                         logger.info(customer + " take ship " + car);
                     }
                 });
+    }
+
+    @Override
+    public void addObserver(SalesObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver() {
+        observers.removeLast();
+    }
+
+    @Override
+    public void notifyObserversForSale(Customer customer, ProductionTypes productType, int vin) {
+        observers.forEach(obs -> obs.onSale(customer, productType, vin));
     }
 }
