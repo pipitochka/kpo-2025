@@ -2,17 +2,16 @@ package hse.kpo;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import hse.kpo.builders.ReportBuilder;
 import hse.kpo.domains.objects.Customer;
-import hse.kpo.domains.ReportBuilder;
 import hse.kpo.factories.car.FlyingCarFactory;
 import hse.kpo.factories.car.HandCarFactory;
 import hse.kpo.factories.car.PedalCarFactory;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
-import hse.kpo.services.services.CarStorage;
-import hse.kpo.services.storage.CustomerStorage;
 import hse.kpo.services.HseCarService;
-import org.junit.jupiter.api.BeforeEach;
+import hse.kpo.storages.CarStorage;
+import hse.kpo.storages.CustomerStorage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
