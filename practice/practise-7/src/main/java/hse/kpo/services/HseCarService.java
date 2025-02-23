@@ -4,6 +4,7 @@ import hse.kpo.domains.objects.Customer;
 import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.providers.CarProviderInterface;
 import hse.kpo.interfaces.providers.CustomerProviderInterface;
+import hse.kpo.interfaces.sales.Observable;
 import hse.kpo.interfaces.sales.Sales;
 import hse.kpo.interfaces.sales.SalesObserver;
 import java.util.ArrayList;
@@ -18,15 +19,20 @@ import org.springframework.stereotype.Component;
  * class of hse car service.
  */
 @Component
-public class HseCarService {
+public class HseCarService implements Observable {
 
-    final List<SalesObserver> observers = new ArrayList<>();
+    private final List<SalesObserver> observers = new ArrayList<>();
 
     public void addObserver(SalesObserver observer) {
         observers.add(observer);
     }
 
-    private void notifyObserversForSale(Customer customer, ProductionTypes productType, int vin) {
+    @Override
+    public void removeObserver() {
+        observers.removeLast();
+    }
+
+    public void notifyObserversForSale(Customer customer, ProductionTypes productType, int vin) {
         observers.forEach(obs -> obs.onSale(customer, productType, vin));
     }
 
