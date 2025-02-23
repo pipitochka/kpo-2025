@@ -1,7 +1,7 @@
 package hse.kpo;
 
 import hse.kpo.domains.objects.Customer;
-import hse.kpo.services.storage.CustomerStorage;
+import hse.kpo.storages.CustomerStorage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

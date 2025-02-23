@@ -1,18 +1,19 @@
-package hse.kpo;
+package hse.kpo.domains.sales;
 
-import hse.kpo.domains.ReportBuilder;
+import hse.kpo.builders.ReportBuilder;
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.enums.ProductionTypes;
+import hse.kpo.interfaces.sales.SalesObserver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Observer;
-
-
+/**
+ * class of sales observer.
+ */
 @Component
 @RequiredArgsConstructor
 public class ReportSalesObserver implements SalesObserver {
-    private final hse.kpo.services.storage.CustomerStorage customerStorage;
+    private final hse.kpo.storages.CustomerStorage customerStorage;
 
     private final ReportBuilder reportBuilder = new ReportBuilder();
 
