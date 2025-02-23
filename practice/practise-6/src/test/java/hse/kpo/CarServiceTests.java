@@ -1,15 +1,15 @@
 package hse.kpo;
 
-import hse.kpo.domains.objects.Car;
 import hse.kpo.domains.engines.FlyEngine;
 import hse.kpo.domains.engines.HandEngine;
 import hse.kpo.domains.engines.PedalEngine;
+import hse.kpo.domains.objects.Car;
 import hse.kpo.factories.car.FlyingCarFactory;
 import hse.kpo.factories.car.HandCarFactory;
 import hse.kpo.factories.car.PedalCarFactory;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
-import hse.kpo.services.services.CarStorage;
+import hse.kpo.storages.CarStorage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

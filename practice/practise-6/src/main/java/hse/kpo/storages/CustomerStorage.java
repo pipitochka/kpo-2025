@@ -1,4 +1,4 @@
-package hse.kpo.services.storage;
+package hse.kpo.storages;
 
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.interfaces.providers.CustomerProviderInterface;
