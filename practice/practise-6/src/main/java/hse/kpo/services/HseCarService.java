@@ -1,12 +1,11 @@
 package hse.kpo.services;
 
-import hse.kpo.Sales;
-import hse.kpo.SalesObserver;
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.providers.CarProviderInterface;
 import hse.kpo.interfaces.providers.CustomerProviderInterface;
-
+import hse.kpo.interfaces.sales.Sales;
+import hse.kpo.interfaces.sales.SalesObserver;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -37,6 +36,12 @@ public class HseCarService {
 
     private final CustomerProviderInterface customerProvider;
 
+    /**
+     * constructor.
+     *
+     * @param carProvider car provider annotated with this hse car service.
+     * @param customersProvider customer provide annotated with this hse car service.
+     */
     public HseCarService(CarProviderInterface carProvider, CustomerProviderInterface customersProvider) {
         this.carProvider = carProvider;
         this.customerProvider = customersProvider;
