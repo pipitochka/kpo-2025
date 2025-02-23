@@ -1,4 +1,4 @@
-package hse.kpo.domains;
+package hse.kpo.builders;
 
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.records.Report;
