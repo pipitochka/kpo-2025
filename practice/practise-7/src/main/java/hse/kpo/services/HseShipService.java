@@ -4,14 +4,11 @@ import hse.kpo.domains.objects.Customer;
 import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.factories.ShipProviderInterface;
 import hse.kpo.interfaces.providers.CustomerProviderInterface;
-
-import java.awt.*;
+import hse.kpo.interfaces.sales.Observable;
+import hse.kpo.interfaces.sales.SalesObserver;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import hse.kpo.interfaces.sales.Observable;
-import hse.kpo.interfaces.sales.SalesObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
