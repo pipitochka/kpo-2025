@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 public class Car {
 
+    @Getter
     private EngineInterface engine;
 
     @Getter
