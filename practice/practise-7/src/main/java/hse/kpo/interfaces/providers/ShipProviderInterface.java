@@ -1,4 +1,4 @@
-package hse.kpo.interfaces.factories;
+package hse.kpo.interfaces.providers;
 
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.domains.objects.Ship;
