@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 public class Ship {
 
+    @Getter
     private final EngineInterface engine;
 
     @Getter
