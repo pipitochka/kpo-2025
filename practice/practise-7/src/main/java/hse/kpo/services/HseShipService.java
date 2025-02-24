@@ -2,9 +2,10 @@ package hse.kpo.services;
 
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.enums.ProductionTypes;
-import hse.kpo.interfaces.factories.ShipProviderInterface;
+import hse.kpo.interfaces.providers.ShipProviderInterface;
 import hse.kpo.interfaces.providers.CustomerProviderInterface;
 import hse.kpo.interfaces.sales.Observable;
+import hse.kpo.interfaces.sales.Sales;
 import hse.kpo.interfaces.sales.SalesObserver;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class HseShipService implements Observable {
     /**
      * function to sell all cars in cars pull to all sellers from sellers poll.
      */
+    @Sales
     public void sellShips() {
         // получаем список покупателей
         var customers = customerProvider.getCustomers();
