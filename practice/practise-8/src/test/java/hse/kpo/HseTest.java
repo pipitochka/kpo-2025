@@ -1,7 +1,7 @@
 package hse.kpo;
 
-import hse.kpo.domains.objects.Car;
 import hse.kpo.domains.sales.ReportSalesObserver;
+import hse.kpo.facade.Hse;
 import hse.kpo.factories.car.FlyingCarFactory;
 import hse.kpo.factories.car.HandCarFactory;
 import hse.kpo.factories.car.PedalCarFactory;
@@ -18,6 +18,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+/**
+ * facade test.
+ */
 @SpringBootTest
 public class HseTest {
     @Autowired
@@ -63,7 +66,7 @@ public class HseTest {
     @Test
     @DisplayName("all test")
     void contextTest() {
-        hse.addCustomer("Ivan1",6,4, 150);
+        hse.addCustomer("Ivan1", 6, 4, 150);
         hse.addCustomer("Maksim", 4, 6, 80);
         hse.addCustomer("Petya", 6, 6, 20);
         hse.addCustomer("Nikita", 6, 6, 300);
