@@ -10,7 +10,7 @@ import hse.kpo.factories.car.PedalCarFactory;
 import hse.kpo.factories.ship.FlyingShipFactory;
 import hse.kpo.factories.ship.HandShipFactory;
 import hse.kpo.factories.ship.PedalShipFactory;
-import hse.kpo.factories.willedCatamaran.WilledCatamaranFactory;
+import hse.kpo.factories.catamaran.WilledCatamaranFactory;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
 import hse.kpo.records.Report;

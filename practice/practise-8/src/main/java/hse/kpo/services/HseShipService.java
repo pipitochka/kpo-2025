@@ -2,8 +2,8 @@ package hse.kpo.services;
 
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.enums.ProductionTypes;
-import hse.kpo.interfaces.providers.ShipProviderInterface;
 import hse.kpo.interfaces.providers.CustomerProviderInterface;
+import hse.kpo.interfaces.providers.ShipProviderInterface;
 import hse.kpo.interfaces.sales.Observable;
 import hse.kpo.interfaces.sales.Sales;
 import hse.kpo.interfaces.sales.SalesObserver;

@@ -6,7 +6,6 @@ import hse.kpo.interfaces.factories.ShipFactoryInterface;
 import hse.kpo.interfaces.providers.ShipProviderInterface;
 import java.util.ArrayList;
 import java.util.List;
-
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 
