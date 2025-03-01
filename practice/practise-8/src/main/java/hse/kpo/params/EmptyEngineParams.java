@@ -1,7 +1,7 @@
 package hse.kpo.params;
 
 /**
- * Параметры для остальных двигателей.
+ * params to create some types of engine.
  */
 public record EmptyEngineParams() {
     public static final EmptyEngineParams DEFAULT = new EmptyEngineParams();

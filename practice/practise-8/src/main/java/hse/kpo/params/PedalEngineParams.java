@@ -1,9 +1,7 @@
 package hse.kpo.params;
 
 /**
- * Параметры для педальных двигателей.
- *
- * @param pedalSize размер педалей
+ * params to create some types of engine.
  */
 public record PedalEngineParams(int pedalSize) {
 }
