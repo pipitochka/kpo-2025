@@ -1,4 +1,4 @@
-package hse.kpo.factories.willedCatamaran;
+package hse.kpo.factories.catamaran;
 
 import hse.kpo.domains.objects.Car;
 import hse.kpo.domains.objects.Ship;
@@ -6,6 +6,9 @@ import hse.kpo.domains.objects.WilledCatamaran;
 import hse.kpo.interfaces.factories.CarFactoryInterface;
 import org.springframework.stereotype.Component;
 
+/**
+ * facroty to make willed catamarans.
+ */
 @Component
 public class WilledCatamaranFactory implements CarFactoryInterface<Ship> {
     @Override
