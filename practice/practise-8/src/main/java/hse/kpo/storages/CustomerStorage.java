@@ -1,29 +1,24 @@
 package hse.kpo.storages;
 
-import hse.kpo.domains.Customer;
-import hse.kpo.interfaces.CustomerProvider;
+import hse.kpo.domains.objects.Customer;
+import hse.kpo.interfaces.providers.CustomerProviderInterface;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
 /**
- * Хранилище информации о пользователях.
+ * class of customer storage.
  */
 @Component
-public class CustomerStorage implements CustomerProvider {
-    private final List<Customer> customers = new ArrayList<>();
+public class CustomerStorage implements CustomerProviderInterface {
+    private List<Customer> customers = new ArrayList<>();
 
     @Override
     public List<Customer> getCustomers() {
         return customers;
     }
 
-    /**
-     * Метод добавления покупателя в систему.
-     *
-     * @param customer покупатель
-     */
     public void addCustomer(Customer customer) {
-        customers.add(customer);
+        customers.add(customer); // просто добавляем покупателя в список
     }
 }

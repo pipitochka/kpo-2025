@@ -1,7 +1,7 @@
 package hse.kpo.enums;
 
 /**
- * Типы продуктов.
+ * types of production.
  */
 public enum ProductionTypes {
     CAR,
