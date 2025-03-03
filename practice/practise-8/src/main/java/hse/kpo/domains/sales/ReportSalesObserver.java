@@ -17,7 +17,7 @@ public class ReportSalesObserver implements SalesObserver {
 
     private final ReportBuilder reportBuilder = new ReportBuilder();
 
-    public hse.kpo.records.Report buildReport() {
+    public hse.kpo.domains.reports.Report buildReport() {
         return reportBuilder.build();
     }
 

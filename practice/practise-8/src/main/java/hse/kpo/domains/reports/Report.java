@@ -1,4 +1,4 @@
-package hse.kpo.records;
+package hse.kpo.domains.reports;
 
 /**
  * class to make reports.
