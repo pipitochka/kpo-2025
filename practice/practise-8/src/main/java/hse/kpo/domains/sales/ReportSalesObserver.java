@@ -2,6 +2,7 @@ package hse.kpo.domains.sales;
 
 import hse.kpo.builders.ReportBuilder;
 import hse.kpo.domains.objects.Customer;
+import hse.kpo.domains.reports.Report;
 import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.sales.SalesObserver;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class ReportSalesObserver implements SalesObserver {
 
     private final ReportBuilder reportBuilder = new ReportBuilder();
 
-    public hse.kpo.records.Report buildReport() {
+    public Report buildReport() {
         return reportBuilder.build();
     }
 

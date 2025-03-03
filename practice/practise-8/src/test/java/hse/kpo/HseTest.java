@@ -1,6 +1,7 @@
 package hse.kpo;
 
 import hse.kpo.domains.sales.ReportSalesObserver;
+import hse.kpo.enums.ReportFormat;
 import hse.kpo.facade.Hse;
 import hse.kpo.factories.car.FlyingCarFactory;
 import hse.kpo.factories.car.HandCarFactory;
@@ -17,6 +18,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * facade test.
@@ -65,7 +70,7 @@ public class HseTest {
 
     @Test
     @DisplayName("all test")
-    void contextTest() {
+    void contextTest() throws IOException {
         hse.addCustomer("Ivan1", 6, 4, 150);
         hse.addCustomer("Maksim", 4, 6, 80);
         hse.addCustomer("Petya", 6, 6, 20);
@@ -77,8 +82,29 @@ public class HseTest {
         hse.addHandCar();
         hse.addHandWilledCatamarand();
 
+        try (FileWriter fileWriter = new FileWriter("reportCatamaran.csv")) {
+            hse.transportReport(ReportFormat.MARKDOWN, fileWriter);
+        }
+
+        try (FileWriter fileWriter = new FileWriter("reportCatamaran.json")) {
+            hse.transportReport(ReportFormat.JSON, fileWriter);
+        }
+
         hse.sell();
         System.out.println(hse.generateReport());
+
+        // Экспорт в консоль в формате Markdown
+        hse.exportReport(ReportFormat.MARKDOWN, new PrintWriter(System.out));
+// Экспорт в файл в формате MARKDOWN
+        try (FileWriter fileWriter = new FileWriter("report.MD")) {
+            hse.exportReport(ReportFormat.MARKDOWN, fileWriter);
+        }
+
+// Экспорт в файл в формате JSON
+        try (FileWriter fileWriter = new FileWriter("report.json")) {
+            hse.exportReport(ReportFormat.JSON, fileWriter);
+        }
+
 
     }
 }
