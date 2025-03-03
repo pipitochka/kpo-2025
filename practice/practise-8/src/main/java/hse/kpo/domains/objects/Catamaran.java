@@ -13,6 +13,11 @@ public class Catamaran extends Car {
     }
 
     @Override
+    public String getEngineType() {
+        return super.getEngine().toString();
+    }
+
+    @Override
     public String getTransportType(){
         return "Catamaran";
     }

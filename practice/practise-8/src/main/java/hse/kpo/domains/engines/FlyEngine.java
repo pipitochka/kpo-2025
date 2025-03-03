@@ -1,5 +1,6 @@
 package hse.kpo.domains.engines;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.engines.EngineInterface;
@@ -9,6 +10,7 @@ import lombok.ToString;
  * class of flying engine.
  */
 @ToString
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class FlyEngine implements EngineInterface {
 
     /**
