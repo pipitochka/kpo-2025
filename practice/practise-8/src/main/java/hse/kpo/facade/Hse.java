@@ -12,7 +12,7 @@ import hse.kpo.factories.ship.HandShipFactory;
 import hse.kpo.factories.ship.PedalShipFactory;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
-import hse.kpo.records.Report;
+import hse.kpo.domains.reports.Report;
 import hse.kpo.services.HseCarService;
 import hse.kpo.services.HseShipService;
 import hse.kpo.storages.CarStorage;
