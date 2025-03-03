@@ -200,3 +200,64 @@
 2025-03-03T18:08:03.550+03:00  INFO 12906 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Hse Car Service created
 2025-03-03T18:08:03.571+03:00  INFO 12906 --- [kpo] [Test worker] hse.kpo.services.HseShipService          : Hse Ship Service created
 2025-03-03T18:08:03.657+03:00  INFO 12906 --- [kpo] [Test worker] hse.kpo.HseTest                          : Started HseTest in 0.666 seconds (process running for 1.489)
+2025-03-03T19:04:41.905+03:00  INFO 14026 --- [kpo] [Test worker] hse.kpo.CarServiceTests                  : Starting CarServiceTests using Java 21.0.5 with PID 14026 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/practice/practise-8)
+2025-03-03T19:04:41.906+03:00  INFO 14026 --- [kpo] [Test worker] hse.kpo.CarServiceTests                  : No active profile set, falling back to 1 default profile: "default"
+2025-03-03T19:04:42.312+03:00  INFO 14026 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Hse Car Service created
+2025-03-03T19:04:42.333+03:00  INFO 14026 --- [kpo] [Test worker] hse.kpo.services.HseShipService          : Hse Ship Service created
+2025-03-03T19:04:42.434+03:00  INFO 14026 --- [kpo] [Test worker] hse.kpo.CarServiceTests                  : Started CarServiceTests in 0.754 seconds (process running for 1.58)
+2025-03-03T19:04:50.257+03:00  INFO 14062 --- [kpo] [Test worker] hse.kpo.HseTest                          : Starting HseTest using Java 21.0.5 with PID 14062 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/practice/practise-8)
+2025-03-03T19:04:50.258+03:00  INFO 14062 --- [kpo] [Test worker] hse.kpo.HseTest                          : No active profile set, falling back to 1 default profile: "default"
+2025-03-03T19:04:50.629+03:00  INFO 14062 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Hse Car Service created
+2025-03-03T19:04:50.648+03:00  INFO 14062 --- [kpo] [Test worker] hse.kpo.services.HseShipService          : Hse Ship Service created
+2025-03-03T19:04:50.739+03:00  INFO 14062 --- [kpo] [Test worker] hse.kpo.HseTest                          : Started HseTest in 0.701 seconds (process running for 1.546)
+2025-03-03T19:04:51.234+03:00  INFO 14062 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Customer(name=Ivan1, legPower=6, handPower=4, car=Car(engine=PedalEngine(size=6), vin=1), ship=null, iq=150) take car Car(engine=PedalEngine(size=6), vin=1)
+2025-03-03T19:04:51.235+03:00  INFO 14062 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Customer(name=Maksim, legPower=4, handPower=6, car=Car(engine=HandEngine(), vin=3), ship=null, iq=80) take car Car(engine=HandEngine(), vin=3)
+2025-03-03T19:04:51.236+03:00  INFO 14062 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Customer(name=Petya, legPower=6, handPower=6, car=Car(engine=PedalEngine(size=6), vin=2), ship=null, iq=20) take car Car(engine=PedalEngine(size=6), vin=2)
+2025-03-03T19:14:19.990+03:00  INFO 14144 --- [kpo] [Test worker] hse.kpo.HseTest                          : Starting HseTest using Java 21.0.5 with PID 14144 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/practice/practise-8)
+2025-03-03T19:14:19.991+03:00  INFO 14144 --- [kpo] [Test worker] hse.kpo.HseTest                          : No active profile set, falling back to 1 default profile: "default"
+2025-03-03T19:14:20.366+03:00  INFO 14144 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Hse Car Service created
+2025-03-03T19:14:20.387+03:00  INFO 14144 --- [kpo] [Test worker] hse.kpo.services.HseShipService          : Hse Ship Service created
+2025-03-03T19:14:20.475+03:00  INFO 14144 --- [kpo] [Test worker] hse.kpo.HseTest                          : Started HseTest in 0.704 seconds (process running for 1.526)
+2025-03-03T19:14:21.021+03:00  INFO 14144 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Customer(name=Ivan1, legPower=6, handPower=4, car=Car(engine=PedalEngine(size=6), vin=1), ship=null, iq=150) take car Car(engine=PedalEngine(size=6), vin=1)
+2025-03-03T19:14:21.022+03:00  INFO 14144 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Customer(name=Maksim, legPower=4, handPower=6, car=Car(engine=HandEngine(), vin=3), ship=null, iq=80) take car Car(engine=HandEngine(), vin=3)
+2025-03-03T19:14:21.022+03:00  INFO 14144 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Customer(name=Petya, legPower=6, handPower=6, car=Car(engine=PedalEngine(size=6), vin=2), ship=null, iq=20) take car Car(engine=PedalEngine(size=6), vin=2)
+2025-03-03T19:14:21.022+03:00  INFO 14144 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Customer(name=Nikita, legPower=6, handPower=6, car=Catamaran(), ship=null, iq=300) take car Catamaran()
+2025-03-03T19:24:32.427+03:00  INFO 14403 --- [kpo] [Test worker] hse.kpo.HseTest                          : Starting HseTest using Java 21.0.5 with PID 14403 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/practice/practise-8)
+2025-03-03T19:24:32.428+03:00  INFO 14403 --- [kpo] [Test worker] hse.kpo.HseTest                          : No active profile set, falling back to 1 default profile: "default"
+2025-03-03T19:24:32.791+03:00  INFO 14403 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Hse Car Service created
+2025-03-03T19:24:32.810+03:00  INFO 14403 --- [kpo] [Test worker] hse.kpo.services.HseShipService          : Hse Ship Service created
+2025-03-03T19:24:32.899+03:00  INFO 14403 --- [kpo] [Test worker] hse.kpo.HseTest                          : Started HseTest in 0.683 seconds (process running for 1.551)
+2025-03-03T19:24:33.415+03:00  INFO 14403 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Customer(name=Ivan1, legPower=6, handPower=4, car=Car(engine=PedalEngine(size=6), vin=1), ship=null, iq=150) take car Car(engine=PedalEngine(size=6), vin=1)
+2025-03-03T19:24:33.415+03:00  INFO 14403 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Customer(name=Maksim, legPower=4, handPower=6, car=Car(engine=HandEngine(), vin=3), ship=null, iq=80) take car Car(engine=HandEngine(), vin=3)
+2025-03-03T19:24:33.415+03:00  INFO 14403 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Customer(name=Petya, legPower=6, handPower=6, car=Car(engine=PedalEngine(size=6), vin=2), ship=null, iq=20) take car Car(engine=PedalEngine(size=6), vin=2)
+2025-03-03T19:24:33.416+03:00  INFO 14403 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Customer(name=Nikita, legPower=6, handPower=6, car=Catamaran(), ship=null, iq=300) take car Catamaran()
+2025-03-03T19:25:16.501+03:00  INFO 14450 --- [kpo] [Test worker] hse.kpo.HseTest                          : Starting HseTest using Java 21.0.5 with PID 14450 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/practice/practise-8)
+2025-03-03T19:25:16.502+03:00  INFO 14450 --- [kpo] [Test worker] hse.kpo.HseTest                          : No active profile set, falling back to 1 default profile: "default"
+2025-03-03T19:25:16.874+03:00  INFO 14450 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Hse Car Service created
+2025-03-03T19:25:16.894+03:00  INFO 14450 --- [kpo] [Test worker] hse.kpo.services.HseShipService          : Hse Ship Service created
+2025-03-03T19:25:16.976+03:00  INFO 14450 --- [kpo] [Test worker] hse.kpo.HseTest                          : Started HseTest in 0.704 seconds (process running for 1.515)
+2025-03-03T19:25:35.068+03:00  INFO 14471 --- [kpo] [Test worker] hse.kpo.HseTest                          : Starting HseTest using Java 21.0.5 with PID 14471 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/practice/practise-8)
+2025-03-03T19:25:35.070+03:00  INFO 14471 --- [kpo] [Test worker] hse.kpo.HseTest                          : No active profile set, falling back to 1 default profile: "default"
+2025-03-03T19:25:35.674+03:00  INFO 14471 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Hse Car Service created
+2025-03-03T19:25:35.714+03:00  INFO 14471 --- [kpo] [Test worker] hse.kpo.services.HseShipService          : Hse Ship Service created
+2025-03-03T19:25:35.884+03:00  INFO 14471 --- [kpo] [Test worker] hse.kpo.HseTest                          : Started HseTest in 1.265 seconds (process running for 2.612)
+2025-03-03T19:30:36.721+03:00  INFO 14523 --- [kpo] [Test worker] hse.kpo.HseTest                          : Starting HseTest using Java 21.0.5 with PID 14523 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/practice/practise-8)
+2025-03-03T19:30:36.723+03:00  INFO 14523 --- [kpo] [Test worker] hse.kpo.HseTest                          : No active profile set, falling back to 1 default profile: "default"
+2025-03-03T19:30:37.085+03:00  INFO 14523 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Hse Car Service created
+2025-03-03T19:30:37.104+03:00  INFO 14523 --- [kpo] [Test worker] hse.kpo.services.HseShipService          : Hse Ship Service created
+2025-03-03T19:30:37.190+03:00  INFO 14523 --- [kpo] [Test worker] hse.kpo.HseTest                          : Started HseTest in 0.679 seconds (process running for 1.449)
+2025-03-03T19:30:46.952+03:00  INFO 14540 --- [kpo] [Test worker] hse.kpo.HseTest                          : Starting HseTest using Java 21.0.5 with PID 14540 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/practice/practise-8)
+2025-03-03T19:30:46.957+03:00  INFO 14540 --- [kpo] [Test worker] hse.kpo.HseTest                          : No active profile set, falling back to 1 default profile: "default"
+2025-03-03T19:30:47.574+03:00  INFO 14540 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Hse Car Service created
+2025-03-03T19:30:47.614+03:00  INFO 14540 --- [kpo] [Test worker] hse.kpo.services.HseShipService          : Hse Ship Service created
+2025-03-03T19:30:47.784+03:00  INFO 14540 --- [kpo] [Test worker] hse.kpo.HseTest                          : Started HseTest in 1.393 seconds (process running for 2.791)
+2025-03-03T19:31:45.760+03:00  INFO 14551 --- [kpo] [Test worker] hse.kpo.HseTest                          : Starting HseTest using Java 21.0.5 with PID 14551 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/practice/practise-8)
+2025-03-03T19:31:45.762+03:00  INFO 14551 --- [kpo] [Test worker] hse.kpo.HseTest                          : No active profile set, falling back to 1 default profile: "default"
+2025-03-03T19:31:46.368+03:00  INFO 14551 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Hse Car Service created
+2025-03-03T19:31:46.407+03:00  INFO 14551 --- [kpo] [Test worker] hse.kpo.services.HseShipService          : Hse Ship Service created
+2025-03-03T19:31:46.576+03:00  INFO 14551 --- [kpo] [Test worker] hse.kpo.HseTest                          : Started HseTest in 1.237 seconds (process running for 2.462)
+2025-03-03T19:32:04.314+03:00  INFO 14557 --- [kpo] [Test worker] hse.kpo.HseTest                          : Starting HseTest using Java 21.0.5 with PID 14557 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/practice/practise-8)
+2025-03-03T19:32:04.315+03:00  INFO 14557 --- [kpo] [Test worker] hse.kpo.HseTest                          : No active profile set, falling back to 1 default profile: "default"
+2025-03-03T19:32:04.894+03:00  INFO 14557 --- [kpo] [Test worker] hse.kpo.services.HseCarService           : Hse Car Service created
+2025-03-03T19:32:04.933+03:00  INFO 14557 --- [kpo] [Test worker] hse.kpo.services.HseShipService          : Hse Ship Service created
+2025-03-03T19:32:05.093+03:00  INFO 14557 --- [kpo] [Test worker] hse.kpo.HseTest                          : Started HseTest in 1.208 seconds (process running for 2.518)

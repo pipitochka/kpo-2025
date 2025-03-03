@@ -2,7 +2,7 @@ package hse.kpo.domains.exporter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hse.kpo.interfaces.transport.Transport;
-import hse.kpo.interfaces.transport.TransportExporter;
+import hse.kpo.interfaces.reports.TransportExporter;
 
 import java.io.IOException;
 import java.io.Writer;
