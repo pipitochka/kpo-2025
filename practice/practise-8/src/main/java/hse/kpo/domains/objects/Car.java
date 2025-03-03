@@ -2,6 +2,7 @@ package hse.kpo.domains.objects;
 
 import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.engines.EngineInterface;
+import hse.kpo.interfaces.transport.Transport;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -9,7 +10,7 @@ import lombok.ToString;
  * class to makes cars.
  */
 @ToString
-public class Car {
+public class Car implements Transport {
 
     @Getter
     private EngineInterface engine;
@@ -37,5 +38,15 @@ public class Car {
     public boolean isCompatible(Customer customer) {
         return this.engine.isCompatible(customer, ProductionTypes.CAR); // внутри метода
         // просто вызываем соответствующий метод двигателя
+    }
+
+    @Override
+    public String getEngineType() {
+        return engine.toString();
+    }
+
+    @Override
+    public String getTransportType() {
+        return "Car";
     }
 }

@@ -82,6 +82,10 @@ public class HseTest {
         hse.addHandCar();
         hse.addHandWilledCatamarand();
 
+        try (FileWriter fileWriter = new FileWriter("report.csv")) {
+            hse.transportReport(fileWriter);
+        }
+
         hse.sell();
         System.out.println(hse.generateReport());
 
@@ -96,5 +100,7 @@ public class HseTest {
         try (FileWriter fileWriter = new FileWriter("report.json")) {
             hse.exportReport(ReportFormat.JSON, fileWriter);
         }
+
+
     }
 }

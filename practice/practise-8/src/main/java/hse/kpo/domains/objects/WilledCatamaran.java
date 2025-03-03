@@ -12,4 +12,9 @@ public class WilledCatamaran extends Car {
     public WilledCatamaran(Ship ship, int vin) {
         super(vin, ship.getEngine());
     }
+
+    @Override
+    public String getTransportType(){
+        return "WilledCatamaran";
+    }
 }

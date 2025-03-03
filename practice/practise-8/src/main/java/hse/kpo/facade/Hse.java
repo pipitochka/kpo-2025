@@ -1,5 +1,6 @@
 package hse.kpo.facade;
 
+import hse.kpo.domains.exporter.JsonTransportExporter;
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.domains.objects.Ship;
 import hse.kpo.domains.sales.ReportSalesObserver;
@@ -14,6 +15,7 @@ import hse.kpo.factories.ship.HandShipFactory;
 import hse.kpo.factories.ship.PedalShipFactory;
 import hse.kpo.interfaces.reports.ReportExporter;
 import hse.kpo.interfaces.sales.SalesObserver;
+import hse.kpo.interfaces.transport.Transport;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
 import hse.kpo.domains.reports.Report;
@@ -26,7 +28,10 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
+import java.util.stream.Stream;
 
 
 /**
@@ -125,5 +130,15 @@ public class Hse {
         } catch (Exception e) {
             throw new RuntimeException();
         }
+    }
+
+    public void transportReport(Writer writer) throws IOException {
+//        List<Transport> transports = Stream.concat(
+//                        carStorage.getCars().stream(),
+//                        catamaranStorage.getCatamarans().stream())
+//                .toList();
+        List<Transport> transports = List.copyOf(carStorage.getCars());
+        JsonTransportExporter exporter = new JsonTransportExporter();
+        exporter.export(transports, writer);
     }
 }

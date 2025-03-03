@@ -1,4 +1,4 @@
-# Отчет за 03-03-2025 17:34:32
+# Отчет за 03-03-2025 18:04:40
 
 Buyers: - Customer(name=Ivan1, legPower=6, handPower=4, car=null, ship=null, iq=150) - Customer(name=Maksim, legPower=4, handPower=6, car=null, ship=null, iq=80) - Customer(name=Petya, legPower=6, handPower=6, car=null, ship=null, iq=20) - Customer(name=Nikita, legPower=6, handPower=6, car=null, ship=null, iq=300)
 Operation: Продажа: CAR VIN-1 клиенту Ivan1 (Сила рук: 4, Сила ног: 6, IQ: 150)
