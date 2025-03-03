@@ -1,6 +1,5 @@
 package hse.kpo.facade;
 
-import hse.kpo.domains.exporter.JsonTransportExporter;
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.domains.objects.Ship;
 import hse.kpo.domains.sales.ReportSalesObserver;
@@ -8,14 +7,16 @@ import hse.kpo.enums.ReportFormat;
 import hse.kpo.factories.car.FlyingCarFactory;
 import hse.kpo.factories.car.HandCarFactory;
 import hse.kpo.factories.car.PedalCarFactory;
-import hse.kpo.factories.catamaran.WilledCatamaranFactory;
+import hse.kpo.factories.catamaran.CatamaranFactory;
 import hse.kpo.factories.report.ReportExporterFactory;
+import hse.kpo.factories.report.TransportExporterFactory;
 import hse.kpo.factories.ship.FlyingShipFactory;
 import hse.kpo.factories.ship.HandShipFactory;
 import hse.kpo.factories.ship.PedalShipFactory;
 import hse.kpo.interfaces.reports.ReportExporter;
 import hse.kpo.interfaces.sales.SalesObserver;
 import hse.kpo.interfaces.transport.Transport;
+import hse.kpo.interfaces.reports.TransportExporter;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
 import hse.kpo.domains.reports.Report;
@@ -53,8 +54,9 @@ public class Hse {
     private final ShipStorage shipStorage;
     private final CarStorage carStorage;
     private final ReportSalesObserver reportSalesObserver;
-    private final WilledCatamaranFactory willedCatamaranFactory;
+    private final CatamaranFactory catamaranFactory;
     private final ReportExporterFactory reportExporterFactory;
+    private final TransportExporterFactory transportExporterFactory;
     private final SalesObserver salesObserver;
 
     public void addCustomer(String name, int legPower, int handPower, int iq) {
@@ -94,22 +96,22 @@ public class Hse {
     }
 
     public void addWilledCatamarand(Ship ship) {
-        carStorage.addCar(willedCatamaranFactory, ship);
+        carStorage.addCar(catamaranFactory, ship);
     }
 
     public  void addPedalWilledCatamarand(int pedalSize) {
         Ship ship = pedalShipFactory.createShip(new PedalEngineParams(pedalSize), 0);
-        carStorage.addCar(willedCatamaranFactory, ship);
+        carStorage.addCar(catamaranFactory, ship);
     }
 
     public void addHandWilledCatamarand() {
         Ship ship = handShipFactory.createShip(EmptyEngineParams.DEFAULT, 0);
-        carStorage.addCar(willedCatamaranFactory, ship);
+        carStorage.addCar(catamaranFactory, ship);
     }
 
     public void addFlyingWilledCatamarand() {
         Ship ship = flyingShipFactory.createShip(EmptyEngineParams.DEFAULT, 0);
-        carStorage.addCar(willedCatamaranFactory, ship);
+        carStorage.addCar(catamaranFactory, ship);
     }
 
     public void sell() {
@@ -132,13 +134,16 @@ public class Hse {
         }
     }
 
-    public void transportReport(Writer writer) throws IOException {
-//        List<Transport> transports = Stream.concat(
-//                        carStorage.getCars().stream(),
-//                        catamaranStorage.getCatamarans().stream())
-//                .toList();
-        List<Transport> transports = List.copyOf(carStorage.getCars());
-        JsonTransportExporter exporter = new JsonTransportExporter();
-        exporter.export(transports, writer);
+    public void transportReport(ReportFormat format, Writer writer) throws IOException {
+        List<Transport> transports = Stream.concat(
+                        carStorage.getCars().stream(),
+                        shipStorage.getShips().stream())
+                .toList();
+        TransportExporter exporter = transportExporterFactory.create(format);
+        try {
+            exporter.export(transports, writer);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
     }
 }

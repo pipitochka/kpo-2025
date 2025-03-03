@@ -1,4 +1,6 @@
-package hse.kpo.interfaces.transport;
+package hse.kpo.interfaces.reports;
+
+import hse.kpo.interfaces.transport.Transport;
 
 import java.io.IOException;
 import java.io.Writer;

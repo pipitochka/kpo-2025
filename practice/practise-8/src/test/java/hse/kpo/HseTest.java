@@ -82,8 +82,12 @@ public class HseTest {
         hse.addHandCar();
         hse.addHandWilledCatamarand();
 
-        try (FileWriter fileWriter = new FileWriter("report.csv")) {
-            hse.transportReport(fileWriter);
+        try (FileWriter fileWriter = new FileWriter("reportCatamaran.csv")) {
+            hse.transportReport(ReportFormat.MARKDOWN, fileWriter);
+        }
+
+        try (FileWriter fileWriter = new FileWriter("reportCatamaran.json")) {
+            hse.transportReport(ReportFormat.JSON, fileWriter);
         }
 
         hse.sell();

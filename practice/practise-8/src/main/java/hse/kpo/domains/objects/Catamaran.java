@@ -1,20 +1,19 @@
 package hse.kpo.domains.objects;
 
-import hse.kpo.interfaces.engines.EngineInterface;
 import lombok.ToString;
 
 /**
  * class for willed catamaran.
  */
 @ToString
-public class WilledCatamaran extends Car {
+public class Catamaran extends Car {
 
-    public WilledCatamaran(Ship ship, int vin) {
+    public Catamaran(Ship ship, int vin) {
         super(vin, ship.getEngine());
     }
 
     @Override
     public String getTransportType(){
-        return "WilledCatamaran";
+        return "Catamaran";
     }
 }

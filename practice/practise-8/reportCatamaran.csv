@@ -1,0 +1,28 @@
+<Vehicle>
+    <VIN>1</VIN>
+    <Type>Car</Type>
+    <Engine>
+        <Type>PedalEngine(size=6)</Type>
+    </Engine>
+</Vehicle>
+<Vehicle>
+    <VIN>2</VIN>
+    <Type>Car</Type>
+    <Engine>
+        <Type>PedalEngine(size=6)</Type>
+    </Engine>
+</Vehicle>
+<Vehicle>
+    <VIN>3</VIN>
+    <Type>Car</Type>
+    <Engine>
+        <Type>HandEngine()</Type>
+    </Engine>
+</Vehicle>
+<Vehicle>
+    <VIN>4</VIN>
+    <Type>Catamaran</Type>
+    <Engine>
+        <Type>HandEngine()</Type>
+    </Engine>
+</Vehicle>
