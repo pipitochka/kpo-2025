@@ -3,13 +3,17 @@ package hse.kpo.facade;
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.domains.objects.Ship;
 import hse.kpo.domains.sales.ReportSalesObserver;
+import hse.kpo.enums.ReportFormat;
 import hse.kpo.factories.car.FlyingCarFactory;
 import hse.kpo.factories.car.HandCarFactory;
 import hse.kpo.factories.car.PedalCarFactory;
 import hse.kpo.factories.catamaran.WilledCatamaranFactory;
+import hse.kpo.factories.report.ReportExporterFactory;
 import hse.kpo.factories.ship.FlyingShipFactory;
 import hse.kpo.factories.ship.HandShipFactory;
 import hse.kpo.factories.ship.PedalShipFactory;
+import hse.kpo.interfaces.reports.ReportExporter;
+import hse.kpo.interfaces.sales.SalesObserver;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
 import hse.kpo.domains.reports.Report;
@@ -21,6 +25,8 @@ import hse.kpo.storages.ShipStorage;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.io.Writer;
 
 
 /**
@@ -43,6 +49,8 @@ public class Hse {
     private final CarStorage carStorage;
     private final ReportSalesObserver reportSalesObserver;
     private final WilledCatamaranFactory willedCatamaranFactory;
+    private final ReportExporterFactory reportExporterFactory;
+    private final SalesObserver salesObserver;
 
     public void addCustomer(String name, int legPower, int handPower, int iq) {
         Customer customer = new Customer(name, legPower, handPower, iq);
@@ -106,5 +114,16 @@ public class Hse {
 
     public Report generateReport() {
         return reportSalesObserver.buildReport();
+    }
+
+    public void exportReport(ReportFormat format, Writer writer) {
+        Report report = salesObserver.buildReport();
+        ReportExporter exporter = reportExporterFactory.create(format);
+
+        try {
+            exporter.export(report, writer);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
     }
 }
