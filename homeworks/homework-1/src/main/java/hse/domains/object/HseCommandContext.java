@@ -2,7 +2,7 @@ package hse.domains.object;
 
 import hse.emums.CommandType;
 import hse.emums.OperationType;
-import hse.interfaces.CommandContext;
+import hse.interfaces.object.CommandContext;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -11,7 +11,6 @@ import lombok.Setter;
 public class HseCommandContext implements CommandContext {
 
     @Getter
-    @Setter
     public final CommandType commandType;
 
     @Getter
