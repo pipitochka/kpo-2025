@@ -1,4 +1,4 @@
-package hse.interfaces;
+package hse.interfaces.object;
 
 import hse.emums.OperationType;
 

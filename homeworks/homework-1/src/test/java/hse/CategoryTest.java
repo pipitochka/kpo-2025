@@ -1,6 +1,6 @@
 package hse;
 
-import hse.domains.HseCategory;
+import hse.domains.object.HseCategory;
 import hse.emums.OperationType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

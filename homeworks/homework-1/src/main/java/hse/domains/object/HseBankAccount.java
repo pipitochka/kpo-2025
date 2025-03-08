@@ -1,11 +1,9 @@
-package hse.domains;
+package hse.domains.object;
 
-import hse.interfaces.BankAccount;
+import hse.interfaces.object.BankAccount;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
-import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @ToString

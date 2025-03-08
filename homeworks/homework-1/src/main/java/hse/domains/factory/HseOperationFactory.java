@@ -1,9 +1,12 @@
-package hse.domains;
+package hse.domains.factory;
 
+import hse.domains.object.HseOperation;
 import hse.emums.OperationType;
-import hse.interfaces.Operation;
-import hse.interfaces.OperationFactory;
+import hse.interfaces.object.Operation;
+import hse.interfaces.factory.OperationFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class HseOperationFactory implements OperationFactory {
 
     @Override

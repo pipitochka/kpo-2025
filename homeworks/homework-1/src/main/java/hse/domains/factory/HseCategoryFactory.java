@@ -1,9 +1,12 @@
-package hse.domains;
+package hse.domains.factory;
 
+import hse.domains.object.HseCategory;
 import hse.emums.OperationType;
-import hse.interfaces.Category;
-import hse.interfaces.CategoryFactory;
+import hse.interfaces.object.Category;
+import hse.interfaces.factory.CategoryFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class HseCategoryFactory implements CategoryFactory {
 
     @Override
