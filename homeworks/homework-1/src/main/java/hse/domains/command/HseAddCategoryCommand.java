@@ -1,13 +1,14 @@
 package hse.domains.command;
 
-import hse.emums.OperationType;
-import hse.interfaces.CommandContext;
+import hse.interfaces.object.CommandContext;
 import hse.interfaces.object.Command;
 import hse.interfaces.object.Facade;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class HseAddCategoryCommand implements Command {
+    @Getter
     private final CommandContext context;
 
 

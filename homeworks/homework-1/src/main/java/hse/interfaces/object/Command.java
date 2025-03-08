@@ -1,8 +1,9 @@
 package hse.interfaces.object;
 
-import hse.interfaces.CommandContext;
-
 public interface Command {
 
+    public CommandContext getContext();
+
     void execute(Facade facade);
+
 }

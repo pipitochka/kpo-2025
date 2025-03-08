@@ -8,11 +8,12 @@ import hse.domains.factory.HseOperationFactory;
 import hse.domains.object.HseCommandContext;
 import hse.emums.CommandType;
 import hse.emums.OperationType;
-import hse.interfaces.CommandContext;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
 public class FacadeTest {
@@ -67,16 +68,7 @@ public class FacadeTest {
         HseCommandContext commandContext4 = new HseCommandContext(CommandType.CATEGORY);
         commandContext4.setName("CashBack");
         commandContext4.setOperationType(OperationType.INCOME);
-        hse.takeCommand(commandContext3);
-
-        HseCommandContext commandContext5 = new HseCommandContext(CommandType.OPERATION);
-        commandContext5.setOperationType(OperationType.EXPENSE);
-        commandContext5.setAccountId(1);
-        commandContext5.setAmount(100);
-        commandContext5.setDate(1);
-        commandContext5.setDescription("test");
-        commandContext5.setCategoryId(1);
-        hse.takeCommand(commandContext5);
+        hse.takeCommand(commandContext4);
 
         HseCommandContext commandContext6 = new HseCommandContext(CommandType.OPERATION);
         commandContext6.setOperationType(OperationType.INCOME);
@@ -84,10 +76,26 @@ public class FacadeTest {
         commandContext6.setAmount(150);
         commandContext6.setDate(1);
         commandContext6.setDescription("test1");
-        commandContext6.setCategoryId(0);
+        commandContext6.setCategoryId(1);
         hse.takeCommand(commandContext6);
+
+        HseCommandContext commandContext5 = new HseCommandContext(CommandType.OPERATION);
+        commandContext5.setOperationType(OperationType.EXPENSE);
+        commandContext5.setAccountId(0);
+        commandContext5.setAmount(100);
+        commandContext5.setDate(1);
+        commandContext5.setDescription("test");
+        commandContext5.setCategoryId(0);
+        hse.takeCommand(commandContext5);
 
 
         System.out.println(hse);
+
+        assertThat(hse.getCategoryList().size()).isEqualTo(2);
+        assertThat(hse.getOperationList().size()).isEqualTo(2);
+        assertThat(hse.getBankAccountList().size()).isEqualTo(2);
+        assertThat(hse.getBankAccountList().get(0).getName()).isEqualTo("Artem");
+        assertThat(hse.getBankAccountList().get(0).getBalance()).isEqualTo(50);
+        assertThat(hse.getBankAccountList().get(1).getBalance()).isEqualTo(0);
     }
 }

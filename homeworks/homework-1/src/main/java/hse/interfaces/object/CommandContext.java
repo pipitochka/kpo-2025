@@ -1,8 +1,7 @@
-package hse.interfaces;
+package hse.interfaces.object;
 
 import hse.emums.CommandType;
 import hse.emums.OperationType;
-import lombok.RequiredArgsConstructor;
 
 public interface CommandContext {
     public CommandType getCommandType();

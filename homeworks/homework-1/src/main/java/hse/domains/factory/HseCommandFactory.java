@@ -3,12 +3,11 @@ package hse.domains.factory;
 import hse.domains.command.HseAddBankAccountCommand;
 import hse.domains.command.HseAddCategoryCommand;
 import hse.domains.command.HseAddOperationCommand;
-import hse.interfaces.CommandContext;
+import hse.interfaces.object.CommandContext;
 import hse.interfaces.factory.CommandFactory;
 import hse.interfaces.object.Command;
 import hse.interfaces.object.Facade;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 

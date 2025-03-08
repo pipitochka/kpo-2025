@@ -3,6 +3,7 @@ package hse.domains.object;
 import hse.interfaces.object.BankAccount;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @RequiredArgsConstructor
@@ -13,6 +14,7 @@ public class HseBankAccount implements BankAccount {
     private final int id;
 
     @Getter
+    @Setter
     private double balance = 0;
 
     @Getter

@@ -1,7 +1,7 @@
 package hse.domains.facade;
 
 import hse.emums.OperationType;
-import hse.interfaces.CommandContext;
+import hse.interfaces.object.CommandContext;
 import hse.interfaces.factory.AccountFactory;
 import hse.interfaces.factory.CategoryFactory;
 import hse.interfaces.factory.CommandFactory;
@@ -20,8 +20,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HseFacade implements Facade {
 
+    @Getter
     private final List<BankAccount> bankAccountList = new ArrayList<>();
+    @Getter
     private final List<Operation> operationList = new ArrayList<>();
+    @Getter
     private final List<Category> categoryList = new ArrayList<>();
 
     @Getter
@@ -32,6 +35,9 @@ public class HseFacade implements Facade {
     private final OperationFactory operationFactory;
     @Getter
     private final CommandFactory commandFactory;
+    @Getter
+    private final OperationHandler operationHandler;
+
 
     @Override
     public void addBankAccount(String name) {
@@ -53,6 +59,10 @@ public class HseFacade implements Facade {
     @Override
     public void takeCommand(CommandContext context) {
         Command command = commandFactory.createCommand(context);
-        command.execute(this);
+        if (operationHandler != null) {
+            if (operationHandler.handle(command, this)){
+                command.execute(this);
+            }
+        }
     }
 }
