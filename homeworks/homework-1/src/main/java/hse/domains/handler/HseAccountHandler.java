@@ -22,7 +22,7 @@ public class HseAccountHandler implements OperationHandler {
             if (command.getContext().getName() == null){
                 return false;
             }
-            if (facade.getBankAccountList().stream().noneMatch(
+            if (facade.getAccountList().stream().noneMatch(
                     bankAccount -> bankAccount.getName().equals(command.getContext().getName()))){
                 return true;
             }

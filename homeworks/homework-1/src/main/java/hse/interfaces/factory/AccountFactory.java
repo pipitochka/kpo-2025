@@ -1,7 +1,7 @@
 package hse.interfaces.factory;
 
-import hse.interfaces.object.BankAccount;
+import hse.interfaces.object.Account;
 
 public interface AccountFactory {
-    public BankAccount createAccount(int number, String name);
+    public Account createAccount(int number, String name);
 }
