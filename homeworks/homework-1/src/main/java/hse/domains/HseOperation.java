@@ -4,30 +4,31 @@ import hse.emums.OperationType;
 import hse.interfaces.Operation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 
-@Component
+@ToString
 @RequiredArgsConstructor
 public class HseOperation implements Operation {
 
     @Getter
-    private int id;
+    private final int id;
 
     @Getter
-    private OperationType operationType;
+    private final OperationType operationType;
 
     @Getter
-    private int bankAccountId;
+    private final int bankAccountId;
 
     @Getter
-    private double amount;
+    private final double amount;
 
     @Getter
-    private int date;
+    private final int date;
 
     @Getter
-    private String description;
+    private final String description;
 
     @Getter
-    private int categoryId;
+    private final int categoryId;
 }

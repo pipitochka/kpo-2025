@@ -1,0 +1,15 @@
+2025-03-08T15:44:33.747+03:00  INFO 42823 --- [kpo] [Test worker] hse.AccountTest                          : Starting AccountTest using Java 21.0.5 with PID 42823 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/homeworks/homework-1)
+2025-03-08T15:44:33.748+03:00  INFO 42823 --- [kpo] [Test worker] hse.AccountTest                          : No active profile set, falling back to 1 default profile: "default"
+2025-03-08T15:44:34.033+03:00  INFO 42823 --- [kpo] [Test worker] hse.AccountTest                          : Started AccountTest in 0.49 seconds (process running for 1.251)
+2025-03-08T15:44:47.293+03:00  INFO 42862 --- [kpo] [Test worker] hse.AccountTest                          : Starting AccountTest using Java 21.0.5 with PID 42862 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/homeworks/homework-1)
+2025-03-08T15:44:47.294+03:00  INFO 42862 --- [kpo] [Test worker] hse.AccountTest                          : No active profile set, falling back to 1 default profile: "default"
+2025-03-08T15:44:47.576+03:00  INFO 42862 --- [kpo] [Test worker] hse.AccountTest                          : Started AccountTest in 0.596 seconds (process running for 1.383)
+2025-03-08T16:13:17.406+03:00  INFO 43752 --- [kpo] [Test worker] hse.AccountTest                          : Starting AccountTest using Java 21.0.5 with PID 43752 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/homeworks/homework-1)
+2025-03-08T16:13:17.408+03:00  INFO 43752 --- [kpo] [Test worker] hse.AccountTest                          : No active profile set, falling back to 1 default profile: "default"
+2025-03-08T16:13:17.705+03:00  INFO 43752 --- [kpo] [Test worker] hse.AccountTest                          : Started AccountTest in 0.516 seconds (process running for 1.377)
+2025-03-08T17:59:09.433+03:00  INFO 44484 --- [kpo] [Test worker] hse.OperationTest                        : Starting OperationTest using Java 21.0.5 with PID 44484 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/homeworks/homework-1)
+2025-03-08T17:59:09.434+03:00  INFO 44484 --- [kpo] [Test worker] hse.OperationTest                        : No active profile set, falling back to 1 default profile: "default"
+2025-03-08T17:59:09.722+03:00  INFO 44484 --- [kpo] [Test worker] hse.OperationTest                        : Started OperationTest in 0.496 seconds (process running for 1.367)
+2025-03-08T18:00:00.972+03:00  INFO 44557 --- [kpo] [Test worker] hse.OperationTest                        : Starting OperationTest using Java 21.0.5 with PID 44557 (started by artemakulov in /Users/artemakulov/Study/2 course/2 sem/kpo-2025/homeworks/homework-1)
+2025-03-08T18:00:00.973+03:00  INFO 44557 --- [kpo] [Test worker] hse.OperationTest                        : No active profile set, falling back to 1 default profile: "default"
+2025-03-08T18:00:01.253+03:00  INFO 44557 --- [kpo] [Test worker] hse.OperationTest                        : Started OperationTest in 0.486 seconds (process running for 1.22)
