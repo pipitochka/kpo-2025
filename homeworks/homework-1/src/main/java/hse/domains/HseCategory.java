@@ -4,18 +4,19 @@ import hse.emums.OperationType;
 import hse.interfaces.Category;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 
-@Component
+@ToString
 @RequiredArgsConstructor
 public class HseCategory implements Category {
 
     @Getter
-    private String name;
+    private final int id;
 
     @Getter
-    private int id;
+    private final OperationType operationType;
 
     @Getter
-    private OperationType operationType;
+    private final String name;
 }
