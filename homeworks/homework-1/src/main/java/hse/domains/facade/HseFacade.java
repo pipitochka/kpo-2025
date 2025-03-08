@@ -1,14 +1,23 @@
-package hse.domains;
+package hse.domains.facade;
 
 import hse.emums.OperationType;
-import hse.interfaces.*;
+import hse.interfaces.CommandContext;
+import hse.interfaces.factory.AccountFactory;
+import hse.interfaces.factory.CategoryFactory;
+import hse.interfaces.factory.CommandFactory;
+import hse.interfaces.factory.OperationFactory;
+import hse.interfaces.object.*;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@ToString
 @Component
+@RequiredArgsConstructor
 public class HseFacade implements Facade {
 
     private final List<BankAccount> bankAccountList = new ArrayList<>();
@@ -16,12 +25,15 @@ public class HseFacade implements Facade {
     private final List<Category> categoryList = new ArrayList<>();
 
     @Getter
-    private AccountFactory accountFactory;
+    private final AccountFactory accountFactory;
     @Getter
-    private CategoryFactory categoryFactory;
+    private final CategoryFactory categoryFactory;
     @Getter
-    private OperationFactory operationFactory;
+    private final OperationFactory operationFactory;
+    @Getter
+    private final CommandFactory commandFactory;
 
+    @Override
     public void addBankAccount(String name) {
         bankAccountList.add(accountFactory.createAccount(bankAccountList.size(), name));
     }
@@ -33,7 +45,14 @@ public class HseFacade implements Facade {
                 amount, date, description, categoryId));
     }
 
+    @Override
     public void addCategory(OperationType type, String name) {
         categoryList.add(categoryFactory.createCategory(categoryList.size(), type, name));
+    }
+
+    @Override
+    public void takeCommand(CommandContext context) {
+        Command command = commandFactory.createCommand(context);
+        command.execute(this);
     }
 }

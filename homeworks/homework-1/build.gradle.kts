@@ -4,6 +4,7 @@ plugins {
 	id("org.springframework.boot") version "3.4.2"
 	id("io.spring.dependency-management") version "1.1.7"
 	jacoco
+    kotlin("jvm") version "2.1.10"
 }
 
 tasks.test {
@@ -49,6 +50,7 @@ dependencies {
 	testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	implementation("com.fasterxml.jackson.core:jackson-databind:2.18.2")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.withType<Test> {

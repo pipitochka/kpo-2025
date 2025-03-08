@@ -1,11 +1,10 @@
-package hse.domains;
+package hse.domains.object;
 
 import hse.emums.OperationType;
-import hse.interfaces.Operation;
+import hse.interfaces.object.Operation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import org.springframework.stereotype.Component;
 
 @ToString
 @RequiredArgsConstructor
