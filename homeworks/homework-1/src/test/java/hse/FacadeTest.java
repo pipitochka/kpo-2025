@@ -29,7 +29,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 @SpringBootTest
-@ActiveProfiles("test")
 public class FacadeTest {
 
     @Autowired
