@@ -10,13 +10,28 @@ import hse.emums.CommandType;
 import hse.emums.OperationType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+
+import java.util.Scanner;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+
 @SpringBootTest
+@ActiveProfiles("test")
 public class FacadeTest {
+
     @Autowired
     private HseFacade hse;
 
@@ -32,16 +47,18 @@ public class FacadeTest {
     @Autowired
     private HseCommandFactory commandFactory;
 
+
     @Test
     @DisplayName("Input Facade Test")
     public void inputFacadeTest() {
+
         hse.addBankAccount("Artem");
         hse.addBankAccount("Vanya");
         hse.addBankAccount("Mike");
         hse.addBankAccount("Kate");
 
         hse.addCategory(OperationType.EXPENSE, "Coffee");
-        hse.addCategory(OperationType.EXPENSE, "Cafe");
+        hse.addCategory(OperationType.INCOME, "Cafe");
         hse.addCategory(OperationType.EXPENSE, "Health");
 
         hse.addOperation(OperationType.INCOME, 1, 10, 1,"", 1);
@@ -52,6 +69,7 @@ public class FacadeTest {
     @Test
     @DisplayName("Add Command Test")
     public void addCommandTest() {
+
         HseCommandContext commandContext1 = new HseCommandContext(CommandType.ACCOUNT);
         commandContext1.setName("Artem");
         hse.takeCommand(commandContext1);
@@ -93,9 +111,9 @@ public class FacadeTest {
 
         assertThat(hse.getCategoryList().size()).isEqualTo(2);
         assertThat(hse.getOperationList().size()).isEqualTo(2);
-        assertThat(hse.getBankAccountList().size()).isEqualTo(2);
-        assertThat(hse.getBankAccountList().get(0).getName()).isEqualTo("Artem");
-        assertThat(hse.getBankAccountList().get(0).getBalance()).isEqualTo(50);
-        assertThat(hse.getBankAccountList().get(1).getBalance()).isEqualTo(0);
+        assertThat(hse.getAccountList().size()).isEqualTo(2);
+        assertThat(hse.getAccountList().get(0).getName()).isEqualTo("Artem");
+        assertThat(hse.getAccountList().get(0).getBalance()).isEqualTo(50);
+        assertThat(hse.getAccountList().get(1).getBalance()).isEqualTo(0);
     }
 }

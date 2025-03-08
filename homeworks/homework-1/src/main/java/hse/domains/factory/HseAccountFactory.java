@@ -1,16 +1,16 @@
 package hse.domains.factory;
 
-import hse.domains.object.HseBankAccount;
+import hse.domains.object.HseAccount;
 import hse.interfaces.factory.AccountFactory;
-import hse.interfaces.object.BankAccount;
+import hse.interfaces.object.Account;
 import org.springframework.stereotype.Component;
 
 @Component
 public class HseAccountFactory implements AccountFactory {
 
     @Override
-    public BankAccount createAccount(int t, String s) {
-        BankAccount newAccount = new HseBankAccount(t, s);
+    public Account createAccount(int t, String s) {
+        Account newAccount = new HseAccount(t, s);
         return newAccount;
     }
 }

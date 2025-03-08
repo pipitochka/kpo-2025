@@ -9,6 +9,7 @@ import hse.interfaces.factory.OperationFactory;
 import hse.interfaces.object.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
@@ -21,11 +22,11 @@ import java.util.List;
 public class HseFacade implements Facade {
 
     @Getter
-    private final List<BankAccount> bankAccountList = new ArrayList<>();
+    private List<Account> accountList = new ArrayList<>();
     @Getter
-    private final List<Operation> operationList = new ArrayList<>();
+    private List<Operation> operationList = new ArrayList<>();
     @Getter
-    private final List<Category> categoryList = new ArrayList<>();
+    private List<Category> categoryList = new ArrayList<>();
 
     @Getter
     private final AccountFactory accountFactory;
@@ -41,7 +42,7 @@ public class HseFacade implements Facade {
 
     @Override
     public void addBankAccount(String name) {
-        bankAccountList.add(accountFactory.createAccount(bankAccountList.size(), name));
+        accountList.add(accountFactory.createAccount(accountList.size(), name));
     }
 
     @Override
@@ -62,6 +63,10 @@ public class HseFacade implements Facade {
         if (operationHandler != null) {
             if (operationHandler.handle(command, this)){
                 command.execute(this);
+                System.out.println("Command taken");
+            }
+            else{
+                System.out.println("Invalid command");
             }
         }
     }

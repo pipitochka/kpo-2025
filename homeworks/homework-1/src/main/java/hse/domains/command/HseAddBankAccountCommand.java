@@ -1,6 +1,5 @@
 package hse.domains.command;
 
-import hse.interfaces.object.BankAccount;
 import hse.interfaces.object.CommandContext;
 import hse.interfaces.object.Command;
 import hse.interfaces.object.Facade;

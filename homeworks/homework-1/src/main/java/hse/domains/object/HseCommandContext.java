@@ -17,9 +17,6 @@ public class HseCommandContext implements CommandContext {
     @Setter
     private OperationType operationType;
 
-    @Getter
-    @Setter
-    private int bankAccountId;
 
     @Getter
     @Setter

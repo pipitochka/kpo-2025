@@ -14,7 +14,7 @@ public interface Facade {
 
     public void takeCommand(CommandContext context);
 
-    public List<BankAccount> getBankAccountList();
+    public List<Account> getAccountList();
 
     public List<Operation> getOperationList();
 
