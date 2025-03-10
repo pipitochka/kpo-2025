@@ -8,18 +8,19 @@ import hse.interfaces.factory.CategoryFactory;
 import hse.interfaces.factory.CommandBuilder;
 import hse.interfaces.factory.OperationFactory;
 import hse.interfaces.object.*;
+import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @ToString
 @Component
-@RequiredArgsConstructor
 public class HseFacade implements Facade {
 
     @Getter
@@ -40,6 +41,16 @@ public class HseFacade implements Facade {
     @Getter
     private final OperationHandler operationHandler;
 
+
+    public HseFacade(AccountFactory accountFactory, CategoryFactory categoryFactory, OperationFactory operationFactory, CommandBuilder commandBuilder, OperationHandler operationHandler) {
+        this.accountFactory = accountFactory;
+        this.categoryFactory = categoryFactory;
+        this.operationFactory = operationFactory;
+        this.commandBuilder = commandBuilder;
+        this.operationHandler = operationHandler;
+        addCategory(OperationType.INCOME, "nullIncome");
+        addCategory(OperationType.EXPENSE, "nullExpense");
+    }
 
     @Override
     public void addBankAccount(String name) {
@@ -154,5 +165,91 @@ public class HseFacade implements Facade {
         });
     }
 
+    @Override
+    public void deleteAccount(int accountId) {
+        if (accountList.get(accountId) != null) {
+            accountList.remove(accountId);
+            Iterator<Operation> iterator = operationList.iterator();
+            while (iterator.hasNext()) {
+                if (iterator.next().getBankAccountId() == accountId) {
+                    iterator.remove();
+                }
+            }
+            System.out.println("Account " + accountId + " deleted.");
+        }
+        else {
+            System.out.println("Account " + accountId + " not found.");
+        }
 
+    }
+
+    @Override
+    public void deleteCategory(int categoryId) {
+        if (categoryId == 0 || categoryId == 1){
+            System.out.println("Category " + categoryId + " cannot be deleted.");
+            return;
+        }
+        if (categoryList.get(categoryId) != null) {
+            categoryList.remove(categoryId);
+
+            operationList.stream().forEach(operation -> {
+                if (operation.getCategoryId() == categoryId) {
+                    if (operation.getOperationType() == OperationType.INCOME) {
+                        operation.setCategoryId(0);
+                    }
+                    if (operation.getOperationType() == OperationType.EXPENSE) {
+                        operation.setCategoryId(1);
+                    }
+                }
+            });
+            System.out.println("Category " + categoryId + " deleted.");
+            return;
+        }
+        else {
+            System.out.println("Category " + categoryId + " not found.");
+        }
+    }
+
+    @Override
+    public void reverseOperation(int operationId) {
+        if (operationList.get(operationId) != null) {
+            Command command = new CommandFromOpperation(operationList.get(operationId));
+            switch (command.getContext().getOperationType()){
+                case INCOME:
+                    command.getContext().setOperationType(OperationType.EXPENSE);
+                    break;
+                case EXPENSE:
+                    command.getContext().setOperationType(OperationType.INCOME);
+                    break;
+            }
+            if (operationHandler.handle(command, this)) {
+                operationList.remove(operationId);
+            }
+        }
+        else{
+            System.out.println("Operation " + operationId + " not found.");
+        }
+    }
+
+    @Override
+    public void changeOperationType(int operationId, int newCategoryId) {
+        if (operationList.get(operationId) != null){
+            if (categoryList.get(newCategoryId) != null){
+                if (categoryList.get(operationList.get(operationId).getCategoryId()).getOperationType() ==
+                    categoryList.get(newCategoryId).getOperationType()) {
+                    operationList.get(operationId).setCategoryId(newCategoryId);
+                    System.out.println("Category " + newCategoryId + " changed.");
+                }
+                else{
+                    System.out.println("Category " + newCategoryId + "another type");
+                }
+            }
+            else {
+                System.out.println("Category " + newCategoryId + " not found.");
+            }
+        }
+        else {
+            System.out.println("Operation " + operationId + " not found.");
+        }
+    }
 }

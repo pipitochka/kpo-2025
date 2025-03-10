@@ -35,7 +35,22 @@ exit
 Далее работа осуществляется через консоль
 Набор доступных команд
 ```shell
-
+add account <name> - создать пользователя
+add category <expense/income> <name> - создать категорию
+add operation <expense/income> <accountId/accountName> <amount> <date> <descripition> <categoryId/categoryName> - создать операцию
+add operation <expense/income> <accountId/accountName> <amount> <date> <categoryId/categoryName> - создать операцию
+show accounts - показать пользователей
+show categories - показать категории
+show operations - показать операции
+analyse account <accountId/accountName> from <dateFrom> to <dateTo> - вывести анализ аккаунта за период
+analyse income <accountId/accountName> from <dateFrom> to <dateTo> - вывести заработок аккаунта за период
+analyse expense <accountId/accountName> from <dateFrom> to <dateTo> - вывести траты аккаунта за период
+analyse account <accountId/accountName> by <categoryName/categoryId> from <dateFrom> to <dateTo> - вывести анализ аккаунта по категории
+change operation <operationId> category to <categoryName/categoryId> - поменять категорию операции 
+delete account <accountId/accountName> - удалить аккаунт
+delete category <categoryId/categoryName> - удалить категорию
+repeat <accountId/accountName> - повторить все операции для аккаунта
+reverse <operationId> - отменить операцию
 ```
 
 Пример возможной работы
@@ -46,16 +61,30 @@ add category expense cafe
 add category expense coffee
 add category income cashback
 add category income salary
-add operation income 0 200 0 salary 3
-add operation income Artem 200 1 salary salary
+add operation income 0 200 0 salary 5
+add operation income Artem 200 1 salary
 add operation income Aliya 200 2 salary salary
+add operation income Artem 100 2 cashback
 add operation expense Aliya 100 3 coffee
 add operation expense Artem 100 4 coffee
-analyse account Artem from 1 to 2
-analyse account Aliya from 1 to 4
+add operation expense Aliya 100 4 coffee
 show accounts
 show categories
 show operations
+analyse account Artem from 1 to 2
+analyse account Aliya from 1 to 4
+analyse account Aliya by coffee from 3 to 4
+analyse income Artem from 1 to 1
+analyse expense Aliya from 3 to 4
+change operation 5 category to cafe 
+analyse account Artem from 1 to 4
+delete account 1
+show operations
+delete category cafe
+show categories
+change operation 3 category to cofee
+reverse operation 3
+show accounts
 exit
 ```
 

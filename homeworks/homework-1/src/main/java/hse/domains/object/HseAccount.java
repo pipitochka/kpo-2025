@@ -19,14 +19,4 @@ public class HseAccount implements Account {
 
     @Getter
     private final String name;
-
-    @Override
-    public void deposit(double amount) {
-        balance += amount;
-    }
-
-    @Override
-    public void withdraw(double amount) {
-        balance -= amount;
-    }
 }

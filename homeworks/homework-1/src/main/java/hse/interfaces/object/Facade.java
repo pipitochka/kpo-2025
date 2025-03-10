@@ -29,4 +29,12 @@ public interface Facade {
     public void printAnaliticByAccountByCategory(int accountId, int categoryId, int dateFrom, int dateTo);
 
     public void repeatOperations(int accountId);
+
+    public void deleteAccount(int accountId);
+
+    public void deleteCategory(int categoryId);
+
+    public void reverseOperation(int operationId);
+
+    public void changeOperationType(int operationId, int newCategoryId);
 }
