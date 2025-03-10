@@ -9,8 +9,8 @@ public interface CommandContext {
     public double getAmount();
     public OperationType getOperationType();
     public void setOperationType(OperationType operationType);
-    public int getAccountId();
+    public Account getAccount();
     public int getDate();
     public String getDescription();
-    public int getCategoryId();
+    public Category getCategory();
 }

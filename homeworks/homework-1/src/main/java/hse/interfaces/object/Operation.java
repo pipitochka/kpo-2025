@@ -5,10 +5,10 @@ import hse.emums.OperationType;
 public interface Operation {
     public int getId();
     public OperationType getOperationType();
-    public int getBankAccountId();
+    public Account getAccount();
     public double getAmount();
     public int getDate();
     public String getDescription();
-    public int getCategoryId();
-    public void setCategoryId(int categoryId);
+    public Category getCategory();
+    public void setCategory(Category category);
 }

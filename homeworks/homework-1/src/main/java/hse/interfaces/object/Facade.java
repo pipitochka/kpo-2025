@@ -7,8 +7,8 @@ import java.util.List;
 public interface Facade {
     public void addBankAccount(String name);
 
-    public void addOperation(OperationType operationType, int bankAccountId, double amount, int date,
-                             String description, int categoryId);
+    public void addOperation(OperationType operationType, Account bankAccountId, double amount, int date,
+                             String description, Category category);
 
     public void addCategory(OperationType type, String name);
 
@@ -20,21 +20,31 @@ public interface Facade {
 
     public List<Category> getCategoryList();
 
-    public void printAnaliticByAccountByDate(int accountId, int dateFrom, int dateTo);
+    public void printAnaliticByAccountByDate(Account account, int dateFrom, int dateTo);
 
-    public void printAnaliticByAccountIncome(int accountId, int dateFrom, int dateTo);
+    public void printAnaliticByAccountIncome(Account accountId, int dateFrom, int dateTo);
 
-    public void printAnaliticByAccountExpense(int accountId, int dateFrom, int dateTo);
+    public void printAnaliticByAccountExpense(Account accountId, int dateFrom, int dateTo);
 
-    public void printAnaliticByAccountByCategory(int accountId, int categoryId, int dateFrom, int dateTo);
+    public void printAnaliticByAccountByCategory(Account accountId, Category categoryId, int dateFrom, int dateTo);
 
-    public void repeatOperations(int accountId);
+    public void repeatOperations(Account accountId);
 
-    public void deleteAccount(int accountId);
+    public void deleteAccount(Account accountId);
 
-    public void deleteCategory(int categoryId);
+    public void deleteCategory(Category categoryId);
 
-    public void reverseOperation(int operationId);
+    public void reverseOperation(Operation operationId);
 
-    public void changeOperationType(int operationId, int newCategoryId);
+    public void changeOperationType(Operation operationId, Category newCategory);
+
+    public Category getCategory(String name);
+
+    public Category getCategoryById(int id);
+
+    public Account getAccount(String name);
+
+    public Account getAccount(int id);
+
+    public Operation getOperation(int id);
 }

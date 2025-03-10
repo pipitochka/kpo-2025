@@ -57,7 +57,7 @@ public class FacadeTest {
         hse.addCategory(OperationType.INCOME, "Cafe");
         hse.addCategory(OperationType.EXPENSE, "Health");
 
-        hse.addOperation(OperationType.INCOME, 1, 10, 1,"", 1);
+        hse.addOperation(OperationType.INCOME, hse.getAccount(0), 10, 1,"", hse.getCategory("Coffee"));
 
         System.out.println(hse);
     }
@@ -86,20 +86,20 @@ public class FacadeTest {
 
         HseCommandContext commandContext6 = new HseCommandContext(CommandType.OPERATION);
         commandContext6.setOperationType(OperationType.INCOME);
-        commandContext6.setAccountId(0);
+        commandContext6.setAccount(hse.getAccount(0));
         commandContext6.setAmount(150);
         commandContext6.setDate(3);
         commandContext6.setDescription("test1");
-        commandContext6.setCategoryId(3);
+        commandContext6.setCategory(hse.getCategoryById(3));
         hse.takeCommand(commandContext6);
 
         HseCommandContext commandContext5 = new HseCommandContext(CommandType.OPERATION);
         commandContext5.setOperationType(OperationType.EXPENSE);
-        commandContext5.setAccountId(0);
+        commandContext5.setAccount(hse.getAccount(0));
         commandContext5.setAmount(100);
         commandContext5.setDate(1);
         commandContext5.setDescription("test");
-        commandContext5.setCategoryId(2);
+        commandContext5.setCategory(hse.getCategoryById(2));
         hse.takeCommand(commandContext5);
 
 
@@ -132,38 +132,38 @@ public class FacadeTest {
 
         HseCommandContext commandContext6 = new HseCommandContext(CommandType.OPERATION);
         commandContext6.setOperationType(OperationType.INCOME);
-        commandContext6.setAccountId(0);
+        commandContext6.setAccount(hse.getAccount(0));
         commandContext6.setAmount(250);
         commandContext6.setDate(0);
         commandContext6.setDescription("test1");
-        commandContext6.setCategoryId(3);
+        commandContext6.setCategory(hse.getCategoryById(3));
         hse.takeCommand(commandContext6);
 
         HseCommandContext commandContext5 = new HseCommandContext(CommandType.OPERATION);
         commandContext5.setOperationType(OperationType.EXPENSE);
-        commandContext5.setAccountId(0);
+        commandContext5.setAccount(hse.getAccount(0));
         commandContext5.setAmount(100);
         commandContext5.setDate(1);
         commandContext5.setDescription("test");
-        commandContext5.setCategoryId(2);
+        commandContext5.setCategory(hse.getCategoryById(2));
         hse.takeCommand(commandContext5);
 
         HseCommandContext commandContext7 = new HseCommandContext(CommandType.OPERATION);
         commandContext7.setOperationType(OperationType.EXPENSE);
-        commandContext7.setAccountId(0);
+        commandContext7.setAccount(hse.getAccount(0));
         commandContext7.setAmount(100);
         commandContext7.setDate(2);
         commandContext7.setDescription("test");
-        commandContext7.setCategoryId(2);
+        commandContext7.setCategory(hse.getCategoryById(2));
         hse.takeCommand(commandContext7);
 
-        hse.printAnaliticByAccountByDate(0, 0, 2);
-        hse.printAnaliticByAccountIncome(0, 0, 1);
-        hse.printAnaliticByAccountExpense(0, 0, 1);
-        hse.printAnaliticByAccountExpense(0, 0, 2);
-        hse.printAnaliticByAccountByCategory(0, 0, 0, 4);
+        hse.printAnaliticByAccountByDate(hse.getAccount(0), 0, 2);
+        hse.printAnaliticByAccountIncome(hse.getAccount(0), 0, 1);
+        hse.printAnaliticByAccountExpense(hse.getAccount(0), 0, 1);
+        hse.printAnaliticByAccountExpense(hse.getAccount(0), 0, 2);
+        hse.printAnaliticByAccountByCategory(hse.getAccount(0), hse.getCategoryById(2), 0, 4);
 
-        hse.repeatOperations(0);
+        hse.repeatOperations(hse.getAccount(0));
         assertThat(hse.getAccountList().get(0).getBalance()).isEqualTo(50);
     }
 
@@ -186,42 +186,43 @@ public class FacadeTest {
 
         HseCommandContext commandContext6 = new HseCommandContext(CommandType.OPERATION);
         commandContext6.setOperationType(OperationType.INCOME);
-        commandContext6.setAccountId(0);
+        commandContext6.setAccount(hse.getAccount(0));
         commandContext6.setAmount(250);
         commandContext6.setDate(0);
         commandContext6.setDescription("test1");
-        commandContext6.setCategoryId(3);
+        commandContext6.setCategory(hse.getCategoryById(3));
         hse.takeCommand(commandContext6);
 
         HseCommandContext commandContext5 = new HseCommandContext(CommandType.OPERATION);
         commandContext5.setOperationType(OperationType.EXPENSE);
-        commandContext5.setAccountId(0);
+        commandContext5.setAccount(hse.getAccount(0));
         commandContext5.setAmount(100);
         commandContext5.setDate(1);
         commandContext5.setDescription("test");
-        commandContext5.setCategoryId(1);
+        commandContext5.setCategory(hse.getCategoryById(2));
         hse.takeCommand(commandContext5);
 
         HseCommandContext commandContext7 = new HseCommandContext(CommandType.OPERATION);
         commandContext7.setOperationType(OperationType.EXPENSE);
-        commandContext7.setAccountId(0);
+        commandContext7.setAccount(hse.getAccount(0));
         commandContext7.setAmount(100);
         commandContext7.setDate(2);
         commandContext7.setDescription("test");
-        commandContext7.setCategoryId(2);
+        commandContext7.setCategory(hse.getCategory("Coffee"));
         hse.takeCommand(commandContext7);
 
-        hse.printAnaliticByAccountByDate(0, 0, 2);
-        hse.printAnaliticByAccountIncome(0, 0, 1);
-        hse.printAnaliticByAccountExpense(0, 0, 1);
-        hse.printAnaliticByAccountExpense(0, 0, 2);
-        hse.printAnaliticByAccountByCategory(0, 0, 0, 4);
+        hse.printAnaliticByAccountByDate(hse.getAccount(0), 0, 2);
+        hse.printAnaliticByAccountIncome(hse.getAccount(0), 0, 1);
+        hse.printAnaliticByAccountExpense(hse.getAccount(0), 0, 1);
+        hse.printAnaliticByAccountExpense(hse.getAccount(0), 0, 2);
+        hse.printAnaliticByAccountByCategory(hse.getAccount(0), hse.getCategoryById(2), 0, 4);
 
         assertThat(hse.getAccountList().size()).isEqualTo(1);
         assertThat(hse.getCategoryList().size()).isEqualTo(4);
         assertThat(hse.getOperationList().size()).isEqualTo(3);
 
-        hse.deleteAccount(0);
+        hse.deleteAccount(hse.getAccount(0));
+
         assertThat(hse.getAccountList().size()).isEqualTo(0);
         assertThat(hse.getCategoryList().size()).isEqualTo(4);
         assertThat(hse.getOperationList().size()).isEqualTo(0);
@@ -246,46 +247,46 @@ public class FacadeTest {
 
         HseCommandContext commandContext6 = new HseCommandContext(CommandType.OPERATION);
         commandContext6.setOperationType(OperationType.INCOME);
-        commandContext6.setAccountId(0);
+        commandContext6.setAccount(hse.getAccount(0));
         commandContext6.setAmount(250);
         commandContext6.setDate(0);
         commandContext6.setDescription("test1");
-        commandContext6.setCategoryId(3);
+        commandContext6.setCategory(hse.getCategory("CashBack"));
         hse.takeCommand(commandContext6);
 
         HseCommandContext commandContext5 = new HseCommandContext(CommandType.OPERATION);
         commandContext5.setOperationType(OperationType.EXPENSE);
-        commandContext5.setAccountId(0);
+        commandContext5.setAccount(hse.getAccount(0));
         commandContext5.setAmount(100);
         commandContext5.setDate(1);
         commandContext5.setDescription("test");
-        commandContext5.setCategoryId(2);
+        commandContext5.setCategory(hse.getCategoryById(2));
         hse.takeCommand(commandContext5);
 
         HseCommandContext commandContext7 = new HseCommandContext(CommandType.OPERATION);
         commandContext7.setOperationType(OperationType.EXPENSE);
-        commandContext7.setAccountId(0);
+        commandContext7.setAccount(hse.getAccount(0));
         commandContext7.setAmount(100);
         commandContext7.setDate(2);
         commandContext7.setDescription("test");
-        commandContext7.setCategoryId(2);
+        commandContext7.setCategory(hse.getCategory("Coffee"));
         hse.takeCommand(commandContext7);
 
-        hse.printAnaliticByAccountByDate(0, 0, 2);
-        hse.printAnaliticByAccountIncome(0, 0, 1);
-        hse.printAnaliticByAccountExpense(0, 0, 1);
-        hse.printAnaliticByAccountExpense(0, 0, 2);
-        hse.printAnaliticByAccountByCategory(0, 0, 0, 4);
+        hse.printAnaliticByAccountByDate(hse.getAccount(0), 0, 2);
+        hse.printAnaliticByAccountIncome(hse.getAccount(0), 0, 1);
+        hse.printAnaliticByAccountExpense(hse.getAccount(0), 0, 1);
+        hse.printAnaliticByAccountExpense(hse.getAccount(0), 0, 2);
+        hse.printAnaliticByAccountByCategory(hse.getAccount(0), hse.getCategoryById(2), 0, 4);
 
         assertThat(hse.getAccountList().size()).isEqualTo(1);
         assertThat(hse.getCategoryList().size()).isEqualTo(4);
         assertThat(hse.getOperationList().size()).isEqualTo(3);
 
-        hse.deleteCategory(2);
+        hse.deleteCategory(hse.getCategory("Coffee"));
         assertThat(hse.getAccountList().size()).isEqualTo(1);
         assertThat(hse.getCategoryList().size()).isEqualTo(3);
         assertThat(hse.getOperationList().size()).isEqualTo(3);
-        assertThat(hse.getOperationList().get(1).getCategoryId()).isEqualTo(1);
-        assertThat(hse.getOperationList().get(2).getCategoryId()).isEqualTo(1);
+        assertThat(hse.getOperationList().get(1).getCategory()).isEqualTo(hse.getCategoryById(1));
+        assertThat(hse.getOperationList().get(2).getCategory()).isEqualTo(hse.getCategoryById(1));
     }
 }

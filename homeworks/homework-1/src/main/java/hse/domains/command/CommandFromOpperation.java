@@ -28,11 +28,11 @@ public class CommandFromOpperation  extends HseAddOperationCommand{
     public CommandContext makeContext(Operation op) {
         HseCommandContext commandContext = new HseCommandContext(CommandType.OPERATION);
         commandContext.setOperationType(op.getOperationType());
-        commandContext.setAccountId(op.getBankAccountId());
+        commandContext.setAccount(op.getAccount());
         commandContext.setAmount(op.getAmount());
         commandContext.setDate(op.getDate());
         commandContext.setDescription(op.getDescription());
-        commandContext.setCategoryId(op.getCategoryId());
+        commandContext.setCategory(op.getCategory());
         return commandContext;
     }
 
