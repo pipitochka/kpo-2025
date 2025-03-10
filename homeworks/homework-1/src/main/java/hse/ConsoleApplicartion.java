@@ -158,6 +158,90 @@ public class ConsoleApplicartion {
                     }
                     break;
                 }
+                case "analyse":{
+                    if (split[3] != "by") {
+                        int accountId;
+                        try {
+                            accountId = Integer.parseInt(split[2]);
+                        } catch (NumberFormatException e) {
+                            int index = IntStream.range(0, hseFacade.getAccountList().size())
+                                    .filter(i -> hseFacade.getAccountList().get(i).getName().equals(split[2]))
+                                    .findFirst()
+                                    .orElse(-1);
+                            accountId = index;
+                        }
+                        if (!split[3].equals( "from")) {
+                            System.out.println("Invalid input");
+                            break;
+                        }
+                        if (!split[5].equals( "to")) {
+                            System.out.println("Invalid input");
+                            break;
+                        }
+                        int from, to;
+                        try {
+                            from = Integer.parseInt(split[4]);
+                            to = Integer.parseInt(split[6]);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid input");
+                            break;
+                        }
+                        switch (split[1]) {
+                            case "account": {
+                                hseFacade.printAnaliticByAccountByDate(accountId, from, to);
+                                break;
+                            }
+                            case "income": {
+                                hseFacade.printAnaliticByAccountIncome(accountId, from, to);
+                                break;
+                            }
+                            case "expense": {
+                                hseFacade.printAnaliticByAccountExpense(accountId, from, to);
+                                break;
+                            }
+                        }
+                    }
+                    else{
+                        int accountId;
+                        try {
+                            accountId = Integer.parseInt(split[2]);
+                        } catch (NumberFormatException e) {
+                            int index = IntStream.range(0, hseFacade.getAccountList().size())
+                                    .filter(i -> hseFacade.getAccountList().get(i).getName().equals(split[2]))
+                                    .findFirst()
+                                    .orElse(-1);
+                            accountId = index;
+                        }
+                        int categoryId;
+                        try {
+                            categoryId = Integer.parseInt(split[4]);
+                        } catch (NumberFormatException e) {
+                            int index = IntStream.range(0, hseFacade.getCategoryList().size())
+                                    .filter(i -> hseFacade.getCategoryList().get(i).getName().equals(split[4]))
+                                    .findFirst()
+                                    .orElse(-1);
+                            categoryId = index;
+                        }
+                        if (split[5] != "from") {
+                            System.out.println("Invalid input");
+                            break;
+                        }
+                        if (split[7] != "to") {
+                            System.out.println("Invalid input");
+                            break;
+                        }
+                        int from, to;
+                        try {
+                            from = Integer.parseInt(split[6]);
+                            to = Integer.parseInt(split[8]);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid input");
+                            break;
+                        }
+                        hseFacade.printAnaliticByAccountByCategory(accountId, categoryId, from, to);
+                    }
+                    break;
+                }
             }
         }
     }

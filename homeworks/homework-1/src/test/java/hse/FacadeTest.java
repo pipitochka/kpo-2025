@@ -3,27 +3,15 @@ package hse;
 import hse.domains.facade.HseFacade;
 import hse.domains.factory.HseAccountFactory;
 import hse.domains.factory.HseCategoryFactory;
-import hse.domains.factory.HseCommandFactory;
+import hse.domains.factory.HseCommandBuilder;
 import hse.domains.factory.HseOperationFactory;
 import hse.domains.object.HseCommandContext;
 import hse.emums.CommandType;
 import hse.emums.OperationType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-
-import java.util.Scanner;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -44,7 +32,7 @@ public class FacadeTest {
     private HseOperationFactory operationFactory;
 
     @Autowired
-    private HseCommandFactory commandFactory;
+    private HseCommandBuilder commandFactory;
 
 
     @Test

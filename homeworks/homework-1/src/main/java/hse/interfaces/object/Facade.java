@@ -19,4 +19,14 @@ public interface Facade {
     public List<Operation> getOperationList();
 
     public List<Category> getCategoryList();
+
+    public void printAnaliticByAccountByDate(int accountId, int dateFrom, int dateTo);
+
+    public void printAnaliticByAccountIncome(int accountId, int dateFrom, int dateTo);
+
+    public void printAnaliticByAccountExpense(int accountId, int dateFrom, int dateTo);
+
+    public void printAnaliticByAccountByCategory(int accountId, int categoryId, int dateFrom, int dateTo);
+
+    public void repeatOperations(int accountId);
 }
