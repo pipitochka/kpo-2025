@@ -12,7 +12,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HseCommandFactory implements CommandFactory {
+public class HseCommandBuilder implements CommandFactory {
 
     @Getter
     @Setter
