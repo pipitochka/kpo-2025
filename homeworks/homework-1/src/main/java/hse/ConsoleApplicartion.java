@@ -159,7 +159,7 @@ public class ConsoleApplicartion {
                     break;
                 }
                 case "analyse":{
-                    if (split[3] != "by") {
+                    if (!split[3].equals("by")) {
                         int accountId;
                         try {
                             accountId = Integer.parseInt(split[2]);
@@ -222,11 +222,11 @@ public class ConsoleApplicartion {
                                     .orElse(-1);
                             categoryId = index;
                         }
-                        if (split[5] != "from") {
+                        if (!split[5].equals("from")) {
                             System.out.println("Invalid input");
                             break;
                         }
-                        if (split[7] != "to") {
+                        if (!split[7].equals( "to")) {
                             System.out.println("Invalid input");
                             break;
                         }
@@ -242,6 +242,105 @@ public class ConsoleApplicartion {
                     }
                     break;
                 }
+                case "change":{
+                    if (!split[1].equals("operation")) {
+                        System.out.println("Invalid input");
+                        break;
+                    }
+                    int operationId;
+                    try {
+                        operationId = Integer.parseInt(split[2]);
+                    }
+                    catch (NumberFormatException e) {
+                        System.out.println("Invalid input");
+                        break;
+                    }
+                    if (!split[3].equals( "category")) {
+                        System.out.println("Invalid input");
+                        break;
+                    }
+                    if (!split[4].equals( "to")) {
+                        System.out.println("Invalid input");
+                        break;
+                    }
+                    int categoryId;
+                    try {
+                        categoryId = Integer.parseInt(split[5]);
+                    }
+                    catch (NumberFormatException e) {
+                        int index = IntStream.range(0, hseFacade.getCategoryList().size())
+                                .filter(i -> hseFacade.getCategoryList().get(i).getName().equals(split[5]))
+                                .findFirst()
+                                .orElse(-1);
+                        categoryId = index;
+                    }
+                    hseFacade.changeOperationType(operationId, categoryId);
+                    break;
+                }
+                case "delete":{
+                    switch (split[1]) {
+                        case "account": {
+                            int accountId;
+                            try{
+                                accountId = Integer.parseInt(split[2]);
+                            }
+                            catch (NumberFormatException e){
+                                accountId = IntStream.range(0, hseFacade.getAccountList().size())
+                                        .filter(i -> hseFacade.getAccountList().get(i).getName().equals(split[2]))
+                                        .findFirst()
+                                        .orElse(-1);
+
+                            }
+                            hseFacade.deleteAccount(accountId);
+                            break;}
+                        case "category": {
+                            int accountId;
+                            try{
+                                accountId = Integer.parseInt(split[2]);
+                            }
+                            catch (NumberFormatException e){
+                                accountId = IntStream.range(0, hseFacade.getCategoryList().size())
+                                        .filter(i -> hseFacade.getCategoryList().get(i).getName().equals(split[2]))
+                                        .findFirst()
+                                        .orElse(-1);
+
+                            }
+                            hseFacade.deleteCategory(accountId);
+                            break;}
+
+                    }
+                    break;}
+                case "repeat":{
+                    int accountId;
+                    try{
+                        accountId = Integer.parseInt(split[1]);
+                    }
+                    catch (NumberFormatException e){
+                        accountId = IntStream.range(0, hseFacade.getAccountList().size())
+                                .filter(i -> hseFacade.getAccountList().get(i).getName().equals(split[1]))
+                                .findFirst()
+                                .orElse(-1);
+
+                    }
+                    hseFacade.repeatOperations(accountId);
+                    break;}
+                case "reverse":{
+                    if (!split[1].equals("operation")) {
+                        System.out.println("Invalid input");
+                        break;
+                    }
+                    int operationId;
+                    try {
+                        operationId = Integer.parseInt(split[2]);
+                    }
+                    catch (NumberFormatException e) {
+                        System.out.println("Invalid input");
+                        break;
+                    }
+                    hseFacade.reverseOperation(operationId);
+                    break;}
+                case "save":{break;}
+                case "take":{break;}
             }
         }
     }

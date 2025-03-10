@@ -8,6 +8,7 @@ public interface CommandContext {
     public String getName();
     public double getAmount();
     public OperationType getOperationType();
+    public void setOperationType(OperationType operationType);
     public int getAccountId();
     public int getDate();
     public String getDescription();

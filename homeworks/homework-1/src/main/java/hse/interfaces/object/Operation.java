@@ -10,4 +10,5 @@ public interface Operation {
     public int getDate();
     public String getDescription();
     public int getCategoryId();
+    public void setCategoryId(int categoryId);
 }
