@@ -8,6 +8,7 @@ import hse.domains.factory.HseOperationFactory;
 import hse.domains.object.HseCommandContext;
 import hse.emums.CommandType;
 import hse.emums.OperationType;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,12 @@ public class FacadeTest {
     @Autowired
     private HseCommandBuilder commandFactory;
 
+    @BeforeEach
+    void setUp() {
+        hse.getCategoryList().clear();
+        hse.getOperationList().clear();
+        hse.getAccountList().clear();
+    }
 
     @Test
     @DisplayName("Input Facade Test")
@@ -102,5 +109,59 @@ public class FacadeTest {
         assertThat(hse.getAccountList().get(0).getName()).isEqualTo("Artem");
         assertThat(hse.getAccountList().get(0).getBalance()).isEqualTo(50);
         assertThat(hse.getAccountList().get(1).getBalance()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("Analyse Test")
+    public void analyseTest() {
+        HseCommandContext commandContext1 = new HseCommandContext(CommandType.ACCOUNT);
+        commandContext1.setName("Artem");
+        hse.takeCommand(commandContext1);
+
+        HseCommandContext commandContext3 = new HseCommandContext(CommandType.CATEGORY);
+        commandContext3.setName("Coffee");
+        commandContext3.setOperationType(OperationType.EXPENSE);
+        hse.takeCommand(commandContext3);
+
+        HseCommandContext commandContext4 = new HseCommandContext(CommandType.CATEGORY);
+        commandContext4.setName("CashBack");
+        commandContext4.setOperationType(OperationType.INCOME);
+        hse.takeCommand(commandContext4);
+
+        HseCommandContext commandContext6 = new HseCommandContext(CommandType.OPERATION);
+        commandContext6.setOperationType(OperationType.INCOME);
+        commandContext6.setAccountId(0);
+        commandContext6.setAmount(250);
+        commandContext6.setDate(0);
+        commandContext6.setDescription("test1");
+        commandContext6.setCategoryId(1);
+        hse.takeCommand(commandContext6);
+
+        HseCommandContext commandContext5 = new HseCommandContext(CommandType.OPERATION);
+        commandContext5.setOperationType(OperationType.EXPENSE);
+        commandContext5.setAccountId(0);
+        commandContext5.setAmount(100);
+        commandContext5.setDate(1);
+        commandContext5.setDescription("test");
+        commandContext5.setCategoryId(0);
+        hse.takeCommand(commandContext5);
+
+        HseCommandContext commandContext7 = new HseCommandContext(CommandType.OPERATION);
+        commandContext7.setOperationType(OperationType.EXPENSE);
+        commandContext7.setAccountId(0);
+        commandContext7.setAmount(100);
+        commandContext7.setDate(2);
+        commandContext7.setDescription("test");
+        commandContext7.setCategoryId(0);
+        hse.takeCommand(commandContext7);
+
+        hse.printAnaliticByAccountByDate(0, 0, 2);
+        hse.printAnaliticByAccountIncome(0, 0, 1);
+        hse.printAnaliticByAccountExpense(0, 0, 1);
+        hse.printAnaliticByAccountExpense(0, 0, 2);
+        hse.printAnaliticByAccountByCategory(0, 0, 0, 4);
+
+        hse.repeatOperations(0);
+        assertThat(hse.getAccountList().get(0).getBalance()).isEqualTo(50);
     }
 }

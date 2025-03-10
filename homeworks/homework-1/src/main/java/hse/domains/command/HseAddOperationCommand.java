@@ -5,13 +5,18 @@ import hse.interfaces.object.Command;
 import hse.interfaces.object.Facade;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-@RequiredArgsConstructor
+
 public class HseAddOperationCommand implements Command {
 
     @Getter
-    private final CommandContext context;
+    @Setter
+    private CommandContext context;
 
+    public HseAddOperationCommand(CommandContext context) {
+        this.context = context;
+    }
 
     @Override
     public void execute(Facade facade) {

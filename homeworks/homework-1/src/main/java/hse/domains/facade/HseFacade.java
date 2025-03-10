@@ -5,7 +5,7 @@ import hse.emums.OperationType;
 import hse.interfaces.object.CommandContext;
 import hse.interfaces.factory.AccountFactory;
 import hse.interfaces.factory.CategoryFactory;
-import hse.interfaces.factory.CommandFactory;
+import hse.interfaces.factory.CommandBuilder;
 import hse.interfaces.factory.OperationFactory;
 import hse.interfaces.object.*;
 import lombok.Getter;
@@ -36,7 +36,7 @@ public class HseFacade implements Facade {
     @Getter
     private final OperationFactory operationFactory;
     @Getter
-    private final CommandFactory commandFactory;
+    private final CommandBuilder commandBuilder;
     @Getter
     private final OperationHandler operationHandler;
 
@@ -60,7 +60,7 @@ public class HseFacade implements Facade {
 
     @Override
     public void takeCommand(CommandContext context) {
-        Command command = commandFactory.createCommand(context);
+        Command command = commandBuilder.createCommand(context);
         if (operationHandler != null) {
             if (operationHandler.handle(command, this)){
                 command.execute(this);

@@ -9,12 +9,23 @@ import hse.interfaces.object.Facade;
 import hse.interfaces.object.Operation;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
-public class CommandFromOpperation implements Command {
-    private final Operation op;
 
-    @Override
-    public CommandContext getContext() {
+public class CommandFromOpperation  extends HseAddOperationCommand{
+    private Operation op;
+
+    public CommandFromOpperation(CommandContext context) {
+        super(context);
+    }
+
+    public CommandFromOpperation(Operation op) {
+        super(null);
+        this.op = op;
+        super.setContext(makeContext(op));
+    }
+
+
+
+    public CommandContext makeContext(Operation op) {
         HseCommandContext commandContext = new HseCommandContext(CommandType.OPERATION);
         commandContext.setOperationType(op.getOperationType());
         commandContext.setAccountId(op.getBankAccountId());
