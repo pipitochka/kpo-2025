@@ -20,13 +20,13 @@ public class HseOperationHandler implements OperationHandler {
             if (command.getContext().getOperationType() == null) {
                 return false;
             }
-            if (command.getContext().getAccountId() > facade.getCategoryList().size() ) {
+            if (command.getContext().getAccount()  == null) {
                 return false;
             }
-            if (command.getContext().getCategoryId() > facade.getCategoryList().size()) {
+            if (command.getContext().getCategory() == null) {
                 return false;
             }
-            if (command.getContext().getOperationType() != facade.getCategoryList().get(command.getContext().getCategoryId()).getOperationType()){
+            if (command.getContext().getOperationType() != command.getContext().getCategory().getOperationType()){
                 return false;
             }
             return operationHandler.handle(command, facade);

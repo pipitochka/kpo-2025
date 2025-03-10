@@ -2,6 +2,8 @@ package hse.domains.object;
 
 import hse.emums.CommandType;
 import hse.emums.OperationType;
+import hse.interfaces.object.Account;
+import hse.interfaces.object.Category;
 import hse.interfaces.object.CommandContext;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +33,7 @@ public class HseCommandContext implements CommandContext {
 
     @Getter
     @Setter
-    private int categoryId;
+    private Category category;
 
     @Getter
     @Setter
@@ -39,6 +41,6 @@ public class HseCommandContext implements CommandContext {
 
     @Getter
     @Setter
-    private int accountId;
+    private Account account;
 
 }

@@ -30,6 +30,10 @@ public class HseFacade implements Facade {
     @Getter
     private List<Category> categoryList = new ArrayList<>();
 
+    private int accountCounter = 0;
+    private int operationCounter = 0;
+    private int categoryCounter = 0;
+
     @Getter
     private final AccountFactory accountFactory;
     @Getter
@@ -54,23 +58,26 @@ public class HseFacade implements Facade {
 
     @Override
     public void addBankAccount(String name) {
-        accountList.add(accountFactory.createAccount(accountList.size(), name));
+        accountList.add(accountFactory.createAccount(accountCounter++, name));
     }
 
     @Override
-    public void addOperation(OperationType operationType, int bankAccountId, double amount, int date,
-                             String description, int categoryId) {
-        operationList.add(operationFactory.createOperation(operationList.size(), operationType, bankAccountId,
-                amount, date, description, categoryId));
+    public void addOperation(OperationType operationType, Account bankAccountId, double amount, int date,
+                             String description, Category category) {
+        operationList.add(operationFactory.createOperation(operationCounter++, operationType, bankAccountId,
+                amount, date, description, category));
     }
 
     @Override
     public void addCategory(OperationType type, String name) {
-        categoryList.add(categoryFactory.createCategory(categoryList.size(), type, name));
+        categoryList.add(categoryFactory.createCategory(categoryCounter++, type, name));
     }
 
     @Override
     public void takeCommand(CommandContext context) {
+        if (context == null) {
+            return;
+        }
         Command command = commandBuilder.createCommand(context);
         if (operationHandler != null) {
             if (operationHandler.handle(command, this)){
@@ -84,11 +91,14 @@ public class HseFacade implements Facade {
     }
 
     @Override
-    public void printAnaliticByAccountByDate(int accountId, int dateFrom, int dateTo) {
+    public void printAnaliticByAccountByDate(Account account, int dateFrom, int dateTo) {
+        if (account == null) {
+            return;
+        }
         AtomicReference<Double> totalIncome = new AtomicReference<>((double) 0);
         AtomicReference<Double> totalExpense = new AtomicReference<>((double) 0);
         operationList.forEach(operation -> {
-            if (operation.getBankAccountId() == accountId) {
+            if (operation.getAccount() == account) {
                 if (operation.getDate() >= dateFrom && operation.getDate() <= dateTo) {
                     switch (operation.getOperationType()) {
                         case INCOME:
@@ -108,10 +118,13 @@ public class HseFacade implements Facade {
     }
 
     @Override
-    public void printAnaliticByAccountIncome(int accountId, int dateFrom, int dateTo) {
+    public void printAnaliticByAccountIncome(Account account, int dateFrom, int dateTo) {
+        if (account == null) {
+            return;
+        }
         AtomicReference<Double> totalIncome = new AtomicReference<>((double) 0);
         operationList.forEach(operation -> {
-            if (operation.getBankAccountId() == accountId) {
+            if (operation.getAccount() == account) {
                 if (operation.getDate() >= dateFrom && operation.getDate() <= dateTo) {
                     if (operation.getOperationType() == OperationType.INCOME) {
                         totalIncome.updateAndGet(v -> Double.valueOf(v + operation.getAmount()));
@@ -124,10 +137,13 @@ public class HseFacade implements Facade {
     }
 
     @Override
-    public void printAnaliticByAccountExpense(int accountId, int dateFrom, int dateTo) {
+    public void printAnaliticByAccountExpense(Account accountId, int dateFrom, int dateTo) {
+        if (accountId == null) {
+            return;
+        }
         AtomicReference<Double> totalIncome = new AtomicReference<>((double) 0);
         operationList.forEach(operation -> {
-            if (operation.getBankAccountId() == accountId) {
+            if (operation.getAccount() == accountId) {
                 if (operation.getDate() >= dateFrom && operation.getDate() <= dateTo) {
                     if (operation.getOperationType() == OperationType.EXPENSE) {
                         totalIncome.updateAndGet(v -> Double.valueOf(v + operation.getAmount()));
@@ -140,12 +156,18 @@ public class HseFacade implements Facade {
     }
 
     @Override
-    public void printAnaliticByAccountByCategory(int accountId, int categoryId, int dateFrom, int dateTo) {
+    public void printAnaliticByAccountByCategory(Account accountId, Category category, int dateFrom, int dateTo) {
+        if (accountId == null) {
+            return;
+        }
+        if (category == null) {
+            return;
+        }
         AtomicReference<Double> totalIncome = new AtomicReference<>((double) 0);
         operationList.forEach(operation -> {
-            if (operation.getBankAccountId() == accountId) {
+            if (operation.getAccount() == accountId) {
                 if (operation.getDate() >= dateFrom && operation.getDate() <= dateTo) {
-                    if (operation.getCategoryId() == categoryId) {
+                    if (operation.getCategory() == category) {
                         totalIncome.updateAndGet(v -> Double.valueOf(v + operation.getAmount()));
                         System.out.println(operation);
                     }
@@ -156,64 +178,65 @@ public class HseFacade implements Facade {
     }
 
     @Override
-    public void repeatOperations(int accountId) {
-        accountList.get(accountId).setBalance(0);
+    public void repeatOperations(Account accountId) {
+        if (accountId == null) {
+            return;
+        }
+        accountId.setBalance(0);
         operationList.stream().forEach(operation -> {
-            if (operation.getBankAccountId() == accountId) {
+            if (operation.getAccount() == accountId) {
                 operationHandler.handle(new CommandFromOpperation(operation), this);
             }
         });
     }
 
     @Override
-    public void deleteAccount(int accountId) {
-        if (accountList.get(accountId) != null) {
-            accountList.remove(accountId);
+    public void deleteAccount(Account accountId) {
+        if (accountId != null) {
             Iterator<Operation> iterator = operationList.iterator();
             while (iterator.hasNext()) {
-                if (iterator.next().getBankAccountId() == accountId) {
-                    iterator.remove();
+                Operation operation = iterator.next();
+                if (operation.getAccount() == accountId) {
+                    iterator.remove(); // Удаление безопасно
                 }
             }
-            System.out.println("Account " + accountId + " deleted.");
+            accountList.remove(accountId);
+            System.out.println("Account deleted: " + accountId);
         }
-        else {
-            System.out.println("Account " + accountId + " not found.");
+        else{
+            System.out.println("Account is null");
         }
-
     }
 
     @Override
-    public void deleteCategory(int categoryId) {
-        if (categoryId == 0 || categoryId == 1){
-            System.out.println("Category " + categoryId + " cannot be deleted.");
+    public void deleteCategory(Category category) {
+        if (category == categoryList.get(0) || category == categoryList.get(1)){
+            System.out.println("Category " + category + " cannot be deleted.");
             return;
         }
-        if (categoryList.get(categoryId) != null) {
-            categoryList.remove(categoryId);
+        if (category != null) {
 
             operationList.stream().forEach(operation -> {
-                if (operation.getCategoryId() == categoryId) {
                     if (operation.getOperationType() == OperationType.INCOME) {
-                        operation.setCategoryId(0);
+                        operation.setCategory(categoryList.get(0));
                     }
                     if (operation.getOperationType() == OperationType.EXPENSE) {
-                        operation.setCategoryId(1);
+                        operation.setCategory(categoryList.get(1));
                     }
-                }
             });
-            System.out.println("Category " + categoryId + " deleted.");
+            categoryList.remove(category);
+            System.out.println("Category " + category + " deleted.");
             return;
         }
         else {
-            System.out.println("Category " + categoryId + " not found.");
+            System.out.println("Category " + category + " not found.");
         }
     }
 
     @Override
-    public void reverseOperation(int operationId) {
-        if (operationList.get(operationId) != null) {
-            Command command = new CommandFromOpperation(operationList.get(operationId));
+    public void reverseOperation(Operation operationId) {
+        if (operationId != null) {
+            Command command = new CommandFromOpperation(operationId);
             switch (command.getContext().getOperationType()){
                 case INCOME:
                     command.getContext().setOperationType(OperationType.EXPENSE);
@@ -232,24 +255,49 @@ public class HseFacade implements Facade {
     }
 
     @Override
-    public void changeOperationType(int operationId, int newCategoryId) {
-        if (operationList.get(operationId) != null){
-            if (categoryList.get(newCategoryId) != null){
-                if (categoryList.get(operationList.get(operationId).getCategoryId()).getOperationType() ==
-                    categoryList.get(newCategoryId).getOperationType()) {
-                    operationList.get(operationId).setCategoryId(newCategoryId);
-                    System.out.println("Category " + newCategoryId + " changed.");
+    public void changeOperationType(Operation operationId, Category newCategory) {
+        if (operationId != null){
+            if (newCategory != null){
+                if (newCategory.getOperationType() == operationId.getOperationType()) {
+                    operationId.setCategory(newCategory);
+                    System.out.println("Category " + newCategory + " changed.");
                 }
                 else{
-                    System.out.println("Category " + newCategoryId + "another type");
+                    System.out.println("Category " + newCategory + "another type");
                 }
             }
             else {
-                System.out.println("Category " + newCategoryId + " not found.");
+                System.out.println("Category " + newCategory + " not found.");
             }
         }
         else {
             System.out.println("Operation " + operationId + " not found.");
         }
+    }
+
+    @Override
+    public Category getCategory(String name) {
+        return categoryList.stream().filter(category -> category.getName().equals(name)).findFirst().orElse(null);
+    }
+
+    @Override
+    public Category getCategoryById(int id) {
+        return categoryList.stream().filter(c -> c.getId() == id).findFirst().orElse(null);
+
+    }
+
+    @Override
+    public Account getAccount(String name) {
+        return accountList.stream().filter(a -> a.getName().equals(name)).findFirst().orElse(null);
+    }
+
+    @Override
+    public Account getAccount(int id) {
+        return accountList.stream().filter(a -> a.getId() == id).findFirst().orElse(null);
+    }
+
+    @Override
+    public Operation getOperation(int id) {
+        return operationList.stream().filter(operation -> operation.getId() == id).findFirst().orElse(null);
     }
 }

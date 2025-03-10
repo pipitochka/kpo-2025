@@ -1,6 +1,8 @@
 package hse.domains.object;
 
 import hse.emums.OperationType;
+import hse.interfaces.object.Account;
+import hse.interfaces.object.Category;
 import hse.interfaces.object.Operation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +19,7 @@ public class HseOperation implements Operation {
     private final OperationType operationType;
 
     @Getter
-    private final int bankAccountId;
+    private final Account account;
 
     @Getter
     private final double amount;
@@ -30,15 +32,15 @@ public class HseOperation implements Operation {
 
     @Getter
     @Setter
-    private int categoryId;
+    private Category category;
 
-    public HseOperation(int id, OperationType operationType, int bankAccountId, double amount, int date, String description, int categoryId) {
+    public HseOperation(int id, OperationType operationType, Account account, double amount, int date, String description, Category category) {
         this.id = id;
         this.operationType = operationType;
-        this.bankAccountId = bankAccountId;
+        this.account = account;
         this.amount = amount;
         this.date = date;
         this.description = description;
-        this.categoryId = categoryId;
+        this.category = category;
     }
 }

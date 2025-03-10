@@ -4,6 +4,8 @@ import hse.domains.facade.HseFacade;
 import hse.domains.object.HseCommandContext;
 import hse.emums.CommandType;
 import hse.emums.OperationType;
+import hse.interfaces.object.Account;
+import hse.interfaces.object.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -68,28 +70,20 @@ public class ConsoleApplicartion {
                                 }
                                 try{
                                     int accountId = Integer.parseInt(split[3]);
-                                    context.setAccountId(accountId);
+                                    context.setAccount(hseFacade.getAccount(accountId));
                                 }
                                 catch (NumberFormatException e){
-                                    int index = IntStream.range(0, hseFacade.getAccountList().size())
-                                            .filter(i -> hseFacade.getAccountList().get(i).getName().equals(split[3]))
-                                            .findFirst()
-                                            .orElse(-1);
-                                    context.setAccountId(index);
+                                    context.setAccount(hseFacade.getAccount(split[3]));
                                 }
                                 context.setAmount(Double.parseDouble(split[4]));
                                 context.setDate(Integer.parseInt(split[5]));
                                 context.setDescription(split[6]);
                                 try{
                                     int setCategoryId = Integer.parseInt(split[7]);
-                                    context.setCategoryId(setCategoryId);
+                                    context.setCategory(hseFacade.getCategoryById(setCategoryId));
                                 }
                                 catch (NumberFormatException e){
-                                    int index = IntStream.range(0, hseFacade.getCategoryList().size())
-                                            .filter(i -> hseFacade.getCategoryList().get(i).getName().equals(split[7]))
-                                            .findFirst()
-                                            .orElse(-1);
-                                    context.setCategoryId(index);
+                                    context.setCategory(hseFacade.getCategory(split[7]));
                                 }
                                 hseFacade.takeCommand(context);
                                 break;
@@ -106,27 +100,19 @@ public class ConsoleApplicartion {
                                 }
                                 try{
                                     int accountId = Integer.parseInt(split[3]);
-                                    context.setAccountId(accountId);
+                                    context.setAccount(hseFacade.getAccount(accountId));
                                 }
                                 catch (NumberFormatException e){
-                                    int index = IntStream.range(0, hseFacade.getAccountList().size())
-                                            .filter(i -> hseFacade.getAccountList().get(i).getName().equals(split[3]))
-                                            .findFirst()
-                                            .orElse(-1);
-                                    context.setAccountId(index);
+                                    context.setAccount(hseFacade.getAccount(split[3]));
                                 }
                                 context.setAmount(Double.parseDouble(split[4]));
                                 context.setDate(Integer.parseInt(split[5]));
                                 try{
                                     int setCategoryId = Integer.parseInt(split[6]);
-                                    context.setCategoryId(setCategoryId);
+                                    context.setCategory(hseFacade.getCategoryById(setCategoryId));
                                 }
                                 catch (NumberFormatException e){
-                                    int index = IntStream.range(0, hseFacade.getCategoryList().size())
-                                            .filter(i -> hseFacade.getCategoryList().get(i).getName().equals(split[6]))
-                                            .findFirst()
-                                            .orElse(-1);
-                                    context.setCategoryId(index);
+                                    context.setCategory(hseFacade.getCategory(split[6]));
                                 }
                                 hseFacade.takeCommand(context);
                             }
@@ -160,15 +146,12 @@ public class ConsoleApplicartion {
                 }
                 case "analyse":{
                     if (!split[3].equals("by")) {
-                        int accountId;
+                        Account account;
                         try {
-                            accountId = Integer.parseInt(split[2]);
+                            int accountId = Integer.parseInt(split[2]);
+                            account = hseFacade.getAccount(accountId);
                         } catch (NumberFormatException e) {
-                            int index = IntStream.range(0, hseFacade.getAccountList().size())
-                                    .filter(i -> hseFacade.getAccountList().get(i).getName().equals(split[2]))
-                                    .findFirst()
-                                    .orElse(-1);
-                            accountId = index;
+                            account = hseFacade.getAccount(split[2]);
                         }
                         if (!split[3].equals( "from")) {
                             System.out.println("Invalid input");
@@ -188,39 +171,33 @@ public class ConsoleApplicartion {
                         }
                         switch (split[1]) {
                             case "account": {
-                                hseFacade.printAnaliticByAccountByDate(accountId, from, to);
+                                hseFacade.printAnaliticByAccountByDate(account, from, to);
                                 break;
                             }
                             case "income": {
-                                hseFacade.printAnaliticByAccountIncome(accountId, from, to);
+                                hseFacade.printAnaliticByAccountIncome(account, from, to);
                                 break;
                             }
                             case "expense": {
-                                hseFacade.printAnaliticByAccountExpense(accountId, from, to);
+                                hseFacade.printAnaliticByAccountExpense(account, from, to);
                                 break;
                             }
                         }
                     }
                     else{
-                        int accountId;
+                        Account account;
                         try {
-                            accountId = Integer.parseInt(split[2]);
+                            int accountId = Integer.parseInt(split[2]);
+                            account = hseFacade.getAccount(accountId);
                         } catch (NumberFormatException e) {
-                            int index = IntStream.range(0, hseFacade.getAccountList().size())
-                                    .filter(i -> hseFacade.getAccountList().get(i).getName().equals(split[2]))
-                                    .findFirst()
-                                    .orElse(-1);
-                            accountId = index;
+                            account = hseFacade.getAccount(split[2]);
                         }
-                        int categoryId;
+                        Category category;
                         try {
-                            categoryId = Integer.parseInt(split[4]);
+                            int categoryId = Integer.parseInt(split[4]);
+                            category = hseFacade.getCategoryById(categoryId);
                         } catch (NumberFormatException e) {
-                            int index = IntStream.range(0, hseFacade.getCategoryList().size())
-                                    .filter(i -> hseFacade.getCategoryList().get(i).getName().equals(split[4]))
-                                    .findFirst()
-                                    .orElse(-1);
-                            categoryId = index;
+                            category = hseFacade.getCategory(split[4]);
                         }
                         if (!split[5].equals("from")) {
                             System.out.println("Invalid input");
@@ -238,7 +215,7 @@ public class ConsoleApplicartion {
                             System.out.println("Invalid input");
                             break;
                         }
-                        hseFacade.printAnaliticByAccountByCategory(accountId, categoryId, from, to);
+                        hseFacade.printAnaliticByAccountByCategory(account, category, from, to);
                     }
                     break;
                 }
@@ -263,66 +240,54 @@ public class ConsoleApplicartion {
                         System.out.println("Invalid input");
                         break;
                     }
-                    int categoryId;
+                    Category category;
                     try {
-                        categoryId = Integer.parseInt(split[5]);
+                        int categoryId = Integer.parseInt(split[5]);
+                        category = hseFacade.getCategoryById(categoryId);
                     }
                     catch (NumberFormatException e) {
-                        int index = IntStream.range(0, hseFacade.getCategoryList().size())
-                                .filter(i -> hseFacade.getCategoryList().get(i).getName().equals(split[5]))
-                                .findFirst()
-                                .orElse(-1);
-                        categoryId = index;
+                        category = hseFacade.getCategory(split[5]);
                     }
-                    hseFacade.changeOperationType(operationId, categoryId);
+                    hseFacade.changeOperationType(hseFacade.getOperation(operationId), category);
                     break;
                 }
                 case "delete":{
                     switch (split[1]) {
                         case "account": {
-                            int accountId;
+                            Account account;
                             try{
-                                accountId = Integer.parseInt(split[2]);
+                                int accountId = Integer.parseInt(split[2]);
+                                account = hseFacade.getAccount(accountId);
                             }
                             catch (NumberFormatException e){
-                                accountId = IntStream.range(0, hseFacade.getAccountList().size())
-                                        .filter(i -> hseFacade.getAccountList().get(i).getName().equals(split[2]))
-                                        .findFirst()
-                                        .orElse(-1);
-
+                                account = hseFacade.getAccount(split[2]);
                             }
-                            hseFacade.deleteAccount(accountId);
+                            hseFacade.deleteAccount(account);
                             break;}
                         case "category": {
-                            int accountId;
+                            Category category;
                             try{
-                                accountId = Integer.parseInt(split[2]);
+                                int accountId = Integer.parseInt(split[2]);
+                                category = hseFacade.getCategoryById(accountId);
                             }
                             catch (NumberFormatException e){
-                                accountId = IntStream.range(0, hseFacade.getCategoryList().size())
-                                        .filter(i -> hseFacade.getCategoryList().get(i).getName().equals(split[2]))
-                                        .findFirst()
-                                        .orElse(-1);
-
+                                category = hseFacade.getCategory(split[2]);
                             }
-                            hseFacade.deleteCategory(accountId);
+                            hseFacade.deleteCategory(category);
                             break;}
 
                     }
                     break;}
                 case "repeat":{
-                    int accountId;
+                    Account account;
                     try{
-                        accountId = Integer.parseInt(split[1]);
+                        int accountId = Integer.parseInt(split[1]);
+                        account = hseFacade.getAccount(accountId);
                     }
                     catch (NumberFormatException e){
-                        accountId = IntStream.range(0, hseFacade.getAccountList().size())
-                                .filter(i -> hseFacade.getAccountList().get(i).getName().equals(split[1]))
-                                .findFirst()
-                                .orElse(-1);
-
+                        account = hseFacade.getAccount(split[1]);
                     }
-                    hseFacade.repeatOperations(accountId);
+                    hseFacade.repeatOperations(account);
                     break;}
                 case "reverse":{
                     if (!split[1].equals("operation")) {
@@ -337,7 +302,7 @@ public class ConsoleApplicartion {
                         System.out.println("Invalid input");
                         break;
                     }
-                    hseFacade.reverseOperation(operationId);
+                    hseFacade.reverseOperation(hseFacade.getOperation(operationId));
                     break;}
                 case "save":{break;}
                 case "take":{break;}

@@ -20,7 +20,7 @@ public class HseAddOperationCommand implements Command {
 
     @Override
     public void execute(Facade facade) {
-        facade.addOperation(context.getOperationType(), context.getAccountId(), context.getAmount(),
-                context.getDate(), context.getDescription(), context.getCategoryId());
+        facade.addOperation(context.getOperationType(), context.getAccount(), context.getAmount(),
+                context.getDate(), context.getDescription(), context.getCategory());
     }
 }

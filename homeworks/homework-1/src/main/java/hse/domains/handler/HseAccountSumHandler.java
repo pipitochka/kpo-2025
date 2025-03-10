@@ -19,12 +19,12 @@ public class HseAccountSumHandler implements OperationHandler {
         if (command instanceof HseAddOperationCommand){
             switch (command.getContext().getOperationType()){
                 case INCOME -> {
-                    Account account = facade.getAccountList().get(command.getContext().getAccountId());
+                    Account account = command.getContext().getAccount();
                     account.setBalance(account.getBalance() + command.getContext().getAmount());
                     return true;
                 }
                 case EXPENSE -> {
-                    Account account = facade.getAccountList().get(command.getContext().getAccountId());
+                    Account account = command.getContext().getAccount();
                     if (account.getBalance() >= command.getContext().getAmount()) {
                         account.setBalance(account.getBalance() - command.getContext().getAmount());
                         return true;
