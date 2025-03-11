@@ -13,4 +13,5 @@ public interface CommandContext {
     public int getDate();
     public String getDescription();
     public Category getCategory();
+    public void setCategory(Category category);
 }
