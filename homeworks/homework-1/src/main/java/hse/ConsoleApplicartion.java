@@ -1,9 +1,16 @@
 package hse;
 
 import hse.domains.facade.HseFacade;
+import hse.domains.factory.HseAccountFactory;
+import hse.domains.factory.HseCategoryFactory;
+import hse.domains.factory.HseCommandBuilder;
+import hse.domains.factory.HseOperationFactory;
+import hse.domains.handler.StartHandler;
 import hse.domains.object.HseCommandContext;
 import hse.emums.CommandType;
 import hse.emums.OperationType;
+import hse.file.classes.JsonFileExporter;
+import hse.file.classes.JsonFileImporter;
 import hse.interfaces.object.Account;
 import hse.interfaces.object.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +23,27 @@ import java.util.stream.IntStream;
 public class ConsoleApplicartion {
     @Autowired
     HseFacade hseFacade;
+
+    @Autowired
+    private HseAccountFactory accountFactory;
+
+    @Autowired
+    private HseCategoryFactory categoryFactory;
+
+    @Autowired
+    private HseOperationFactory operationFactory;
+
+    @Autowired
+    private HseCommandBuilder commandFactory;
+
+    @Autowired
+    private StartHandler operationHandler;
+
+    @Autowired
+    private JsonFileExporter jsonFileExporter;
+
+    @Autowired
+    private JsonFileImporter jsonFileImporter;
 
 
     public void run(){
@@ -304,8 +332,26 @@ public class ConsoleApplicartion {
                     }
                     hseFacade.reverseOperation(hseFacade.getOperation(operationId));
                     break;}
-                case "save":{break;}
-                case "take":{break;}
+                case "save":{
+                    if (split.length == 1){
+                        hseFacade.export(jsonFileExporter, "homeworks/homework-1/files/export.json");
+                    }
+                    else{
+                        hseFacade.export(jsonFileExporter, split[1]);
+                    }
+                    break;}
+                case "take":{
+                    if (split.length == 1){
+                        hseFacade = jsonFileImporter.importData("homeworks/homework-1/files/export.json");
+                    }
+                    else{
+                        hseFacade = jsonFileImporter.importData(split[1]);
+                    }
+                    break;}
+                default:{
+                    System.out.println("Invalid input");
+                    break;
+                }
             }
         }
     }

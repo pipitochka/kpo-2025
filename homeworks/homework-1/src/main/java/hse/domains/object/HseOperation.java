@@ -1,5 +1,6 @@
 package hse.domains.object;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import hse.emums.OperationType;
 import hse.interfaces.object.Account;
 import hse.interfaces.object.Category;
@@ -9,26 +10,33 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@JsonDeserialize(as = HseOperation.class)
 @ToString
 public class HseOperation implements Operation {
 
     @Getter
-    private final int id;
+    @Setter
+    private int id;
 
     @Getter
-    private final OperationType operationType;
+    @Setter
+    private OperationType operationType;
 
     @Getter
-    private final Account account;
+    @Setter
+    private Account account;
 
     @Getter
-    private final double amount;
+    @Setter
+    private double amount;
 
     @Getter
-    private final int date;
+    @Setter
+    private int date;
 
+    @Setter
     @Getter
-    private final String description;
+    private String description;
 
     @Getter
     @Setter
@@ -43,4 +51,6 @@ public class HseOperation implements Operation {
         this.description = description;
         this.category = category;
     }
+
+    public HseOperation() {}
 }

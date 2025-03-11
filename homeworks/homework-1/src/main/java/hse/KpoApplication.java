@@ -17,9 +17,6 @@ import java.util.stream.IntStream;
 @SpringBootApplication
 public class KpoApplication {
 
-    @Autowired
-    HseFacade hseFacade;
-
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(KpoApplication.class, args);
         ConsoleApplicartion consoleApplicartion = context.getBean(ConsoleApplicartion.class);
