@@ -5,8 +5,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * class to make objects from file.
+ *
+ * @param <T> type of making object
+ */
 public abstract class FileImporter<T> {
 
+    /**
+     * function to make object from file.
+     *
+     * @param filePath path.
+     * @return object.
+     */
     public final T importData(String filePath) {
         try {
             String content = readFile(filePath);

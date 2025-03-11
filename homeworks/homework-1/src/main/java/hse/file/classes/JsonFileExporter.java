@@ -3,11 +3,13 @@ package hse.file.classes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hse.domains.facade.HseFacade;
 import hse.file.interfaces.Visitor;
-import org.springframework.stereotype.Component;
-
 import java.io.File;
 import java.io.IOException;
+import org.springframework.stereotype.Component;
 
+/**
+ * class to write object into json.
+ */
 @Component
 public class JsonFileExporter implements Visitor {
     private ObjectMapper objectMapper = new ObjectMapper();

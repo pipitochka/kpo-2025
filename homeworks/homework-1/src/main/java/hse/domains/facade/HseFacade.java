@@ -5,23 +5,31 @@ import hse.domains.command.CommandFromOpperation;
 import hse.emums.OperationType;
 import hse.file.interfaces.Observable;
 import hse.file.interfaces.Visitor;
-import hse.interfaces.object.CommandContext;
 import hse.interfaces.factory.AccountFactory;
 import hse.interfaces.factory.CategoryFactory;
-import hse.interfaces.factory.CommandBuilder;
+import hse.interfaces.factory.CommandFactory;
 import hse.interfaces.factory.OperationFactory;
-import hse.interfaces.object.*;
+import hse.interfaces.object.Account;
+import hse.interfaces.object.Category;
+import hse.interfaces.object.Command;
+import hse.interfaces.object.CommandContext;
+import hse.interfaces.object.Facade;
+import hse.interfaces.object.Operation;
+import hse.interfaces.object.OperationHandler;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Facade of application.
+ */
 @ToString
 @Component
 public class HseFacade implements Facade, Observable {
@@ -61,25 +69,35 @@ public class HseFacade implements Facade, Observable {
     @JsonIgnore
     @Getter
     @Setter
-    private CommandBuilder commandBuilder;
+    private CommandFactory commandFactory;
     @JsonIgnore
     @Getter
     @Setter
     private OperationHandler operationHandler;
 
 
+    /**
+     * Constructor.
+     *
+     * @param accountFactory factory to make accounts.
+     * @param categoryFactory factory to make categories.
+     * @param operationFactory factory to make operations.
+     * @param commandFactory factory to make commands.
+     * @param operationHandler list of handlers.
+     */
     @Autowired
-    public HseFacade(AccountFactory accountFactory, CategoryFactory categoryFactory, OperationFactory operationFactory, CommandBuilder commandBuilder, OperationHandler operationHandler) {
+    public HseFacade(AccountFactory accountFactory, CategoryFactory categoryFactory, OperationFactory operationFactory,
+                     CommandFactory commandFactory, OperationHandler operationHandler) {
         this.accountFactory = accountFactory;
         this.categoryFactory = categoryFactory;
         this.operationFactory = operationFactory;
-        this.commandBuilder = commandBuilder;
+        this.commandFactory = commandFactory;
         this.operationHandler = operationHandler;
         addCategory(OperationType.INCOME, "nullIncome");
         addCategory(OperationType.EXPENSE, "nullExpense");
     }
 
-    public HseFacade(){}
+    public HseFacade() {}
 
     @Override
     public void addBankAccount(String name) {
@@ -103,13 +121,12 @@ public class HseFacade implements Facade, Observable {
         if (context == null) {
             return;
         }
-        Command command = commandBuilder.createCommand(context);
+        Command command = commandFactory.createCommand(context);
         if (operationHandler != null) {
-            if (operationHandler.handle(command, this)){
+            if (operationHandler.handle(command, this)) {
                 command.execute(this);
                 System.out.println("Command taken");
-            }
-            else{
+            } else {
                 System.out.println("Invalid command");
             }
         }
@@ -133,6 +150,8 @@ public class HseFacade implements Facade, Observable {
                         case EXPENSE:
                             totalExpense.updateAndGet(v -> Double.valueOf(v + operation.getAmount()));
                             System.out.println(operation);
+                            break;
+                        default:
                             break;
                     }
                 }
@@ -227,33 +246,31 @@ public class HseFacade implements Facade, Observable {
             }
             accountList.remove(accountId);
             System.out.println("Account deleted: " + accountId);
-        }
-        else{
+        } else {
             System.out.println("Account is null");
         }
     }
 
     @Override
     public void deleteCategory(Category category) {
-        if (category == categoryList.get(0) || category == categoryList.get(1)){
+        if (category == categoryList.get(0) || category == categoryList.get(1)) {
             System.out.println("Category " + category + " cannot be deleted.");
             return;
         }
         if (category != null) {
 
             operationList.stream().forEach(operation -> {
-                    if (operation.getOperationType() == OperationType.INCOME) {
-                        operation.setCategory(categoryList.get(0));
-                    }
-                    if (operation.getOperationType() == OperationType.EXPENSE) {
-                        operation.setCategory(categoryList.get(1));
-                    }
+                if (operation.getOperationType() == OperationType.INCOME) {
+                    operation.setCategory(categoryList.get(0));
+                }
+                if (operation.getOperationType() == OperationType.EXPENSE) {
+                    operation.setCategory(categoryList.get(1));
+                }
             });
             categoryList.remove(category);
             System.out.println("Category " + category + " deleted.");
             return;
-        }
-        else {
+        } else {
             System.out.println("Category " + category + " not found.");
         }
     }
@@ -262,7 +279,7 @@ public class HseFacade implements Facade, Observable {
     public void reverseOperation(Operation operationId) {
         if (operationId != null) {
             Command command = new CommandFromOpperation(operationId);
-            switch (command.getContext().getOperationType()){
+            switch (command.getContext().getOperationType()) {
                 case INCOME:
                     command.getContext().setOperationType(OperationType.EXPENSE);
                     command.getContext().setCategory(this.getCategory("nullExpense"));
@@ -271,33 +288,31 @@ public class HseFacade implements Facade, Observable {
                     command.getContext().setOperationType(OperationType.INCOME);
                     command.getContext().setCategory(this.getCategory("nullIncome"));
                     break;
+                default:
+                    break;
             }
             if (operationHandler.handle(command, this)) {
                 operationList.remove(operationId);
             }
-        }
-        else{
+        } else {
             System.out.println("Operation " + operationId + " not found.");
         }
     }
 
     @Override
     public void changeOperationType(Operation operationId, Category newCategory) {
-        if (operationId != null){
-            if (newCategory != null){
+        if (operationId != null) {
+            if (newCategory != null) {
                 if (newCategory.getOperationType() == operationId.getOperationType()) {
                     operationId.setCategory(newCategory);
                     System.out.println("Category " + operationId + " changed.");
-                }
-                else{
+                } else {
                     System.out.println("Category " + operationId + "another type");
                 }
-            }
-            else {
+            } else {
                 System.out.println("Category " + newCategory + " not found.");
             }
-        }
-        else {
+        } else {
             System.out.println("Operation " + operationId + " not found.");
         }
     }

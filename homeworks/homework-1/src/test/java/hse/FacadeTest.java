@@ -3,7 +3,7 @@ package hse;
 import hse.domains.facade.HseFacade;
 import hse.domains.factory.HseAccountFactory;
 import hse.domains.factory.HseCategoryFactory;
-import hse.domains.factory.HseCommandBuilder;
+import hse.domains.factory.HseCommandFactory;
 import hse.domains.factory.HseOperationFactory;
 import hse.domains.handler.StartHandler;
 import hse.domains.object.HseCommandContext;
@@ -34,7 +34,7 @@ public class FacadeTest {
     private HseOperationFactory operationFactory;
 
     @Autowired
-    private HseCommandBuilder commandFactory;
+    private HseCommandFactory commandFactory;
 
     @Autowired
     private StartHandler operationHandler;

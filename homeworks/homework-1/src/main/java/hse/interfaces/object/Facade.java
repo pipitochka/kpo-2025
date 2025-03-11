@@ -1,9 +1,11 @@
 package hse.interfaces.object;
 
 import hse.emums.OperationType;
-
 import java.util.List;
 
+/**
+ * interface of facade.
+ */
 public interface Facade {
     public void addBankAccount(String name);
 

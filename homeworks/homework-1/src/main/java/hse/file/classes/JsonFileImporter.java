@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hse.domains.facade.HseFacade;
 import org.springframework.stereotype.Component;
 
+/**
+ * class to make object of HseFacade from json.
+ */
 @Component
 public class JsonFileImporter extends FileImporter<HseFacade> {
 
