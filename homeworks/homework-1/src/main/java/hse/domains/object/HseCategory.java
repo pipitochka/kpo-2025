@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * realization class of category.
+ */
 @JsonDeserialize(as = HseCategory.class)
 @ToString
 public class HseCategory implements Category {
@@ -24,6 +27,13 @@ public class HseCategory implements Category {
     @Setter
     private String name;
 
+    /**
+     * consturctor.
+     *
+     * @param id unique number.
+     * @param operationType income or exchange.
+     * @param name of category.
+     */
     public HseCategory(int id, OperationType operationType, String name) {
         this.id = id;
         this.operationType = operationType;

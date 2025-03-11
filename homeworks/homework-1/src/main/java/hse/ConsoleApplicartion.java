@@ -3,7 +3,7 @@ package hse;
 import hse.domains.facade.HseFacade;
 import hse.domains.factory.HseAccountFactory;
 import hse.domains.factory.HseCategoryFactory;
-import hse.domains.factory.HseCommandBuilder;
+import hse.domains.factory.HseCommandFactory;
 import hse.domains.factory.HseOperationFactory;
 import hse.domains.handler.StartHandler;
 import hse.domains.object.HseCommandContext;
@@ -13,12 +13,13 @@ import hse.file.classes.JsonFileExporter;
 import hse.file.classes.JsonFileImporter;
 import hse.interfaces.object.Account;
 import hse.interfaces.object.Category;
+import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Scanner;
-import java.util.stream.IntStream;
-
+/**
+ * Class to make runtime console application.
+ */
 @Component
 public class ConsoleApplicartion {
     @Autowired
@@ -34,7 +35,7 @@ public class ConsoleApplicartion {
     private HseOperationFactory operationFactory;
 
     @Autowired
-    private HseCommandBuilder commandFactory;
+    private HseCommandFactory commandFactory;
 
     @Autowired
     private StartHandler operationHandler;
@@ -46,18 +47,21 @@ public class ConsoleApplicartion {
     private JsonFileImporter jsonFileImporter;
 
 
-    public void run(){
+    /**
+     * function to runtime console app.
+     */
+    public void run() {
         Scanner scanner = new Scanner(System.in);
-        while(true){
+        while (true) {
             String line = scanner.nextLine();
             if (line.equals("exit")) {
                 break;
             }
             String[] split = line.split(" ");
-            switch (split[0]){
-                case "add":{
-                    switch (split[1]){
-                        case "account":{
+            switch (split[0]) {
+                case "add": {
+                    switch (split[1]) {
+                        case "account": {
                             if (split.length == 3) {
                                 HseCommandContext context = new HseCommandContext(CommandType.ACCOUNT);
                                 context.setName(split[2]);
@@ -67,15 +71,18 @@ public class ConsoleApplicartion {
                             System.out.println("Invalid input");
                             break;
                         }
-                        case "category":{
+                        case "category": {
                             if (split.length == 4) {
                                 HseCommandContext context = new HseCommandContext(CommandType.CATEGORY);
-                                switch (split[2]){
+                                switch (split[2]) {
                                     case "income":
                                         context.setOperationType(OperationType.INCOME);
                                         break;
                                     case "expense":
                                         context.setOperationType(OperationType.EXPENSE);
+                                        break;
+                                    default:
+                                        System.out.println("Invalid input");
                                         break;
                                 }
                                 context.setName(split[3]);
@@ -85,32 +92,33 @@ public class ConsoleApplicartion {
                             System.out.println("Invalid input");
                             break;
                         }
-                        case "operation":{
+                        case "operation": {
                             if (split.length == 8) {
                                 HseCommandContext context = new HseCommandContext(CommandType.OPERATION);
-                                switch (split[2]){
+                                switch (split[2]) {
                                     case "income":
                                         context.setOperationType(OperationType.INCOME);
                                         break;
                                     case "expense":
                                         context.setOperationType(OperationType.EXPENSE);
                                         break;
+                                    default:
+                                        System.out.println("Invalid input");
+                                        break;
                                 }
-                                try{
+                                try {
                                     int accountId = Integer.parseInt(split[3]);
                                     context.setAccount(hseFacade.getAccount(accountId));
-                                }
-                                catch (NumberFormatException e){
+                                } catch (NumberFormatException e) {
                                     context.setAccount(hseFacade.getAccount(split[3]));
                                 }
                                 context.setAmount(Double.parseDouble(split[4]));
                                 context.setDate(Integer.parseInt(split[5]));
                                 context.setDescription(split[6]);
-                                try{
+                                try {
                                     int setCategoryId = Integer.parseInt(split[7]);
                                     context.setCategory(hseFacade.getCategoryById(setCategoryId));
-                                }
-                                catch (NumberFormatException e){
+                                } catch (NumberFormatException e) {
                                     context.setCategory(hseFacade.getCategory(split[7]));
                                 }
                                 hseFacade.takeCommand(context);
@@ -118,28 +126,29 @@ public class ConsoleApplicartion {
                             }
                             if (split.length == 7) {
                                 HseCommandContext context = new HseCommandContext(CommandType.OPERATION);
-                                switch (split[2]){
+                                switch (split[2]) {
                                     case "income":
                                         context.setOperationType(OperationType.INCOME);
                                         break;
                                     case "expense":
                                         context.setOperationType(OperationType.EXPENSE);
                                         break;
+                                    default:
+                                        System.out.println("Invalid input");
+                                        break;
                                 }
-                                try{
+                                try {
                                     int accountId = Integer.parseInt(split[3]);
                                     context.setAccount(hseFacade.getAccount(accountId));
-                                }
-                                catch (NumberFormatException e){
+                                } catch (NumberFormatException e) {
                                     context.setAccount(hseFacade.getAccount(split[3]));
                                 }
                                 context.setAmount(Double.parseDouble(split[4]));
                                 context.setDate(Integer.parseInt(split[5]));
-                                try{
+                                try {
                                     int setCategoryId = Integer.parseInt(split[6]);
                                     context.setCategory(hseFacade.getCategoryById(setCategoryId));
-                                }
-                                catch (NumberFormatException e){
+                                } catch (NumberFormatException e) {
                                     context.setCategory(hseFacade.getCategory(split[6]));
                                 }
                                 hseFacade.takeCommand(context);
@@ -152,17 +161,17 @@ public class ConsoleApplicartion {
                     }
                     break;
                 }
-                case "show":{
-                    switch (split[1]){
-                        case "accounts":{
+                case "show": {
+                    switch (split[1]) {
+                        case "accounts": {
                             hseFacade.getAccountList().forEach(System.out::println);
                             break;
                         }
-                        case "categories":{
+                        case "categories": {
                             hseFacade.getCategoryList().forEach(System.out::println);
                             break;
                         }
-                        case "operations":{
+                        case "operations": {
                             hseFacade.getOperationList().forEach(System.out::println);
                             break;
                         }
@@ -172,7 +181,7 @@ public class ConsoleApplicartion {
                     }
                     break;
                 }
-                case "analyse":{
+                case "analyse": {
                     if (!split[3].equals("by")) {
                         Account account;
                         try {
@@ -181,15 +190,16 @@ public class ConsoleApplicartion {
                         } catch (NumberFormatException e) {
                             account = hseFacade.getAccount(split[2]);
                         }
-                        if (!split[3].equals( "from")) {
+                        if (!split[3].equals("from")) {
                             System.out.println("Invalid input");
                             break;
                         }
-                        if (!split[5].equals( "to")) {
+                        if (!split[5].equals("to")) {
                             System.out.println("Invalid input");
                             break;
                         }
-                        int from, to;
+                        int from;
+                        int to;
                         try {
                             from = Integer.parseInt(split[4]);
                             to = Integer.parseInt(split[6]);
@@ -210,9 +220,11 @@ public class ConsoleApplicartion {
                                 hseFacade.printAnaliticByAccountExpense(account, from, to);
                                 break;
                             }
+                            default:
+                                System.out.println("Invalid input");
+                                break;
                         }
-                    }
-                    else{
+                    } else {
                         Account account;
                         try {
                             int accountId = Integer.parseInt(split[2]);
@@ -231,11 +243,12 @@ public class ConsoleApplicartion {
                             System.out.println("Invalid input");
                             break;
                         }
-                        if (!split[7].equals( "to")) {
+                        if (!split[7].equals("to")) {
                             System.out.println("Invalid input");
                             break;
                         }
-                        int from, to;
+                        int from;
+                        int to;
                         try {
                             from = Integer.parseInt(split[6]);
                             to = Integer.parseInt(split[8]);
@@ -247,7 +260,7 @@ public class ConsoleApplicartion {
                     }
                     break;
                 }
-                case "change":{
+                case "change": {
                     if (!split[1].equals("operation")) {
                         System.out.println("Invalid input");
                         break;
@@ -255,16 +268,15 @@ public class ConsoleApplicartion {
                     int operationId;
                     try {
                         operationId = Integer.parseInt(split[2]);
-                    }
-                    catch (NumberFormatException e) {
+                    } catch (NumberFormatException e) {
                         System.out.println("Invalid input");
                         break;
                     }
-                    if (!split[3].equals( "category")) {
+                    if (!split[3].equals("category")) {
                         System.out.println("Invalid input");
                         break;
                     }
-                    if (!split[4].equals( "to")) {
+                    if (!split[4].equals("to")) {
                         System.out.println("Invalid input");
                         break;
                     }
@@ -272,52 +284,54 @@ public class ConsoleApplicartion {
                     try {
                         int categoryId = Integer.parseInt(split[5]);
                         category = hseFacade.getCategoryById(categoryId);
-                    }
-                    catch (NumberFormatException e) {
+                    } catch (NumberFormatException e) {
                         category = hseFacade.getCategory(split[5]);
                     }
                     hseFacade.changeOperationType(hseFacade.getOperation(operationId), category);
                     break;
                 }
-                case "delete":{
+                case "delete": {
                     switch (split[1]) {
                         case "account": {
                             Account account;
-                            try{
+                            try {
                                 int accountId = Integer.parseInt(split[2]);
                                 account = hseFacade.getAccount(accountId);
-                            }
-                            catch (NumberFormatException e){
+                            } catch (NumberFormatException e) {
                                 account = hseFacade.getAccount(split[2]);
                             }
                             hseFacade.deleteAccount(account);
-                            break;}
+                            break;
+                        }
                         case "category": {
                             Category category;
-                            try{
+                            try {
                                 int accountId = Integer.parseInt(split[2]);
                                 category = hseFacade.getCategoryById(accountId);
-                            }
-                            catch (NumberFormatException e){
+                            } catch (NumberFormatException e) {
                                 category = hseFacade.getCategory(split[2]);
                             }
                             hseFacade.deleteCategory(category);
-                            break;}
-
+                            break;
+                        }
+                        default:
+                            System.out.println("Invalid input");
+                            break;
                     }
-                    break;}
-                case "repeat":{
+                    break;
+                }
+                case "repeat": {
                     Account account;
-                    try{
+                    try {
                         int accountId = Integer.parseInt(split[1]);
                         account = hseFacade.getAccount(accountId);
-                    }
-                    catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         account = hseFacade.getAccount(split[1]);
                     }
                     hseFacade.repeatOperations(account);
-                    break;}
-                case "reverse":{
+                    break;
+                }
+                case "reverse": {
                     if (!split[1].equals("operation")) {
                         System.out.println("Invalid input");
                         break;
@@ -325,35 +339,34 @@ public class ConsoleApplicartion {
                     int operationId;
                     try {
                         operationId = Integer.parseInt(split[2]);
-                    }
-                    catch (NumberFormatException e) {
+                    } catch (NumberFormatException e) {
                         System.out.println("Invalid input");
                         break;
                     }
                     hseFacade.reverseOperation(hseFacade.getOperation(operationId));
-                    break;}
-                case "save":{
-                    if (split.length == 1){
+                    break;
+                }
+                case "save": {
+                    if (split.length == 1) {
                         hseFacade.export(jsonFileExporter, "homeworks/homework-1/files/export.json");
-                    }
-                    else{
+                    } else {
                         hseFacade.export(jsonFileExporter, split[1]);
                     }
-                    break;}
-                case "take":{
-                    if (split.length == 1){
+                    break;
+                }
+                case "take": {
+                    if (split.length == 1) {
                         hseFacade = jsonFileImporter.importData("homeworks/homework-1/files/export.json");
-                    }
-                    else{
+                    } else {
                         hseFacade = jsonFileImporter.importData(split[1]);
                     }
-                    break;}
-                default:{
+                    break;
+                }
+                default: {
                     System.out.println("Invalid input");
                     break;
                 }
             }
         }
     }
-
 }

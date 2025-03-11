@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * realization class of operations.
+ */
 @JsonDeserialize(as = HseOperation.class)
 @ToString
 public class HseOperation implements Operation {
@@ -42,7 +45,19 @@ public class HseOperation implements Operation {
     @Setter
     private Category category;
 
-    public HseOperation(int id, OperationType operationType, Account account, double amount, int date, String description, Category category) {
+    /**
+     * contructor.
+     *
+     * @param id unique number.
+     * @param operationType income or expense.
+     * @param account user
+     * @param amount amount of money
+     * @param date date
+     * @param description description
+     * @param category category of operation
+     */
+    public HseOperation(int id, OperationType operationType, Account account, double amount,
+                        int date, String description, Category category) {
         this.id = id;
         this.operationType = operationType;
         this.account = account;

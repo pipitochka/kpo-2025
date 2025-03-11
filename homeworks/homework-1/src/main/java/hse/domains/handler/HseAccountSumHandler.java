@@ -6,6 +6,9 @@ import hse.interfaces.object.Command;
 import hse.interfaces.object.Facade;
 import hse.interfaces.object.OperationHandler;
 
+/**
+ * Handler to check is operation can be done.
+ */
 public class HseAccountSumHandler implements OperationHandler {
     private OperationHandler operationHandler;
 
@@ -16,8 +19,8 @@ public class HseAccountSumHandler implements OperationHandler {
 
     @Override
     public boolean handle(Command command, Facade facade) {
-        if (command instanceof HseAddOperationCommand){
-            switch (command.getContext().getOperationType()){
+        if (command instanceof HseAddOperationCommand) {
+            switch (command.getContext().getOperationType()) {
                 case INCOME -> {
                     Account account = command.getContext().getAccount();
                     account.setBalance(account.getBalance() + command.getContext().getAmount());
@@ -29,6 +32,9 @@ public class HseAccountSumHandler implements OperationHandler {
                         account.setBalance(account.getBalance() - command.getContext().getAmount());
                         return true;
                     }
+                    return false;
+                }
+                default -> {
                     return false;
                 }
             }

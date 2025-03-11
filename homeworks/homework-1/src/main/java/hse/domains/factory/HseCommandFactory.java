@@ -3,16 +3,19 @@ package hse.domains.factory;
 import hse.domains.command.HseAddBankAccountCommand;
 import hse.domains.command.HseAddCategoryCommand;
 import hse.domains.command.HseAddOperationCommand;
-import hse.interfaces.object.CommandContext;
-import hse.interfaces.factory.CommandBuilder;
+import hse.interfaces.factory.CommandFactory;
 import hse.interfaces.object.Command;
+import hse.interfaces.object.CommandContext;
 import hse.interfaces.object.Facade;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+/**
+ * Factory to makes commands.
+ */
 @Component
-public class HseCommandBuilder implements CommandBuilder {
+public class HseCommandFactory implements CommandFactory {
 
     @Getter
     @Setter

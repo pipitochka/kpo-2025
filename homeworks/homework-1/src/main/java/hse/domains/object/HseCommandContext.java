@@ -9,6 +9,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+/**
+ * realization class of command context.
+ */
 @RequiredArgsConstructor
 public class HseCommandContext implements CommandContext {
 

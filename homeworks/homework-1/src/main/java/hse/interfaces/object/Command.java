@@ -1,5 +1,8 @@
 package hse.interfaces.object;
 
+/**
+ * interface of command.
+ */
 public interface Command {
 
     public CommandContext getContext();

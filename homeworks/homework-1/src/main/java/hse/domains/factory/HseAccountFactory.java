@@ -5,6 +5,9 @@ import hse.interfaces.factory.AccountFactory;
 import hse.interfaces.object.Account;
 import org.springframework.stereotype.Component;
 
+/**
+ * Factory to makes accounts.
+ */
 @Component
 public class HseAccountFactory implements AccountFactory {
 

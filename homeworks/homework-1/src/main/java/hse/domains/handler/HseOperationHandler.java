@@ -6,6 +6,9 @@ import hse.interfaces.object.Facade;
 import hse.interfaces.object.OperationHandler;
 import org.springframework.stereotype.Component;
 
+/**
+ * Handler to check operation command is correct.
+ */
 public class HseOperationHandler implements OperationHandler {
     private OperationHandler operationHandler;
 
@@ -16,7 +19,7 @@ public class HseOperationHandler implements OperationHandler {
 
     @Override
     public boolean handle(Command command, Facade facade) {
-        if (command instanceof HseAddOperationCommand){
+        if (command instanceof HseAddOperationCommand) {
             if (command.getContext().getOperationType() == null) {
                 return false;
             }
@@ -26,7 +29,7 @@ public class HseOperationHandler implements OperationHandler {
             if (command.getContext().getCategory() == null) {
                 return false;
             }
-            if (command.getContext().getOperationType() != command.getContext().getCategory().getOperationType()){
+            if (command.getContext().getOperationType() != command.getContext().getCategory().getOperationType()) {
                 return false;
             }
             return operationHandler.handle(command, facade);
