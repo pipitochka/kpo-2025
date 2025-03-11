@@ -46,6 +46,7 @@ public class HseFacade implements Facade {
     private final OperationHandler operationHandler;
 
 
+
     public HseFacade(AccountFactory accountFactory, CategoryFactory categoryFactory, OperationFactory operationFactory, CommandBuilder commandBuilder, OperationHandler operationHandler) {
         this.accountFactory = accountFactory;
         this.categoryFactory = categoryFactory;
