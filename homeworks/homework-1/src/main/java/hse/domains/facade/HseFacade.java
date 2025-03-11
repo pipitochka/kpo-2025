@@ -1,17 +1,20 @@
 package hse.domains.facade;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hse.domains.command.CommandFromOpperation;
 import hse.emums.OperationType;
+import hse.file.interfaces.Observable;
+import hse.file.interfaces.Visitor;
 import hse.interfaces.object.CommandContext;
 import hse.interfaces.factory.AccountFactory;
 import hse.interfaces.factory.CategoryFactory;
 import hse.interfaces.factory.CommandBuilder;
 import hse.interfaces.factory.OperationFactory;
 import hse.interfaces.object.*;
-import jakarta.annotation.PostConstruct;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -21,32 +24,51 @@ import java.util.concurrent.atomic.AtomicReference;
 
 @ToString
 @Component
-public class HseFacade implements Facade {
+public class HseFacade implements Facade, Observable {
 
     @Getter
+    @Setter
     private List<Account> accountList = new ArrayList<>();
     @Getter
+    @Setter
     private List<Operation> operationList = new ArrayList<>();
     @Getter
+    @Setter
     private List<Category> categoryList = new ArrayList<>();
 
+    @Setter
+    @Getter
     private int accountCounter = 0;
+    @Setter
+    @Getter
     private int operationCounter = 0;
+    @Setter
+    @Getter
     private int categoryCounter = 0;
 
+    @JsonIgnore
     @Getter
-    private final AccountFactory accountFactory;
+    @Setter
+    private AccountFactory accountFactory;
+    @JsonIgnore
     @Getter
-    private final CategoryFactory categoryFactory;
+    @Setter
+    private CategoryFactory categoryFactory;
+    @JsonIgnore
     @Getter
-    private final OperationFactory operationFactory;
+    @Setter
+    private OperationFactory operationFactory;
+    @JsonIgnore
     @Getter
-    private final CommandBuilder commandBuilder;
+    @Setter
+    private CommandBuilder commandBuilder;
+    @JsonIgnore
     @Getter
-    private final OperationHandler operationHandler;
+    @Setter
+    private OperationHandler operationHandler;
 
 
-
+    @Autowired
     public HseFacade(AccountFactory accountFactory, CategoryFactory categoryFactory, OperationFactory operationFactory, CommandBuilder commandBuilder, OperationHandler operationHandler) {
         this.accountFactory = accountFactory;
         this.categoryFactory = categoryFactory;
@@ -56,6 +78,8 @@ public class HseFacade implements Facade {
         addCategory(OperationType.INCOME, "nullIncome");
         addCategory(OperationType.EXPENSE, "nullExpense");
     }
+
+    public HseFacade(){}
 
     @Override
     public void addBankAccount(String name) {
@@ -302,5 +326,10 @@ public class HseFacade implements Facade {
     @Override
     public Operation getOperation(int id) {
         return operationList.stream().filter(operation -> operation.getId() == id).findFirst().orElse(null);
+    }
+
+    @Override
+    public void export(Visitor observer, String filename) {
+        observer.visit(this, filename);
     }
 }

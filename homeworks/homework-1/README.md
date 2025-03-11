@@ -1,23 +1,3 @@
-```shell
-add account Artem
-add account Aliya
-add category expense cafe
-add category expense coffee
-add category income cashback
-add category income salary
-add operation income 0 200 0 salary 3
-add operation income Artem 200 1 salary salary
-add operation income Aliya 200 2 salary salary
-add operation expense Aliya 100 3 coffee
-add operation expense Artem 100 4 coffee
-analyse account Artem from 1 to 2
-analyse account Aliya from 1 to 4
-show accounts
-show categories
-show operations
-exit
-```
-
 # ДЗ 1
 реализация консольного приложения для банка
 
@@ -51,6 +31,8 @@ delete account <accountId/accountName> - удалить аккаунт
 delete category <categoryId/categoryName> - удалить категорию
 repeat <accountId/accountName> - повторить все операции для аккаунта
 reverse <operationId> - отменить операцию
+save <null/path> - сохраняет 
+take <null/path> - загружает
 ```
 
 Пример возможной работы
@@ -87,6 +69,7 @@ show operations
 show accounts
 reverse operation 3
 show accounts
+save
 exit
 ```
 
@@ -110,7 +93,7 @@ exit
 │    │    │    ├── HseAddOperationCommand.java    <-- Команда для добавления операции
 │    │    │    ├── HseAddCategoryCommand.java     <-- Команда для добавления категории
 │    │    │
-│    │    ├── /facade                     <-- Пакет для фасадов  
+│    │    ├── /facade           <-- Пакет для фасадов  
 │    │    │    ├── HseFacade.java         <-- Конкретный чтобы упростить работу с банком
 │    │    │
 │    │    ├── /factory                       <-- Пакет для классов, с созданием объектов 
@@ -119,7 +102,7 @@ exit
 │    │    │    ├── HseOperationFactory.java  <-- Фабрика для операций
 │    │    │    ├── HseCommandBuilder.java    <-- Фабрика для комманд
 |    |    |
-│    │    ├── /handler                  <-- Пакет для классов, связанных с обработкой данных 
+│    │    ├── /handler          <-- Пакет для классов, связанных с обработкой данных 
 │    │    │    ├── StartHandler.java            <-- Отвечает за создание цепочки обработчиков
 │    │    │    ├── ErrorHandler.java            <-- Отвечает за случай если никто не обработал 
 │    │    │    ├── HseAccountHandler.java       <-- Отвечает за добавление пользователя (имя не совпадает)
@@ -133,25 +116,35 @@ exit
 │    │    │    ├── HseOperation.java            <-- Класс операций
 │    │    │    ├── HseCommandContext.java       <-- Класс контекста
 │    │    
-│    ├── /enums                  <-- Пакет для перечислений
+│    ├── /enums                 <-- Пакет для перечислений
 |    |    ├── CommandType             <-- Тип комманды
 |    |    ├── OperationType           <-- Тип операции
+|    |
+│    ├── /file                  <-- Пакет для работы с файлами
+|    |    ├── /classes                <-- Пакет для реализаций экспортеров и импортеров
+|    |    |    ├── FileImporter               <-- Абстрактный класс для загрузчика
+|    |    |    ├── JsonFileImporter           <-- Реализация нужного нам загрузчика
+|    |    |    ├── JsoneFileExporter          <-- Реализация импортера
+|    |    |
+|    |    ├── /interfaces             <-- Пакет интерфейсов
+|    |    |    ├── OperationType              <-- Интерфейс класса который надо сохранить
+|    |    |    ├── OperationType              <-- Интрефейс сохранятеля
 │    │    
-│    ├── /interfaces                  <-- Пакет для интерфейсов
-|    │    ├── /factory                     <-- Интерфейсы фабрик  
+│    ├── /interfaces              <-- Пакет для интерфейсов
+|    │    ├── /factory                 <-- Интерфейсы фабрик  
 │    │    │    ├── AccountFactory.java        <-- Интерфейс фабрики пользователей
 │    │    │    ├── CategoryFactory.java       <-- Интерфейс фабрики категорий
 │    │    │    ├── OperationFactory.java      <-- Интерфейс фабрики операций
 │    │    │    ├── CommandBuilder.java        <-- Интерфейс фабрики комманд
 |    |    |
 |    │    ├── /object                  <-- Пакет для классов, содержащих данные  
-│    │    │    ├── Account.java              <-- Интерфейс пользователя
-│    │    │    ├── Category.java             <-- Интерфейс категории
-│    │    │    ├── Operation.java            <-- Интерфейс операции
-│    │    │    ├── CommandContext.java       <-- Интерфейс контекста
-│    │    │    ├── Command.java              <-- Интерфейс комманды
-│    │    │    ├── Facade.java               <-- Интерфейс фасада
-│    │    │    ├── OperationHandler.java     <-- Интерфейс обработчика
+│    │    │    ├── Account.java               <-- Интерфейс пользователя
+│    │    │    ├── Category.java              <-- Интерфейс категории
+│    │    │    ├── Operation.java             <-- Интерфейс операции
+│    │    │    ├── CommandContext.java        <-- Интерфейс контекста
+│    │    │    ├── Command.java               <-- Интерфейс комманды
+│    │    │    ├── Facade.java                <-- Интерфейс фасада
+│    │    │    ├── OperationHandler.java      <-- Интерфейс обработчика
 ```
 
 ## Добавление
@@ -187,3 +180,5 @@ exit
 - Фабрика - все новые объекты создаются на фабриках
 - Адаптер - для операции, чтобы их можно было обратно обратить в команды (например для пересчета человека)
 - Цепочка обязанностей - для обработки запросов
+- Посетитель - для экпортера 
+- Шаблонный метод - для импорта

@@ -1,22 +1,33 @@
 package hse.domains.object;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import hse.interfaces.object.Account;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@RequiredArgsConstructor
+@JsonDeserialize(as = HseAccount.class)
 @ToString
 public class HseAccount implements Account {
 
     @Getter
-    private final int id;
+    @Setter
+    private int id;
 
     @Getter
     @Setter
     private double balance = 0;
 
     @Getter
-    private final String name;
+    @Setter
+    private String name;
+
+    public HseAccount() {
+    }
+
+    public HseAccount(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
