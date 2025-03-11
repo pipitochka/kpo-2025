@@ -82,7 +82,9 @@ delete account 1
 show operations
 delete category cafe
 show categories
-change operation 3 category to cofee
+change operation 5 category to coffee
+show operations
+show accounts
 reverse operation 3
 show accounts
 exit

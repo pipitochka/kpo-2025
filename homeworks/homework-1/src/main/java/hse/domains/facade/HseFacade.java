@@ -240,9 +240,11 @@ public class HseFacade implements Facade {
             switch (command.getContext().getOperationType()){
                 case INCOME:
                     command.getContext().setOperationType(OperationType.EXPENSE);
+                    command.getContext().setCategory(this.getCategory("nullExpense"));
                     break;
                 case EXPENSE:
                     command.getContext().setOperationType(OperationType.INCOME);
+                    command.getContext().setCategory(this.getCategory("nullIncome"));
                     break;
             }
             if (operationHandler.handle(command, this)) {
@@ -260,10 +262,10 @@ public class HseFacade implements Facade {
             if (newCategory != null){
                 if (newCategory.getOperationType() == operationId.getOperationType()) {
                     operationId.setCategory(newCategory);
-                    System.out.println("Category " + newCategory + " changed.");
+                    System.out.println("Category " + operationId + " changed.");
                 }
                 else{
-                    System.out.println("Category " + newCategory + "another type");
+                    System.out.println("Category " + operationId + "another type");
                 }
             }
             else {
