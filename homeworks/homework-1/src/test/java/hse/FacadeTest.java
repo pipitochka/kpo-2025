@@ -1,5 +1,7 @@
 package hse;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import hse.domains.facade.HseFacade;
 import hse.domains.factory.HseAccountFactory;
 import hse.domains.factory.HseCategoryFactory;
@@ -15,9 +17,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-
+/**
+ * class to test facade.
+ */
 @SpringBootTest
 public class FacadeTest {
 
@@ -57,7 +60,7 @@ public class FacadeTest {
         hse.addCategory(OperationType.INCOME, "Cafe");
         hse.addCategory(OperationType.EXPENSE, "Health");
 
-        hse.addOperation(OperationType.INCOME, hse.getAccount(0), 10, 1,"", hse.getCategory("Coffee"));
+        hse.addOperation(OperationType.INCOME, hse.getAccount(0), 10, 1, "", hse.getCategory("Coffee"));
 
         System.out.println(hse);
     }

@@ -1,5 +1,7 @@
 package hse;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import hse.domains.facade.HseFacade;
 import hse.domains.factory.HseAccountFactory;
 import hse.domains.factory.HseCategoryFactory;
@@ -17,8 +19,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+/**
+ * class to test save and export.
+ */
 @SpringBootTest
 public class SaveTest {
     @Autowired
@@ -44,7 +48,6 @@ public class SaveTest {
 
     @Autowired
     private JsonFileImporter jsonFileImporter;
-
 
 
     @BeforeEach
