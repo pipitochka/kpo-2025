@@ -1,24 +1,35 @@
 package hse.kpo.services;
 
-import hse.kpo.interfaces.ICarProvider;
-import hse.kpo.interfaces.ICustomerProvider;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import hse.kpo.domains.Customer;
+import hse.kpo.interfaces.CarProviderInterface;
+import hse.kpo.interfaces.CustomerProviderInterface;
+import java.util.Objects;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
-
+/**
+ * class of hse car service.
+ */
 @Component
-@RequiredArgsConstructor
-@Slf4j
 public class HseCarService {
 
-    private final ICarProvider carProvider;
+    private static final Logger logger = LoggerFactory.getLogger(HseCarService.class);
 
-    private final ICustomerProvider customerProvider;
+    private final CarProviderInterface carProvider;
 
-    public void sellCars()
-    {
+    private final CustomerProviderInterface customerProvider;
+
+    public HseCarService(CarProviderInterface carProvider, CustomerProviderInterface customersProvider) {
+        this.carProvider = carProvider;
+        this.customerProvider = customersProvider;
+        logger.info("Hse Car Service created");
+    }
+
+    /**
+     * function to sell all cars in cars pull to all sellers from sellers poll.
+     */
+    public void sellCars() {
         // получаем список покупателей
         var customers = customerProvider.getCustomers();
         // пробегаемся по полученному списку
@@ -27,8 +38,7 @@ public class HseCarService {
                     var car = carProvider.takeCar(customer);
                     if (Objects.nonNull(car)) {
                         customer.setCar(car);
-                    } else {
-                        log.warn("No car in CarService");
+                        logger.info(customer + " take car " + car);
                     }
                 });
     }

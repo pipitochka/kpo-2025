@@ -1,19 +1,24 @@
 package hse.kpo.domains;
 
-import hse.kpo.enums.ProductionTypes;
-import hse.kpo.interfaces.IEngine;
+import hse.kpo.interfaces.EngineInterface;
 import lombok.ToString;
 
 /**
- * Класс, реализующий {@link IEngine} ручного типа.
+ * class of hand engine.
  */
 @ToString
-public class HandEngine implements IEngine {
+public class HandEngine implements EngineInterface {
+
+    /**
+     * Проверяет подходит ли двигатель покупателю.
+     *
+     * @param customer - покупатель, с которым мы сравниваем двигатель.
+     */
     @Override
     public boolean isCompatible(Customer customer, ProductionTypes type) {
         return switch (type) {
-            case ProductionTypes.CAR -> customer.getHandPower() > 5;
-            case ProductionTypes.CATAMARAN -> customer.getHandPower() > 2;
+            case hse.kpo.domains.ProductionTypes.CAR -> customer.getHandPower() > 5;
+            case hse.kpo.domains.ProductionTypes.CATAMARAN -> customer.getHandPower() > 2;
             case null, default -> throw new RuntimeException("This type of production doesn't exist");
         };
     }

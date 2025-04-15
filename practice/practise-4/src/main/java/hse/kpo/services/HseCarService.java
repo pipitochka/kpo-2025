@@ -1,22 +1,29 @@
 package hse.kpo.services;
 
-import hse.kpo.interfaces.ICarProvider;
-import hse.kpo.interfaces.ICustomerProvider;
-import lombok.RequiredArgsConstructor;
+import hse.kpo.interfaces.CarProviderInterface;
+import hse.kpo.interfaces.CustomerProviderInterface;
+import java.util.Objects;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
-
+/**
+ * class of hse car service.
+ */
 @Component
-@RequiredArgsConstructor
 public class HseCarService {
 
-    private final ICarProvider carProvider;
+    private final CarProviderInterface carProvider;
 
-    private final ICustomerProvider customerProvider;
+    private final CustomerProviderInterface customerProvider;
 
-    public void sellCars()
-    {
+    public HseCarService(CarProviderInterface carProvider, CustomerProviderInterface customersProvider) {
+        this.carProvider = carProvider;
+        this.customerProvider = customersProvider;
+    }
+
+    /**
+     * function to sell all cars in cars pull to all sellers from sellers poll.
+     */
+    public void sellCars() {
         // получаем список покупателей
         var customers = customerProvider.getCustomers();
         // пробегаемся по полученному списку

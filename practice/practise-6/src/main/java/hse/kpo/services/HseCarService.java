@@ -1,27 +1,57 @@
 package hse.kpo.services;
 
-import hse.kpo.interfaces.cars.CarProvider;
-import hse.kpo.interfaces.CustomerProvider;
+import hse.kpo.domains.objects.Customer;
+import hse.kpo.enums.ProductionTypes;
+import hse.kpo.interfaces.providers.CarProviderInterface;
+import hse.kpo.interfaces.providers.CustomerProviderInterface;
+import hse.kpo.interfaces.sales.Sales;
+import hse.kpo.interfaces.sales.SalesObserver;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+
 /**
- * Сервис продажи машин.
+ * class of hse car service.
  */
 @Component
-@RequiredArgsConstructor
-@Slf4j
 public class HseCarService {
 
-    private final CarProvider carProvider;
+    final List<SalesObserver> observers = new ArrayList<>();
 
-    private final CustomerProvider customerProvider;
+    public void addObserver(SalesObserver observer) {
+        observers.add(observer);
+    }
+
+    private void notifyObserversForSale(Customer customer, ProductionTypes productType, int vin) {
+        observers.forEach(obs -> obs.onSale(customer, productType, vin));
+    }
+
+    private static final Logger logger = LoggerFactory.getLogger(HseCarService.class);
+
+    private final CarProviderInterface carProvider;
+
+    private final CustomerProviderInterface customerProvider;
 
     /**
-     * Метод продажи машин
+     * constructor.
+     *
+     * @param carProvider car provider annotated with this hse car service.
+     * @param customersProvider customer provide annotated with this hse car service.
      */
+    public HseCarService(CarProviderInterface carProvider, CustomerProviderInterface customersProvider) {
+        this.carProvider = carProvider;
+        this.customerProvider = customersProvider;
+        logger.info("Hse Car Service created");
+    }
+
+    /**
+     * function to sell all cars in cars pull to all sellers from sellers poll.
+     */
+    @Sales
     public void sellCars() {
         // получаем список покупателей
         var customers = customerProvider.getCustomers();
@@ -31,8 +61,8 @@ public class HseCarService {
                     var car = carProvider.takeCar(customer);
                     if (Objects.nonNull(car)) {
                         customer.setCar(car);
-                    } else {
-                        log.warn("No car in CarService");
+                        notifyObserversForSale(customer, ProductionTypes.CAR, car.getVin());
+                        logger.info(customer + " take car " + car);
                     }
                 });
     }

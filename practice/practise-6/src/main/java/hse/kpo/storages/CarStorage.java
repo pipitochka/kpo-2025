@@ -1,18 +1,18 @@
 package hse.kpo.storages;
 
-import hse.kpo.domains.Car;
-import hse.kpo.domains.Customer;
-import hse.kpo.interfaces.cars.CarFactory;
-import hse.kpo.interfaces.cars.CarProvider;
+import hse.kpo.domains.objects.Car;
+import hse.kpo.domains.objects.Customer;
+import hse.kpo.interfaces.factories.CarFactoryInterface;
+import hse.kpo.interfaces.providers.CarProviderInterface;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
 /**
- * Хранилище информации о машинах.
+ * class of car service.
  */
 @Component
-public class CarStorage implements CarProvider {
+public class CarStorage implements CarProviderInterface {
 
     private final List<Car> cars = new ArrayList<>();
 
@@ -31,17 +31,19 @@ public class CarStorage implements CarProvider {
     }
 
     /**
-     * Метод добавления {@link Car} в систему.
+     * function which make car and add it to the pool.
      *
-     * @param carFactory фабрика для создания автомобилей
-     * @param carParams параметры для создания автомобиля
+     * @param carFactory factory which will make car.
+     * @param carParams car params which used in car constructor.
+     * @param <ParamsT> params for constructor.
      */
-    public <ProductionParams> void addCar(CarFactory<ProductionParams> carFactory, ProductionParams carParams) {
-        var car = carFactory.create(
-                carParams,
-                ++carNumberCounter
+    public <ParamsT> void addCar(CarFactoryInterface<ParamsT> carFactory, ParamsT carParams) {
+        // создаем автомобиль из переданной фабрики
+        var car = carFactory.createCar(
+                carParams, // передаем параметры
+                ++carNumberCounter // передаем номер - номер будет начинаться с 1
         );
 
-        cars.add(car);
+        cars.add(car); // добавляем автомобиль
     }
 }
