@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import zoo.domains.valueObjects.AnimalFood;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.UUID;
 
 @Getter

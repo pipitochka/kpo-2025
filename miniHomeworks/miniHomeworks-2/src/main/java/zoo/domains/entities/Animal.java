@@ -1,7 +1,9 @@
 package zoo.domains.entities;
 
+import jdk.jfr.Frequency;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import zoo.domains.valueObjects.AnimalFood;
@@ -16,16 +18,22 @@ import java.util.UUID;
 @Slf4j
 @RequiredArgsConstructor
 public class Animal {
-
+    @Getter
     private final AnimalTypes type;
+    @Getter
     private final String name;
+    @Getter
     private final Date birthDate;
+    @Getter
     private final AnimalGender gender;
     @Getter
     private final UUID animalId = UUID.randomUUID();
 
+    @Getter
     private Enclosure enclosure;
+    @Getter
     private AnimalFood favoriteFood;
+    @Getter
     private AnimalStatus status;
 
     public void Feed(AnimalFood favoriteFood) {
