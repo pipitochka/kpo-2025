@@ -1,4 +1,15 @@
 package zoo.infrastructure.dto.requests;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import zoo.domains.valueObjects.AnimalFood;
+
+import java.util.Date;
+import java.util.UUID;
+
+@RequiredArgsConstructor
 public class FeedingShedulesDTO {
+    private @NonNull UUID animalId;
+    private @NonNull AnimalFood animalFood;
+    private @NonNull Date date;
 }
