@@ -1,4 +1,4 @@
-package zoo.infrastructure.dto.requests;
+package zoo.infrastructure.dto;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

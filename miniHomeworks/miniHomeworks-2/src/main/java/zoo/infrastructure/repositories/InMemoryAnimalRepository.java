@@ -1,10 +1,12 @@
 package zoo.infrastructure.repositories;
 
+import org.springframework.stereotype.Component;
 import zoo.application.interfaces.AnimalRepository;
 import zoo.domains.entities.Animal;
 
 import java.util.*;
 
+@Component
 public class InMemoryAnimalRepository implements AnimalRepository {
     private final Map<UUID, Animal> animals = new HashMap<>();
 
