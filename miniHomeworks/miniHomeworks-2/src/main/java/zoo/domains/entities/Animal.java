@@ -30,10 +30,13 @@ public class Animal {
     private final UUID animalId = UUID.randomUUID();
 
     @Getter
+    @Setter
     private Enclosure enclosure;
     @Getter
+    @Setter
     private AnimalFood favoriteFood;
     @Getter
+    @Setter
     private AnimalStatus status;
 
     public void Feed(AnimalFood favoriteFood) {

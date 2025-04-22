@@ -16,9 +16,11 @@ import java.util.UUID;
 public class Enclosure {
     @Getter
     private final UUID id = UUID.randomUUID();
-
+    @Getter
     private final AnimalTypes animalType;
+    @Getter
     private final int maxSize;
+    @Getter
     private int currentSize = 0;
 
     private List<Animal> animals = new ArrayList<Animal>();

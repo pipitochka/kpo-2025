@@ -1,9 +1,8 @@
-package zoo.infrastructure.dto.requests;
+package zoo.infrastructure.dto;
 
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import zoo.domains.entities.Enclosure;
 import zoo.domains.valueObjects.AnimalFood;
 import zoo.domains.valueObjects.enums.AnimalGender;
 import zoo.domains.valueObjects.enums.AnimalStatus;
