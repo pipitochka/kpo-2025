@@ -6,10 +6,20 @@ import zoo.domains.entities.FeedingSchedule;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class InMemoryFeedingScheduleRepository implements FeedingScheduleRepository {
+
     private final List<FeedingSchedule> feedingSchedules = new ArrayList<>();
+
+    @Override
+    public Optional<FeedingSchedule> findById(UUID id) {
+        return feedingSchedules.stream()
+                .filter(feedingSchedule -> feedingSchedule.getId().equals(id))
+                .findFirst();
+    }
 
     @Override
     public void add(FeedingSchedule feedingSchedule) {

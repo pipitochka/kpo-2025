@@ -8,7 +8,8 @@ import java.util.Date;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-public class FeedingShedulesDTO {
+public class FeedingSchedulesDTO {
+    private @NonNull UUID id;
     private @NonNull UUID animalId;
     private @NonNull AnimalFood animalFood;
     private @NonNull Date date;
