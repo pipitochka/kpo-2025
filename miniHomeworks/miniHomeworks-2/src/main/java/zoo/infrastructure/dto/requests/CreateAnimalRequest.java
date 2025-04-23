@@ -1,8 +1,9 @@
 package zoo.infrastructure.dto.requests;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
-import zoo.domains.valueObjects.AnimalFood;
+import zoo.domains.valueObjects.enums.AnimalFood;
 import zoo.domains.valueObjects.enums.AnimalGender;
 import zoo.domains.valueObjects.enums.AnimalStatus;
 import zoo.domains.valueObjects.enums.AnimalTypes;
@@ -24,6 +25,7 @@ public class CreateAnimalRequest {
     private String name;
 
     @NotNull(message = "Birth date is required")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Schema(example = "2020-05-10")
     private Date birthDate;
 

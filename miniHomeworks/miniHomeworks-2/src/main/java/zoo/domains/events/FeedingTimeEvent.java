@@ -2,7 +2,7 @@ package zoo.domains.events;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import zoo.domains.valueObjects.AnimalFood;
+import zoo.domains.valueObjects.enums.AnimalFood;
 
 import java.util.Date;
 import java.util.UUID;

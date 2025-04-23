@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import zoo.domains.valueObjects.AnimalFood;
+import zoo.domains.valueObjects.enums.AnimalFood;
 
 import java.util.Date;
 
