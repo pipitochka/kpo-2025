@@ -52,7 +52,8 @@ public class EnclosureController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAnimal(@PathVariable UUID id) {
         var enclosure = enclosureRepository.getEnclosureById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Animal not found"));
         enclosureRepository.remove(enclosure);
     }
 

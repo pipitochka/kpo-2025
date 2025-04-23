@@ -48,7 +48,8 @@ public class AnimalController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAnimal(@PathVariable String name) {
         var animal = animalRepository.getAnimalByName(name)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Animal not found"));
         animalRepository.remove(animal);
     }
 }

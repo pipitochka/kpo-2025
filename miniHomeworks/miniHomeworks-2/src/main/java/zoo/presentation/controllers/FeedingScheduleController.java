@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import zoo.application.interfaces.AnimalRepository;
 import zoo.application.interfaces.FeedingScheduleRepository;
 import zoo.domains.entities.Enclosure;
 import zoo.domains.entities.FeedingSchedule;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 public class FeedingScheduleController {
 
     private final FeedingScheduleRepository feedingScheduleRepository;
+    private final AnimalRepository animalRepository;
 
     @GetMapping
     public List<FeedingSchedulesDTO> getFeedingSchedules() {
@@ -34,7 +36,12 @@ public class FeedingScheduleController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public FeedingSchedulesDTO createFeedingSchedule(@Valid @RequestBody CreateFeedingScheduleRequest createFeedingScheduleRequest) {
-        var newFeedingSchedule = FeedingSchedulesConverter.toEntity(createFeedingScheduleRequest);
+        var animal = animalRepository.getAnimalByName(createFeedingScheduleRequest.getName());
+        if (animal == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal not found");
+        }
+        var newFeedingSchedule = FeedingSchedulesConverter.toEntity(createFeedingScheduleRequest,
+                animal.get().getAnimalId());
         feedingScheduleRepository.add(newFeedingSchedule);
         return FeedingSchedulesConverter.toDTO(newFeedingSchedule);
     }
@@ -43,7 +50,8 @@ public class FeedingScheduleController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteFeedingSchedule(@PathVariable UUID id) {
         var feedingSchedule = feedingScheduleRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Animal not found"));
         feedingScheduleRepository.remove(feedingSchedule);
     }
 
