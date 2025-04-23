@@ -8,27 +8,26 @@ import lombok.extern.slf4j.Slf4j;
 import zoo.domains.valueObjects.enums.AnimalFood;
 
 import java.util.Date;
+import java.util.UUID;
 
+@Getter
 @ToString
 @Slf4j
 @RequiredArgsConstructor
 public class FeedingSchedule {
-    @Getter
-    private final Animal animal;
+    private final UUID id = UUID.randomUUID();
 
-    @Getter
+    private final UUID animalId;
+
     private final AnimalFood food;
 
-    @Setter
-    @Getter
-    private Date date;
+    private final Date date;
 
     @Setter
-    @Getter
     private boolean isDone = false;
 
     public void makeComplete(){
         this.isDone = true;
-        log.info("feeding animal {} by food {} complete", animal.getAnimalId(), food);
+        log.info("feeding animal {} by food {} complete", animalId, food);
     }
 }

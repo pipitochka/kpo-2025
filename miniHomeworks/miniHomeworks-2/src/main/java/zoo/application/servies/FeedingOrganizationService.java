@@ -14,16 +14,20 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class FeedingOrganizationService {
     private final FeedingScheduleRepository feedingScheduleRepository;
+    private final AnimalRepository animalRepository;
     private final EventHandler eventHandler;
 
     public void feed(){
         for (FeedingSchedule feedingSchedule : feedingScheduleRepository.getSchedules()){
             if (feedingSchedule.getDate().before(new Date())){
                 if (feedingSchedule.isDone() == false){
-                    feedingSchedule.getAnimal().Feed(feedingSchedule.getFood());
+                    animalRepository.getAnimalById(feedingSchedule.getAnimalId()).orElseThrow(
+                                    ()->new RuntimeException("Animal not found")
+                            )
+                            .Feed(feedingSchedule.getFood());
                     feedingSchedule.setDone(true);
                     eventHandler.handle(new FeedingTimeEvent(
-                            feedingSchedule.getAnimal().getAnimalId(),
+                            feedingSchedule.getAnimalId(),
                             feedingSchedule.getDate(),
                             feedingSchedule.getFood()
                     ));
