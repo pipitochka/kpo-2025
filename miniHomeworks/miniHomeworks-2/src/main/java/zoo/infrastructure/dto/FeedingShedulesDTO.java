@@ -2,7 +2,7 @@ package zoo.infrastructure.dto;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import zoo.domains.valueObjects.AnimalFood;
+import zoo.domains.valueObjects.enums.AnimalFood;
 
 import java.util.Date;
 import java.util.UUID;
