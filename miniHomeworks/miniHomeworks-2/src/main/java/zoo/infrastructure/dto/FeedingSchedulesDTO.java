@@ -1,5 +1,6 @@
 package zoo.infrastructure.dto;
 
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import zoo.domains.valueObjects.enums.AnimalFood;
@@ -7,6 +8,7 @@ import zoo.domains.valueObjects.enums.AnimalFood;
 import java.util.Date;
 import java.util.UUID;
 
+@Getter
 @RequiredArgsConstructor
 public class FeedingSchedulesDTO {
     private @NonNull UUID id;

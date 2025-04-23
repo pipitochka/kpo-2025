@@ -14,9 +14,9 @@ import java.util.UUID;
 @Setter
 public class CreateFeedingScheduleRequest {
 
-    @NotNull(message = "Animal ID is required")
-    @Schema(example = "8a1f1e9a-5d3e-4c8b-9d4a-123456789abc", description = "ID of the animal to feed")
-    private UUID animalId;
+    @NotNull(message = "Name is required")
+    @Schema(example = "Leo")
+    private String name;
 
     @NotNull(message = "Food is required")
     @Schema(example = "MEAT", description = "Type of food to give")

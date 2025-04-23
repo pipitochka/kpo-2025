@@ -4,6 +4,8 @@ import zoo.domains.entities.FeedingSchedule;
 import zoo.infrastructure.dto.FeedingSchedulesDTO;
 import zoo.infrastructure.dto.requests.CreateFeedingScheduleRequest;
 
+import java.util.UUID;
+
 public class FeedingSchedulesConverter {
 
     public static FeedingSchedulesDTO toDTO(FeedingSchedule feedingSchedule) {
@@ -11,8 +13,8 @@ public class FeedingSchedulesConverter {
                 feedingSchedule.getFood(), feedingSchedule.getDate());
     }
 
-    public static FeedingSchedule toEntity(CreateFeedingScheduleRequest createFeedingScheduleRequest) {
-        return new FeedingSchedule(createFeedingScheduleRequest.getAnimalId(), createFeedingScheduleRequest.getFood(),
+    public static FeedingSchedule toEntity(CreateFeedingScheduleRequest createFeedingScheduleRequest, UUID animalId) {
+        return new FeedingSchedule(animalId, createFeedingScheduleRequest.getFood(),
                 createFeedingScheduleRequest.getDate());
     }
 }
