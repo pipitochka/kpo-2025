@@ -43,4 +43,12 @@ public class AnimalController {
         animalRepository.add(newAnimal);
         return AnimalConverter.toDTO(newAnimal);
     }
+
+    @DeleteMapping("/{name}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAnimal(@PathVariable String name) {
+        var animal = animalRepository.getAnimalByName(name)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        animalRepository.remove(animal);
+    }
 }
