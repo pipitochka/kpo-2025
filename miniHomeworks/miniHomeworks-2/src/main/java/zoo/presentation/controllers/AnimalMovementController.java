@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import zoo.application.interfaces.AnimalRepository;
 import zoo.application.interfaces.EnclosureRepository;
+import zoo.application.servies.AnimalTransferService;
 import zoo.domains.entities.Animal;
 import zoo.infrastructure.dto.requests.MoveAnimalRequest;
 
@@ -15,21 +16,15 @@ import zoo.infrastructure.dto.requests.MoveAnimalRequest;
 @RequiredArgsConstructor
 public class AnimalMovementController {
 
-    private final AnimalRepository animalRepository;
-    private final EnclosureRepository enclosureRepository;
+    private final AnimalTransferService animalTransferService;
 
     @PostMapping("/animals/move")
     @ResponseStatus(HttpStatus.OK)
     public void moveAnimal(@Valid @RequestBody MoveAnimalRequest request) {
-        var animal = animalRepository.getAnimalByName(request.getName());
-        var enclosure = enclosureRepository.getEnclosureById(request.getEnclosureId());
-        if (animal == null || enclosure == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal or Enclosure not found");
+        try{
+            animalTransferService.moveAnimal(request.getName(), request.getEnclosureId());
         }
-        try {
-            animal.get().
-        }
-        catch (Exception e) {
+        catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
