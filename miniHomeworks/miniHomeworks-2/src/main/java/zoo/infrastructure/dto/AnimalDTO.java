@@ -19,7 +19,7 @@ public class AnimalDTO {
     private @NonNull Date birthDate;
     private @NonNull AnimalGender gender;
     private @NonNull UUID animalId;
-    private final UUID enclosureID;
+    private final UUID enclosureId;
     private @NonNull AnimalFood food;
     private @NonNull AnimalStatus animalStatus;
 }
