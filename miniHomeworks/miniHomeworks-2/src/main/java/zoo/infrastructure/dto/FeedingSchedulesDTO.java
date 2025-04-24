@@ -15,4 +15,5 @@ public class FeedingSchedulesDTO {
     private @NonNull UUID animalId;
     private @NonNull AnimalFood animalFood;
     private @NonNull Date date;
+    private @NonNull boolean isDone;
 }

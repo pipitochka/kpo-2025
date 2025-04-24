@@ -10,11 +10,13 @@ public class FeedingSchedulesConverter {
 
     public static FeedingSchedulesDTO toDTO(FeedingSchedule feedingSchedule) {
         return new FeedingSchedulesDTO(feedingSchedule.getId(), feedingSchedule.getAnimalId(),
-                feedingSchedule.getFood(), feedingSchedule.getDate());
+                feedingSchedule.getFood(), feedingSchedule.getDate(), feedingSchedule.isDone());
     }
 
     public static FeedingSchedule toEntity(CreateFeedingScheduleRequest createFeedingScheduleRequest, UUID animalId) {
-        return new FeedingSchedule(animalId, createFeedingScheduleRequest.getFood(),
+        var feedingSchedule = new FeedingSchedule(animalId, createFeedingScheduleRequest.getFood(),
                 createFeedingScheduleRequest.getDate());
+        feedingSchedule.setDone(false);
+        return feedingSchedule;
     }
 }
