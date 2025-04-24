@@ -1,14 +1,20 @@
 package zoo.infrastructure.repositories;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import zoo.application.interfaces.AnimalRepository;
+import zoo.application.interfaces.EnclosureRepository;
 import zoo.domains.entities.Animal;
+import zoo.domains.entities.Enclosure;
 
 import java.util.*;
 
 @Component
+@RequiredArgsConstructor
 public class InMemoryAnimalRepository implements AnimalRepository {
     private final Map<UUID, Animal> animals = new HashMap<>();
+
+    private final EnclosureRepository enclosureRepository;
 
     @Override
     public void add(Animal animal) {
@@ -17,6 +23,10 @@ public class InMemoryAnimalRepository implements AnimalRepository {
 
     @Override
     public void remove(Animal animal) {
+        if (animal.getEnclosure() != null) {
+            Enclosure enclosure = animal.getEnclosure();
+            enclosure.remove(animal);
+        }
         animals.remove(animal.getAnimalId());
     }
 
@@ -35,5 +45,10 @@ public class InMemoryAnimalRepository implements AnimalRepository {
         return animals.values().stream()  // Ищем животное по имени
                 .filter(animal -> animal.getName().equals(name))
                 .findFirst();
+    }
+
+    @Override
+    public void clear() {
+        animals.clear();
     }
 }

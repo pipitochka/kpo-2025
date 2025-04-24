@@ -9,7 +9,7 @@ public class EnclosureConverter {
     public static EnclosureDTO toDTO(Enclosure enclosure) {
         var enclosureDTO = new EnclosureDTO(enclosure.getId(), enclosure.getAnimalType());
         enclosureDTO.setMaxSize(enclosure.getMaxSize());
-        enclosureDTO.setCurentSize(enclosure.getCurrentSize());
+        enclosureDTO.setCurrentSize(enclosure.getCurrentSize());
         return enclosureDTO;
     }
 

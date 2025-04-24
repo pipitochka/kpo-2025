@@ -30,4 +30,9 @@ public class InMemoryEnclosureRepository implements EnclosureRepository {
     public Optional<Enclosure> getEnclosureById(UUID id) {
         return Optional.ofNullable(enclosures.get(id));
     }
+
+    @Override
+    public void clear() {
+        enclosures.clear();
+    }
 }

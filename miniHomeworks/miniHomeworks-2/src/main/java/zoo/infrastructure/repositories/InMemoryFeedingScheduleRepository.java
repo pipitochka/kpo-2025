@@ -35,4 +35,9 @@ public class InMemoryFeedingScheduleRepository implements FeedingScheduleReposit
     public List<FeedingSchedule> getSchedules() {
         return feedingSchedules;
     }
+
+    @Override
+    public void clear() {
+        feedingSchedules.clear();
+    }
 }

@@ -17,4 +17,6 @@ public interface AnimalRepository {
     Optional<Animal> getAnimalById(UUID id);
 
     Optional<Animal> getAnimalByName(String name);
+
+    public void clear();
 }
