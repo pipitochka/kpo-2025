@@ -27,7 +27,7 @@ public class FeedingScheduleController {
     private final FeedingScheduleRepository feedingScheduleRepository;
     private final AnimalRepository animalRepository;
 
-    @GetMapping
+    @GetMapping("/feedingSchedules")
     public List<FeedingSchedulesDTO> getFeedingSchedules() {
         return feedingScheduleRepository.getSchedules().stream()
                 .map(FeedingSchedulesConverter::toDTO).collect(Collectors.toList());

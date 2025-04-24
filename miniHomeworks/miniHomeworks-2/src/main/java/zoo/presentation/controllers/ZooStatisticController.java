@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import zoo.application.servies.ZooStatisticsService;
+import zoo.domains.valueObjects.enums.AnimalTypes;
 import zoo.infrastructure.dto.requests.MoveAnimalRequest;
 import zoo.infrastructure.dto.requests.StatisticRequest;
 
@@ -23,8 +24,8 @@ public class ZooStatisticController {
         return zooStatisticsService.countFemaleAnimals();
     }
 
-    @GetMapping("/count_by_gender")
-    public int getCountByGender(@Valid @RequestBody StatisticRequest statisticRequest) {
-        return zooStatisticsService.countAnimalsByType(statisticRequest.getType());
+    @GetMapping("/count_by_type/{type}")
+    public int getCountByType(@PathVariable AnimalTypes type) {
+        return zooStatisticsService.countAnimalsByType(type);
     }
 }

@@ -148,7 +148,7 @@ public class FeedingScheduleTest {
         mockMvc.perform(delete("/feedingSchedule/" + id))
                 .andExpect(status().isNoContent());
 
-        mockMvc.perform(get("/feedingSchedule"))
+        mockMvc.perform(get("/feedingSchedule/feedingSchedules"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].animalId").value(secondId))
