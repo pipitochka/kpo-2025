@@ -1,12 +1,11 @@
 package zoo;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import zoo.application.interfaces.AnimalRepository;
 
 @SpringBootTest(classes = KpoApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
@@ -21,6 +21,14 @@ public class AnimalTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private AnimalRepository animalRepository;
+
+    @BeforeEach
+    void setUp() {
+        animalRepository.clear();
+    }
 
     void createAnimal() throws Exception {
         String create1 = """
@@ -106,10 +114,29 @@ public class AnimalTest {
         createAnimal();
         mockMvc.perform(get("/animals"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(2)) // Ожидаем два животных в списке
-                .andExpect(jsonPath("$[0].name").value("Leo")) // Проверяем имя первого животного
-                .andExpect(jsonPath("$[0].type").value("WOLF")) // Проверяем тип первого животного
-                .andExpect(jsonPath("$[1].name").value("Masha")) // Проверяем имя второго животного
-                .andExpect(jsonPath("$[1].type").value("MONKEY")); // Проверяем тип второго животного
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[*].name").value(org.hamcrest.Matchers.hasItems("Leo", "Masha")))
+                .andExpect(jsonPath("$[*].type").value(org.hamcrest.Matchers.hasItems("WOLF", "MONKEY")));
+    }
+
+    @Test
+    @Order(3)
+    void deleteAnimalTest() throws Exception {
+        createAnimal();
+
+        assertThat(animalRepository.getAnimals().size()).isEqualTo(2);
+
+        mockMvc.perform(delete("/animals/Leo"))
+                .andExpect(status().isNoContent());
+
+        mockMvc.perform(get("/animals"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].name").value("Masha"))
+                .andExpect(jsonPath("$[0].type").value("MONKEY"));
+
+        assertThat(animalRepository.getAnimals().size()).isEqualTo(1);
+
+
     }
 }

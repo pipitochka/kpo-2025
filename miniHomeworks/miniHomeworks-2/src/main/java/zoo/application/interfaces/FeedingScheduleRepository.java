@@ -16,4 +16,6 @@ public interface FeedingScheduleRepository {
     void remove(FeedingSchedule feedingSchedule);
 
     List<FeedingSchedule> getSchedules();
+
+    void clear();
 }

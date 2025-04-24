@@ -16,5 +16,5 @@ public class EnclosureDTO {
     @Setter
     private int maxSize;
     @Setter
-    private int curentSize;
+    private int currentSize;
 }

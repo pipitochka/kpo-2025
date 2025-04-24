@@ -15,4 +15,6 @@ public interface EnclosureRepository {
     List<Enclosure> getEnclosures();
 
     Optional<Enclosure> getEnclosureById(UUID id);
+
+    public void clear();
 }
