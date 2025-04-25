@@ -1,16 +1,17 @@
 package zoo.application.servies;
 
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import zoo.application.interfaces.AnimalRepository;
 import zoo.application.interfaces.EnclosureRepository;
-import zoo.domains.entities.Animal;
 import zoo.domains.entities.Enclosure;
 import zoo.domains.events.AnimalMovedEvent;
 import zoo.domains.events.EventHandler;
 
-import java.util.UUID;
-
+/**
+ * class of animal transfer service.
+ */
 @Component
 @RequiredArgsConstructor
 public class AnimalTransferService {
@@ -18,6 +19,13 @@ public class AnimalTransferService {
     private final EnclosureRepository enclosureRepository;
     private final EventHandler eventHandler;
 
+    /**
+     * function to move animal to new enclosure.
+     *
+     * @param animalName - name of animal.
+     * @param enclosureId - id of repository.
+     * @throws Exception - throws if movement impossible(no place or no animal or no enclosure).
+     */
     public void moveAnimal(String animalName, UUID enclosureId) throws Exception {
         var animal = animalRepository.getAnimalByName(animalName)
                 .orElseThrow(() -> new Exception("Animal not found"));

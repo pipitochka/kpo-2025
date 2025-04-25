@@ -1,12 +1,12 @@
 package zoo.domains.events;
 
+import java.util.UUID;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import zoo.domains.entities.Animal;
-import zoo.domains.entities.Enclosure;
 
-import java.util.UUID;
-
+/**
+ * class of animal move event.
+ */
 @Getter
 @RequiredArgsConstructor
 public class AnimalMovedEvent extends DomainEvent {

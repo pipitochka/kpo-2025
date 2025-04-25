@@ -1,17 +1,19 @@
 package zoo.infrastructure.dto.requests;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
-import zoo.domains.valueObjects.enums.AnimalFood;
-import zoo.domains.valueObjects.enums.AnimalGender;
-import zoo.domains.valueObjects.enums.AnimalStatus;
-import zoo.domains.valueObjects.enums.AnimalTypes;
-import jakarta.validation.constraints.NotBlank;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import java.util.Date;
-import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
+import zoo.domains.valueobjects.enums.AnimalFood;
+import zoo.domains.valueobjects.enums.AnimalGender;
+import zoo.domains.valueobjects.enums.AnimalStatus;
+import zoo.domains.valueobjects.enums.AnimalTypes;
 
+/**
+ * class of create animal request.
+ */
 @Getter
 @Setter
 public class CreateAnimalRequest {

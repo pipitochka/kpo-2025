@@ -1,19 +1,20 @@
 package zoo.domains.entities;
 
-import jdk.jfr.Frequency;
+import java.util.Date;
+import java.util.UUID;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import zoo.domains.valueObjects.enums.AnimalFood;
-import zoo.domains.valueObjects.enums.AnimalGender;
-import zoo.domains.valueObjects.enums.AnimalStatus;
-import zoo.domains.valueObjects.enums.AnimalTypes;
+import zoo.domains.valueobjects.enums.AnimalFood;
+import zoo.domains.valueobjects.enums.AnimalGender;
+import zoo.domains.valueobjects.enums.AnimalStatus;
+import zoo.domains.valueobjects.enums.AnimalTypes;
 
-import java.util.Date;
-import java.util.UUID;
-
+/**
+ * class of animal.
+ */
 @ToString
 @Slf4j
 @RequiredArgsConstructor
@@ -39,21 +40,21 @@ public class Animal {
     @Setter
     private AnimalStatus status;
 
-    public void Feed(AnimalFood favoriteFood) {
+    public void feed(AnimalFood favoriteFood) {
         log.info("feed animal {}", animalId);
     }
 
-    public void Treat(){
+    public void treat() {
         log.info("treat animal {}", animalId);
         this.status = AnimalStatus.HEALTHY;
     }
 
-    public void MoveToEnclosure(Enclosure enclosure) {
+    public void moveToEnclosure(Enclosure enclosure) {
         log.info("Move to enclosure: animal {}, enclosure {}", animalId, enclosure.getId());
         this.enclosure = enclosure;
     }
 
-    public void MoveFromEnclosure(){
+    public void moveFromEnclosure() {
         log.info("Move from enclosure animal {}", animalId);
         this.enclosure = null;
     }
