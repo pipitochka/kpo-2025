@@ -1,5 +1,11 @@
 package zoo;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -10,12 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import zoo.application.interfaces.AnimalRepository;
 import zoo.application.interfaces.EnclosureRepository;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
+/**
+ * class of movement tests.
+ */
 @SpringBootTest(classes = KpoApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class MovementTest {
@@ -58,6 +62,7 @@ public class MovementTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(create2));
     }
+
     void createEnclosure() throws Exception {
         String create1 = """
                 {
