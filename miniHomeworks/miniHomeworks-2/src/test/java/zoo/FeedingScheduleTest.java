@@ -1,5 +1,12 @@
 package zoo;
 
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -12,11 +19,9 @@ import zoo.application.interfaces.AnimalRepository;
 import zoo.application.interfaces.FeedingScheduleRepository;
 import zoo.domains.entities.FeedingSchedule;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+/**
+ * class to test feeding schedules.
+ */
 @SpringBootTest(classes = KpoApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class FeedingScheduleTest {
@@ -64,6 +69,7 @@ public class FeedingScheduleTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(create2));
     }
+
     void createFeedingSchedule() throws Exception {
         String create1 = """
                 {
@@ -138,8 +144,8 @@ public class FeedingScheduleTest {
         String firsId = animalRepository.getAnimalByName("Leo").get().getAnimalId().toString();
         String secondId = animalRepository.getAnimalByName("Masha").get().getAnimalId().toString();
 
-        FeedingSchedule feedingSchedule = feedingScheduleRepository.getSchedules().stream().
-                filter(schedule -> schedule.getAnimalId().toString().equals(firsId))
+        FeedingSchedule feedingSchedule = feedingScheduleRepository.getSchedules().stream()
+                        .filter(schedule -> schedule.getAnimalId().toString().equals(firsId))
                 .findFirst()
                 .get();
 
