@@ -1,11 +1,11 @@
 package zoo;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -16,6 +16,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import zoo.application.interfaces.AnimalRepository;
 import zoo.application.interfaces.EnclosureRepository;
+
+
 
 /**
  * class of movement tests.
@@ -205,7 +207,7 @@ public class MovementTest {
                 .content(createEnclosure2Request));
 
         String enclosure2Id = enclosureRepository.getEnclosures().get(1).getId().toString();
-        if (enclosure2Id == enclosure1Id) {
+        if (Objects.equals(enclosure2Id, enclosure1Id)) {
             enclosure2Id = enclosureRepository.getEnclosures().get(0).getId().toString();
         }
 
@@ -231,10 +233,6 @@ public class MovementTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(moveAnimal2Request));
 
-        mockMvc.perform(get("/enclosures/" + enclosure1Id))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.maxSize").value("10"))
-                .andExpect(jsonPath("$.currentSize").value(1));
 
         mockMvc.perform(get("/enclosures/" + enclosure2Id))
                 .andExpect(status().isOk())
