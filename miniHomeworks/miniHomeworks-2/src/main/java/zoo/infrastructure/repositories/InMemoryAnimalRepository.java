@@ -1,5 +1,11 @@
 package zoo.infrastructure.repositories;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import zoo.application.interfaces.AnimalRepository;
@@ -7,8 +13,10 @@ import zoo.application.interfaces.EnclosureRepository;
 import zoo.domains.entities.Animal;
 import zoo.domains.entities.Enclosure;
 
-import java.util.*;
 
+/**
+ * realization of AnimalRepository in memory.
+ */
 @Component
 @RequiredArgsConstructor
 public class InMemoryAnimalRepository implements AnimalRepository {

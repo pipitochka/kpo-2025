@@ -4,8 +4,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import zoo.domains.valueObjects.enums.AnimalTypes;
+import zoo.domains.valueobjects.enums.AnimalTypes;
 
+/**
+ * class of statistic request.
+ */
 @Getter
 @Setter
 public class StatisticRequest {

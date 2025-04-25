@@ -1,12 +1,14 @@
 package zoo.domains.events;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import zoo.domains.valueObjects.enums.AnimalFood;
-
 import java.util.Date;
 import java.util.UUID;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import zoo.domains.valueobjects.enums.AnimalFood;
 
+/**
+ * class of feeding time event.
+ */
 @Getter
 @RequiredArgsConstructor
 public class FeedingTimeEvent extends DomainEvent {

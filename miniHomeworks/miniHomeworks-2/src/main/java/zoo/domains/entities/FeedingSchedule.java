@@ -1,15 +1,17 @@
 package zoo.domains.entities;
 
+import java.util.Date;
+import java.util.UUID;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import zoo.domains.valueObjects.enums.AnimalFood;
+import zoo.domains.valueobjects.enums.AnimalFood;
 
-import java.util.Date;
-import java.util.UUID;
-
+/**
+ * class of feeding schedule.
+ */
 @Getter
 @ToString
 @Slf4j
@@ -26,7 +28,7 @@ public class FeedingSchedule {
     @Setter
     private boolean isDone = false;
 
-    public void makeComplete(){
+    public void makeComplete() {
         this.isDone = true;
         log.info("feeding animal {} by food {} complete", animalId, food);
     }

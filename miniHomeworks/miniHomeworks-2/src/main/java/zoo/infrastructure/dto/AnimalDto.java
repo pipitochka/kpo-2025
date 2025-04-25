@@ -1,19 +1,21 @@
 package zoo.infrastructure.dto;
 
+import java.util.Date;
+import java.util.UUID;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import zoo.domains.valueObjects.enums.AnimalFood;
-import zoo.domains.valueObjects.enums.AnimalGender;
-import zoo.domains.valueObjects.enums.AnimalStatus;
-import zoo.domains.valueObjects.enums.AnimalTypes;
+import zoo.domains.valueobjects.enums.AnimalFood;
+import zoo.domains.valueobjects.enums.AnimalGender;
+import zoo.domains.valueobjects.enums.AnimalStatus;
+import zoo.domains.valueobjects.enums.AnimalTypes;
 
-import java.util.Date;
-import java.util.UUID;
-
+/**
+ * class of animal DTO (to send and receive information).
+ */
 @Getter
 @RequiredArgsConstructor
-public class AnimalDTO {
+public class AnimalDto {
     private @NonNull String name;
     private @NonNull AnimalTypes type;
     private @NonNull Date birthDate;

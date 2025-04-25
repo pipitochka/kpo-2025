@@ -1,18 +1,14 @@
 package zoo.presentation.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
-import zoo.application.interfaces.FeedingScheduleRepository;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import zoo.application.servies.FeedingOrganizationService;
-import zoo.domains.entities.Animal;
-import zoo.infrastructure.dto.FeedingSchedulesDTO;
-import zoo.infrastructure.dto.converters.FeedingSchedulesConverter;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+/**
+ * controller of feeding organization.
+ */
 @RestController
 @RequestMapping("/feeding")
 @RequiredArgsConstructor

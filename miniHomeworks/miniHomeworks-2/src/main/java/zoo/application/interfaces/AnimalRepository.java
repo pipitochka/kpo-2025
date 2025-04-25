@@ -1,12 +1,13 @@
 package zoo.application.interfaces;
 
-import zoo.domains.entities.Animal;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import zoo.domains.entities.Animal;
 
-
+/**
+ * interface of animal repository.
+ */
 public interface AnimalRepository {
     void add(Animal animal);
 

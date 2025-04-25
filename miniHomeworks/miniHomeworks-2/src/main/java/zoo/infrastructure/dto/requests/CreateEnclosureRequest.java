@@ -1,18 +1,15 @@
 package zoo.infrastructure.dto.requests;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import zoo.domains.valueObjects.enums.AnimalFood;
-import zoo.domains.valueObjects.enums.AnimalGender;
-import zoo.domains.valueObjects.enums.AnimalStatus;
-import zoo.domains.valueObjects.enums.AnimalTypes;
+import zoo.domains.valueobjects.enums.AnimalTypes;
 
-import java.util.Date;
-
+/**
+ * class of create enclosure request.
+ */
 @Getter
 @Setter
 public class CreateEnclosureRequest {

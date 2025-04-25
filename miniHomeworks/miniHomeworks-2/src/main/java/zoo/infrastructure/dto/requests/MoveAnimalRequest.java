@@ -2,11 +2,13 @@ package zoo.infrastructure.dto.requests;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
+import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
-
+/**
+ * class of move animal request.
+ */
 @Getter
 @Setter
 public class MoveAnimalRequest {

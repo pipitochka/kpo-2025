@@ -1,12 +1,13 @@
 package zoo.application.interfaces;
 
-import lombok.RequiredArgsConstructor;
-import zoo.domains.entities.FeedingSchedule;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import zoo.domains.entities.FeedingSchedule;
 
+/**
+ * interface of feeding schedule repository.
+ */
 public interface FeedingScheduleRepository {
 
     Optional<FeedingSchedule> findById(UUID id);

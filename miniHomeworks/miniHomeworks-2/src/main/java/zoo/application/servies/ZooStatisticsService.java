@@ -4,9 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import zoo.application.interfaces.AnimalRepository;
 import zoo.application.interfaces.EnclosureRepository;
-import zoo.domains.valueObjects.enums.AnimalGender;
-import zoo.domains.valueObjects.enums.AnimalTypes;
+import zoo.domains.valueobjects.enums.AnimalGender;
+import zoo.domains.valueobjects.enums.AnimalTypes;
 
+/**
+ * class of zoo statistic service (to take statistic information about zoo).
+ */
 @Component
 @RequiredArgsConstructor
 public class ZooStatisticsService {

@@ -1,14 +1,17 @@
 package zoo.infrastructure.repositories;
 
-import org.springframework.stereotype.Component;
-import zoo.application.interfaces.FeedingScheduleRepository;
-import zoo.domains.entities.FeedingSchedule;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.stereotype.Component;
+import zoo.application.interfaces.FeedingScheduleRepository;
+import zoo.domains.entities.FeedingSchedule;
 
+
+/**
+ * realization of feeding schedule repository in memory.
+ */
 @Component
 public class InMemoryFeedingScheduleRepository implements FeedingScheduleRepository {
 
