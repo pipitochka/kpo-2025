@@ -23,11 +23,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 /**
- * facade test.
+ * Facade test.
  */
 @SpringBootTest
-public class HseTest {
+public class FacadeTest {
     @Autowired
     Hse hse;
 
@@ -82,28 +84,12 @@ public class HseTest {
         hse.addHandCar();
         hse.addHandWilledCatamarand();
 
-        try (FileWriter fileWriter = new FileWriter("reports/reportCatamaran.csv")) {
-            hse.transportReport(ReportFormat.MARKDOWN, fileWriter);
-        }
-
-        try (FileWriter fileWriter = new FileWriter("reports/reportCatamaran.json")) {
-            hse.transportReport(ReportFormat.JSON, fileWriter);
-        }
-
         hse.sell();
-        System.out.println(hse.generateReport());
 
-        // Экспорт в консоль в формате Markdown
-        hse.exportReport(ReportFormat.MARKDOWN, new PrintWriter(System.out));
-        // Экспорт в файл в формате MARKDOWN
-        try (FileWriter fileWriter = new FileWriter("reports/report.MD")) {
-            hse.exportReport(ReportFormat.MARKDOWN, fileWriter);
-        }
-
-        // Экспорт в файл в формате JSON
-        try (FileWriter fileWriter = new FileWriter("reports/report.json")) {
-            hse.exportReport(ReportFormat.JSON, fileWriter);
-        }
+        assertThat(customerStorage.getCustomers().get(0).getCar()).isNotNull();
+        assertThat(customerStorage.getCustomers().get(1).getCar()).isNotNull();
+        assertThat(customerStorage.getCustomers().get(2).getCar()).isNotNull();
+        assertThat(customerStorage.getCustomers().get(3).getCar()).isNotNull();
 
 
     }
