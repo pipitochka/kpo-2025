@@ -49,6 +49,14 @@ dependencies {
 	testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	implementation("com.fasterxml.jackson.core:jackson-databind:2.18.2")
+
+	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.16.1")
+
+
+	// Spring Web (включает REST и Tomcat)
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	// Swagger UI и OpenAPI
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
 }
 
 tasks.withType<Test> {

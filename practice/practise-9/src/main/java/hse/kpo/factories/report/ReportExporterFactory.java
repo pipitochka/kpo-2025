@@ -1,5 +1,7 @@
 package hse.kpo.factories.report;
 
+import hse.kpo.domains.exporter.CsvTransportExporter;
+import hse.kpo.domains.exporter.XmlTransportExporter;
 import hse.kpo.domains.reports.JsonReportExporter;
 import hse.kpo.domains.reports.MarkdownReportExporter;
 import hse.kpo.enums.ReportFormat;
