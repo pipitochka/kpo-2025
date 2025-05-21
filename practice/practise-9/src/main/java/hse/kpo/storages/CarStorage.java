@@ -40,13 +40,18 @@ public class CarStorage implements CarProviderInterface {
      * @param carParams car params which used in car constructor.
      * @param <ParamsT> params for constructor.
      */
-    public <ParamsT> void addCar(CarFactoryInterface<ParamsT> carFactory, ParamsT carParams) {
+    public <ParamsT> Car addCar(CarFactoryInterface<ParamsT> carFactory, ParamsT carParams) {
         // создаем автомобиль из переданной фабрики
         var car = carFactory.createCar(
                 carParams, // передаем параметры
                 ++carNumberCounter // передаем номер - номер будет начинаться с 1
         );
 
-        cars.add(car); // добавляем автомобиль
+        cars.add(car);
+        return car;// добавляем автомобиль
+    }
+
+    public boolean addExistingCar(Car car){
+        return cars.add(car);
     }
 }

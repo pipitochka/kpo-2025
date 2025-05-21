@@ -40,13 +40,18 @@ public class ShipStorage implements ShipProviderInterface {
      * @param shipParams params for ship construcor.
      * @param <ParamsT> params for ship construcor.
      */
-    public <ParamsT> void addShip(ShipFactoryInterface<ParamsT> shipFactory, ParamsT shipParams) {
+    public <ParamsT> Ship addShip(ShipFactoryInterface<ParamsT> shipFactory, ParamsT shipParams) {
         // создаем автомобиль из переданной фабрики
         var car = shipFactory.createShip(
                 shipParams, // передаем параметры
                 ++shipNumberCounter // передаем номер - номер будет начинаться с 1
         );
 
-        ships.add(car); // добавляем автомобиль
+        ships.add(car);
+        return car;// добавляем автомобиль
+    }
+
+    public boolean addExistingShip(Ship ship) {
+        return ships.add(ship);
     }
 }
