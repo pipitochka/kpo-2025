@@ -158,17 +158,17 @@ public class Hse implements FacadeIterface {
     }
 
     @Override
-    public List<Car> takeCars() {
+    public List<Car> getCars() {
         return carStorage.getCars();
     }
 
     @Override
-    public List<Ship> takeShips() {
+    public List<Ship> getShips() {
         return shipStorage.getShips();
     }
 
     @Override
-    public List<Customer> takeCustomers() {
+    public List<Customer> getCustomers() {
         return customerStorage.getCustomers();
     }
 }
