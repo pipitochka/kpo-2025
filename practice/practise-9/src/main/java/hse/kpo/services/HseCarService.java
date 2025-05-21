@@ -1,5 +1,6 @@
 package hse.kpo.services;
 
+import hse.kpo.domains.objects.Car;
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.providers.CarProviderInterface;
@@ -39,6 +40,8 @@ public class HseCarService implements Observable {
     private static final Logger logger = LoggerFactory.getLogger(HseCarService.class);
 
     private final CarProviderInterface carProvider;
+
+    public List<Car> takeCars;
 
     private final CustomerProviderInterface customerProvider;
 

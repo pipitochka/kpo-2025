@@ -1,6 +1,7 @@
 package hse.kpo.interfaces;
 
 import hse.kpo.domains.objects.Car;
+import hse.kpo.domains.objects.Customer;
 import hse.kpo.domains.objects.Ship;
 import hse.kpo.domains.reports.Report;
 import hse.kpo.enums.ReportFormat;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
 
 public interface FacadeIterface {
 
@@ -21,4 +23,8 @@ public interface FacadeIterface {
     public Report generateReport();
     public void exportReport(ReportFormat format, Writer writer);
     public void transportReport(ReportFormat format, Writer writer) throws IOException;
+
+    public List<Car> takeCars();
+    public List<Ship> takeShips();
+    public List<Customer> takeCustomers();
 }
