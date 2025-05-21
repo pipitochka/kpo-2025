@@ -18,7 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/customer")
+@RequestMapping("/api/customers")
 @RequiredArgsConstructor
 @Tag(name = "Покупатели", description = "Управление покупателями")
 public class CustomerController {
