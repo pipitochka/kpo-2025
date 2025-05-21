@@ -2,27 +2,27 @@
     <VIN>5</VIN>
     <Type>Car</Type>
     <Engine>
-        <Type>PedalEngine(size=6)</Type>
+        <Type>PEDAL</Type>
     </Engine>
 </Vehicle>
 <Vehicle>
     <VIN>6</VIN>
     <Type>Car</Type>
     <Engine>
-        <Type>PedalEngine(size=6)</Type>
+        <Type>PEDAL</Type>
     </Engine>
 </Vehicle>
 <Vehicle>
     <VIN>7</VIN>
     <Type>Car</Type>
     <Engine>
-        <Type>HandEngine()</Type>
+        <Type>HAND</Type>
     </Engine>
 </Vehicle>
 <Vehicle>
     <VIN>8</VIN>
     <Type>Catamaran</Type>
     <Engine>
-        <Type>HandEngine()</Type>
+        <Type>HAND</Type>
     </Engine>
 </Vehicle>
