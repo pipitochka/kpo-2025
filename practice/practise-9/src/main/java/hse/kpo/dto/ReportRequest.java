@@ -8,13 +8,14 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Getter
 public class ReportRequest {
     @Schema(description = "Тип отчета (json, CSV, Markdown, XML)", example = "CSV")
     @NotNull(message = "Тип отчета обязателен")
-    ReportFormat reportFormat;
+    private final ReportFormat reportFormat;
 
     @Schema(description = "Название файла", example = "transport.json")
     @NotNull(message = "Имя файла обязательно")
-    String filename;
+    private final String filename;
 }

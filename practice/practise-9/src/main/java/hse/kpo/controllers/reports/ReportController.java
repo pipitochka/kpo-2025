@@ -27,7 +27,7 @@ public class ReportController {
     private final FacadeIterface hseFacade;
     private final Hse hse;
 
-    @PostMapping("/reports")
+    @PostMapping()
     public ResponseEntity<Void> createReport(@Valid @RequestBody ReportRequest reportRequest,
                                              BindingResult bindingResult)
     {
