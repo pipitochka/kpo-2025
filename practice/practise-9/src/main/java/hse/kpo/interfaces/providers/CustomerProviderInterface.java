@@ -9,4 +9,6 @@ import java.util.List;
 public interface CustomerProviderInterface {
     List<Customer> getCustomers(); // метод возвращает коллекцию только для чтения,
     // так как мы не хотим давать вызывающему коду возможность изменять список
+
+    public void addCustomer(Customer customer);
 }

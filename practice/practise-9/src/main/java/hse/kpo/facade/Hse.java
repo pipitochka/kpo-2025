@@ -16,6 +16,9 @@ import hse.kpo.factories.ship.FlyingShipFactory;
 import hse.kpo.factories.ship.HandShipFactory;
 import hse.kpo.factories.ship.PedalShipFactory;
 import hse.kpo.interfaces.FacadeIterface;
+import hse.kpo.interfaces.providers.CarProviderInterface;
+import hse.kpo.interfaces.providers.CustomerProviderInterface;
+import hse.kpo.interfaces.providers.ShipProviderInterface;
 import hse.kpo.interfaces.reports.ReportExporter;
 import hse.kpo.interfaces.sales.SalesObserver;
 import hse.kpo.interfaces.transport.Transport;
@@ -45,7 +48,7 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class Hse implements FacadeIterface {
 
-    private final CustomerStorage customerStorage;
+    private final CustomerProviderInterface customerStorage;
     private final HseCarService hseCarService;
     private final HseShipService hseShipService;
     private final PedalCarFactory pedalCarFactory;
@@ -54,8 +57,8 @@ public class Hse implements FacadeIterface {
     private final HandShipFactory handShipFactory;
     private final FlyingCarFactory flyingCarFactory;
     private final FlyingShipFactory flyingShipFactory;
-    private final ShipStorage shipStorage;
-    private final CarStorage carStorage;
+    private final ShipProviderInterface shipStorage;
+    private final CarProviderInterface carStorage;
     private final ReportSalesObserver reportSalesObserver;
     private final CatamaranFactory catamaranFactory;
     private final ReportExporterFactory reportExporterFactory;
@@ -152,5 +155,20 @@ public class Hse implements FacadeIterface {
         } catch (Exception e) {
             throw new RuntimeException();
         }
+    }
+
+    @Override
+    public List<Car> takeCars() {
+        return carStorage.getCars();
+    }
+
+    @Override
+    public List<Ship> takeShips() {
+        return shipStorage.getShips();
+    }
+
+    @Override
+    public List<Customer> takeCustomers() {
+        return customerStorage.getCustomers();
     }
 }

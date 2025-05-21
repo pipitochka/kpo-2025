@@ -33,6 +33,7 @@ public class ShipStorage implements ShipProviderInterface {
         return firstShip.orElse(null);
     }
 
+
     /**
      * function which make and add ship to the pool.
      *
