@@ -24,7 +24,7 @@ public interface FacadeIterface {
     public void exportReport(ReportFormat format, Writer writer);
     public void transportReport(ReportFormat format, Writer writer) throws IOException;
 
-    public List<Car> takeCars();
-    public List<Ship> takeShips();
-    public List<Customer> takeCustomers();
+    public List<Car> getCars();
+    public List<Ship> getShips();
+    public List<Customer> getCustomers();
 }
