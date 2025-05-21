@@ -1,5 +1,7 @@
 package hse.kpo.facade;
 
+import hse.kpo.domains.objects.Car;
+import hse.kpo.domains.objects.Catamaran;
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.domains.objects.Ship;
 import hse.kpo.domains.sales.ReportSalesObserver;
@@ -13,6 +15,7 @@ import hse.kpo.factories.report.TransportExporterFactory;
 import hse.kpo.factories.ship.FlyingShipFactory;
 import hse.kpo.factories.ship.HandShipFactory;
 import hse.kpo.factories.ship.PedalShipFactory;
+import hse.kpo.interfaces.FacadeIterface;
 import hse.kpo.interfaces.reports.ReportExporter;
 import hse.kpo.interfaces.sales.SalesObserver;
 import hse.kpo.interfaces.transport.Transport;
@@ -40,7 +43,7 @@ import java.util.stream.Stream;
  */
 @Component
 @RequiredArgsConstructor
-public class Hse {
+public class Hse implements FacadeIterface {
 
     private final CustomerStorage customerStorage;
     private final HseCarService hseCarService;
@@ -70,48 +73,52 @@ public class Hse {
         hseShipService.addObserver(reportSalesObserver);
     }
 
-    public void addPedalCar(int pedalSize) {
+    public Car addPedalCar(int pedalSize) {
 
-        carStorage.addCar(pedalCarFactory, new PedalEngineParams(pedalSize));
+        return carStorage.addCar(pedalCarFactory, new PedalEngineParams(pedalSize));
     }
 
-    public void addHandCar() {
-        carStorage.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
+    public Car addHandCar() {
+
+        return carStorage.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
     }
 
-    public void addFlyingCar() {
-        carStorage.addCar(flyingCarFactory, EmptyEngineParams.DEFAULT);
+    public Car addFlyingCar() {
+        return carStorage.addCar(flyingCarFactory, EmptyEngineParams.DEFAULT);
     }
 
-    public void addFlyingShip() {
-        shipStorage.addShip(flyingShipFactory, EmptyEngineParams.DEFAULT);
+    public Ship addFlyingShip() {
+
+        return shipStorage.addShip(flyingShipFactory, EmptyEngineParams.DEFAULT);
     }
 
-    public void addHandShip() {
-        shipStorage.addShip(handShipFactory, EmptyEngineParams.DEFAULT);
+    public Ship addHandShip() {
+
+        return shipStorage.addShip(handShipFactory, EmptyEngineParams.DEFAULT);
     }
 
-    public void addPedalShip(int pedalSize) {
-        shipStorage.addShip(pedalShipFactory, new PedalEngineParams(pedalSize));
+    public Ship addPedalShip(int pedalSize) {
+
+        return shipStorage.addShip(pedalShipFactory, new PedalEngineParams(pedalSize));
     }
 
     public void addWilledCatamarand(Ship ship) {
         carStorage.addCar(catamaranFactory, ship);
     }
 
-    public  void addPedalWilledCatamarand(int pedalSize) {
+    public Catamaran addPedalWilledCatamarand(int pedalSize) {
         Ship ship = pedalShipFactory.createShip(new PedalEngineParams(pedalSize), 0);
-        carStorage.addCar(catamaranFactory, ship);
+        return (Catamaran) carStorage.addCar(catamaranFactory, ship);
     }
 
-    public void addHandWilledCatamarand() {
+    public Catamaran addHandWilledCatamarand() {
         Ship ship = handShipFactory.createShip(EmptyEngineParams.DEFAULT, 0);
-        carStorage.addCar(catamaranFactory, ship);
+        return (Catamaran) carStorage.addCar(catamaranFactory, ship);
     }
 
-    public void addFlyingWilledCatamarand() {
+    public Catamaran addFlyingWilledCatamarand() {
         Ship ship = flyingShipFactory.createShip(EmptyEngineParams.DEFAULT, 0);
-        carStorage.addCar(catamaranFactory, ship);
+        return (Catamaran) carStorage.addCar(catamaranFactory, ship);
     }
 
     public void sell() {
