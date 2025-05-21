@@ -27,7 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/cars")
 @RequiredArgsConstructor
-@Tag(name = "Автомобили", description = "Управление транспортными средствами")
+@Tag(name = "Автомобили", description = "Отчеты для системы транспорта")
 public class CarController {
     private final CarStorage carStorage;
     private final HseCarService carService;

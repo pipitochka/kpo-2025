@@ -1,0 +1,49 @@
+package hse.kpo.controllers.reports;
+
+import hse.kpo.dto.ReportRequest;
+import hse.kpo.enums.ReportFormat;
+import hse.kpo.facade.Hse;
+import hse.kpo.interfaces.FacadeIterface;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.io.FileWriter;
+
+@RestController
+@RequestMapping("/api/reports")
+@RequiredArgsConstructor
+@Tag(name = "Отчеты", description = "Управление транспортными средствами")
+public class ReportController {
+
+    private final FacadeIterface hseFacade;
+    private final Hse hse;
+
+    @PostMapping("/reports")
+    public ResponseEntity<Void> createReport(@Valid @RequestBody ReportRequest reportRequest,
+                                             BindingResult bindingResult)
+    {
+        if (bindingResult.hasErrors()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    bindingResult.getAllErrors().get(0).getDefaultMessage());
+        }
+
+        try (FileWriter fileWriter = new FileWriter("reports/" + reportRequest.getFilename())) {
+            hseFacade.transportReport(reportRequest.getReportFormat(), fileWriter);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    bindingResult.getAllErrors().get(0).getDefaultMessage());
+        }
+        return ResponseEntity.ok().build();
+    };
+}
