@@ -26,4 +26,9 @@ public class HandEngine implements EngineInterface {
             case null, default -> throw new RuntimeException("This type of production doesn't exist");
         };
     }
+
+    @Override
+    public String toString() {
+        return "HAND";
+    }
 }

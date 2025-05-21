@@ -117,9 +117,9 @@ public class ShipTest {
         assertThat(report.content().contains("Maksim")).isTrue();
         assertThat(report.content().contains("Petya")).isTrue();
         assertThat(report.content().contains("Ilya")).isTrue();;
-        assertThat(report.content().contains("Ship(engine=FlyEngine(), vin=1)")).isTrue();
-        assertThat(report.content().contains("Ship(engine=HandEngine(), vin=2)")).isTrue();
-        assertThat(report.content().contains("Ship(engine=PedalEngine(size=3), vin=3)")).isTrue();
+        assertThat(report.content().contains("Ship(engine=LEVITATION, vin=1)")).isTrue();
+        assertThat(report.content().contains("Ship(engine=HAND, vin=2)")).isTrue();
+        assertThat(report.content().contains("Ship(engine=PEDAL, vin=3)")).isTrue();
     }
 
     @Test
@@ -155,11 +155,11 @@ public class ShipTest {
         assertThat(report.content().contains("Maksim")).isTrue();
         assertThat(report.content().contains("Petya")).isTrue();
         assertThat(report.content().contains("Ilya")).isTrue();;
-        assertThat(report.content().contains("Ship(engine=FlyEngine(), vin=1)")).isTrue();
-        assertThat(report.content().contains("Ship(engine=HandEngine(), vin=2)")).isTrue();
-        assertThat(report.content().contains("Ship(engine=PedalEngine(size=3), vin=3)")).isTrue();
-        assertThat(report.content().contains("Car(engine=HandEngine(), vin=3)")).isTrue();
-        assertThat(report.content().contains("Car(engine=PedalEngine(size=6), vin=2)")).isTrue();
-        assertThat(report.content().contains("Car(engine=FlyEngine(), vin=1)")).isTrue();
+        assertThat(report.content().contains("Ship(engine=LEVITATION, vin=1)")).isTrue();
+        assertThat(report.content().contains("Ship(engine=HAND, vin=2)")).isTrue();
+        assertThat(report.content().contains("Ship(engine=PEDAL, vin=3)")).isTrue();
+        assertThat(report.content().contains("Car(engine=HAND, vin=3)")).isTrue();
+        assertThat(report.content().contains("Car(engine=PEDAL, vin=2)")).isTrue();
+        assertThat(report.content().contains("Car(engine=LEVITATION, vin=1)")).isTrue();
     }
 }

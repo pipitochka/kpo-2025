@@ -77,10 +77,10 @@ public class ReportTests {
         assertThat(report.content().contains("Maksim")).isTrue();
         assertThat(report.content().contains("Petya")).isTrue();
         assertThat(report.content().contains("Ilya")).isTrue();;
-        assertThat(report.content().contains("Car(engine=PedalEngine(size=6), vin=3)")).isTrue();
-        assertThat(report.content().contains("Car(engine=PedalEngine(size=6), vin=2)")).isTrue();
-        assertThat(report.content().contains("Car(engine=HandEngine(), vin=1)")).isTrue();
-        assertThat(report.content().contains("Car(engine=FlyEngine(), vin=4)")).isTrue();
+        assertThat(report.content().contains("Car(engine=PEDAL, vin=3)")).isTrue();
+        assertThat(report.content().contains("Car(engine=PEDAL, vin=2)")).isTrue();
+        assertThat(report.content().contains("Car(engine=HAND, vin=1)")).isTrue();
+        assertThat(report.content().contains("Car(engine=LEVITATION, vin=4)")).isTrue();
 
     }
 }

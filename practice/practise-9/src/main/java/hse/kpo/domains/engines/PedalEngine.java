@@ -32,4 +32,9 @@ public class PedalEngine implements EngineInterface {
     public PedalEngine(int size) {
         this.size = size;
     }
+
+    @Override
+    public String toString() {
+        return "PEDAL";
+    }
 }

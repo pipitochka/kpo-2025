@@ -22,4 +22,9 @@ public class FlyEngine implements EngineInterface {
     public boolean isCompatible(Customer customer, ProductionTypes productionTypes) {
         return customer.getIq() > 300;
     }
+
+    @Override
+    public String toString() {
+        return "LEVITATION";
+    }
 }
