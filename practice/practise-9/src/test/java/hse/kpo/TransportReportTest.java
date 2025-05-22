@@ -14,14 +14,14 @@ import hse.kpo.services.HseShipService;
 import hse.kpo.storages.CarStorage;
 import hse.kpo.storages.CustomerStorage;
 import hse.kpo.storages.ShipStorage;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * Transport reports test.

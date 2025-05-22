@@ -18,7 +18,7 @@ group = "hse"
 version = "0.0.1-SNAPSHOT"
 
 checkstyle {
-	toolVersion = "10.13.0"
+	toolVersion = "10.12.1"
 	isIgnoreFailures = false
 	maxWarnings = 0
 	maxErrors = 0

@@ -1,7 +1,8 @@
 package hse.kpo;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import hse.kpo.domains.sales.ReportSalesObserver;
-import hse.kpo.enums.ReportFormat;
 import hse.kpo.facade.Hse;
 import hse.kpo.factories.car.FlyingCarFactory;
 import hse.kpo.factories.car.HandCarFactory;
@@ -14,16 +15,14 @@ import hse.kpo.services.HseShipService;
 import hse.kpo.storages.CarStorage;
 import hse.kpo.storages.CustomerStorage;
 import hse.kpo.storages.ShipStorage;
+import java.io.IOException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 
 /**
  * Facade test.
