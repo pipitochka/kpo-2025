@@ -4,6 +4,7 @@ import hse.kpo.domains.objects.Car;
 import hse.kpo.domains.objects.Catamaran;
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.domains.objects.Ship;
+import hse.kpo.domains.reports.Report;
 import hse.kpo.domains.sales.ReportSalesObserver;
 import hse.kpo.enums.ReportFormat;
 import hse.kpo.factories.car.FlyingCarFactory;
@@ -15,38 +16,32 @@ import hse.kpo.factories.report.TransportExporterFactory;
 import hse.kpo.factories.ship.FlyingShipFactory;
 import hse.kpo.factories.ship.HandShipFactory;
 import hse.kpo.factories.ship.PedalShipFactory;
-import hse.kpo.interfaces.FacadeIterface;
+import hse.kpo.interfaces.FacadeInterface;
 import hse.kpo.interfaces.providers.CarProviderInterface;
 import hse.kpo.interfaces.providers.CustomerProviderInterface;
 import hse.kpo.interfaces.providers.ShipProviderInterface;
 import hse.kpo.interfaces.reports.ReportExporter;
+import hse.kpo.interfaces.reports.TransportExporter;
 import hse.kpo.interfaces.sales.SalesObserver;
 import hse.kpo.interfaces.transport.Transport;
-import hse.kpo.interfaces.reports.TransportExporter;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
-import hse.kpo.domains.reports.Report;
 import hse.kpo.services.HseCarService;
 import hse.kpo.services.HseShipService;
-import hse.kpo.storages.CarStorage;
-import hse.kpo.storages.CustomerStorage;
-import hse.kpo.storages.ShipStorage;
 import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 import java.util.stream.Stream;
-
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 /**
  * facade for a program.
  */
 @Component
 @RequiredArgsConstructor
-public class Hse implements FacadeIterface {
+public class Hse implements FacadeInterface {
 
     private final CustomerProviderInterface customerStorage;
     private final HseCarService hseCarService;
@@ -133,6 +128,12 @@ public class Hse implements FacadeIterface {
         return reportSalesObserver.buildReport();
     }
 
+    /**
+     * function to make export report.
+     *
+     * @param format ReportFormat.
+     * @param writer Writer.
+     */
     public void exportReport(ReportFormat format, Writer writer) {
         Report report = salesObserver.buildReport();
         ReportExporter exporter = reportExporterFactory.create(format);
@@ -144,6 +145,13 @@ public class Hse implements FacadeIterface {
         }
     }
 
+    /**
+     * function to make transport report.
+     *
+     * @param format ReportFormat.
+     * @param writer Writer.
+     * @throws IOException if can not be exported.
+     */
     public void transportReport(ReportFormat format, Writer writer) throws IOException {
         List<Transport> transports = Stream.concat(
                         carStorage.getCars().stream(),

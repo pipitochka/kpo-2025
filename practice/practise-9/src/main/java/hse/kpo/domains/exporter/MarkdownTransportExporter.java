@@ -1,12 +1,14 @@
 package hse.kpo.domains.exporter;
 
-import hse.kpo.interfaces.transport.Transport;
 import hse.kpo.interfaces.reports.TransportExporter;
-
+import hse.kpo.interfaces.transport.Transport;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
+/**
+ * class of markdown transport exporter.
+ */
 public class MarkdownTransportExporter implements TransportExporter {
 
     @Override
@@ -21,7 +23,7 @@ public class MarkdownTransportExporter implements TransportExporter {
             <Type>%s</Type>
         </Engine>
     </Vehicle>
-    """,
+                    """,
                         transport.getVin(),
                         transport.getTransportType(),
                         transport.getEngineType()

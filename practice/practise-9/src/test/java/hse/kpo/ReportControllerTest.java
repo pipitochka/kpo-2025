@@ -5,7 +5,7 @@ import hse.kpo.dto.CarRequest;
 import hse.kpo.dto.CustomerRequest;
 import hse.kpo.dto.ReportRequest;
 import hse.kpo.enums.ReportFormat;
-import hse.kpo.interfaces.FacadeIterface;
+import hse.kpo.interfaces.FacadeInterface;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ReportControllerTest {
 
     @Autowired
-    private FacadeIterface facade;
+    private FacadeInterface facade;
 
     @Autowired
     private MockMvc mockMvc;

@@ -1,10 +1,9 @@
 package hse.kpo.factories.catamaran;
 
 import hse.kpo.domains.objects.Car;
-import hse.kpo.domains.objects.Ship;
 import hse.kpo.domains.objects.Catamaran;
+import hse.kpo.domains.objects.Ship;
 import hse.kpo.interfaces.factories.CarFactoryInterface;
-import hse.kpo.interfaces.factories.CatamaranFactoryInterface;
 import org.springframework.stereotype.Component;
 
 /**

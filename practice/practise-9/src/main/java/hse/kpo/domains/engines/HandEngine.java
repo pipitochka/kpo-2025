@@ -9,7 +9,6 @@ import lombok.ToString;
 /**
  * class of hand engine.
  */
-@ToString
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class HandEngine implements EngineInterface {
 

@@ -6,6 +6,9 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 
+/**
+ * class of customer request.
+ */
 public record ShipRequest(
         @Schema(description = "Тип двигателя (PEDAL, HAND, LEVITATION)", example = "PEDAL")
         @Pattern(regexp = "PEDAL|HAND|LEVITATION", message = "Допустимые значения: PEDAL, HAND, LEVITATION")

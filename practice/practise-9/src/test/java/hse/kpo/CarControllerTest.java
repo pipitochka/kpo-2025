@@ -6,7 +6,7 @@ import hse.kpo.controllers.car.CarController;
 import hse.kpo.domains.objects.Car;
 import hse.kpo.dto.CarRequest;
 import hse.kpo.dto.CustomerRequest;
-import hse.kpo.interfaces.FacadeIterface;
+import hse.kpo.interfaces.FacadeInterface;
 import hse.kpo.services.HseCarService;
 import hse.kpo.storages.CarStorage;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CarControllerTest {
 
     @Autowired
-    private FacadeIterface facade;
+    private FacadeInterface facade;
 
     @Autowired
     private MockMvc mockMvc;

@@ -5,26 +5,38 @@ import hse.kpo.domains.objects.Customer;
 import hse.kpo.domains.objects.Ship;
 import hse.kpo.domains.reports.Report;
 import hse.kpo.enums.ReportFormat;
-import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
-public interface FacadeIterface {
+/**
+ * class of facade interface.
+ */
+public interface FacadeInterface {
 
     public Car addPedalCar(int pedalSize);
+
     public Car addHandCar();
+
     public Car addFlyingCar();
+
     public Ship addFlyingShip();
+
     public Ship addHandShip();
+
     public Ship addPedalShip(int pedalSize);
+
     public void sell();
+
     public Report generateReport();
+
     public void exportReport(ReportFormat format, Writer writer);
+
     public void transportReport(ReportFormat format, Writer writer) throws IOException;
 
     public List<Car> getCars();
+
     public List<Ship> getShips();
+
     public List<Customer> getCustomers();
 }

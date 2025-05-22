@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hse.kpo.dto.CarRequest;
 import hse.kpo.dto.CustomerRequest;
 import hse.kpo.dto.ShipRequest;
-import hse.kpo.interfaces.FacadeIterface;
+import hse.kpo.interfaces.FacadeInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ShipControllerTest {
 
     @Autowired
-    private FacadeIterface facade;
+    private FacadeInterface facade;
 
     @Autowired
     private MockMvc mockMvc;

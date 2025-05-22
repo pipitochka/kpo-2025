@@ -8,8 +8,18 @@ import hse.kpo.enums.ReportFormat;
 import hse.kpo.interfaces.reports.TransportExporter;
 import org.springframework.stereotype.Component;
 
+/**
+ * class of transport exporter factory.
+ */
 @Component
 public class TransportExporterFactory {
+
+    /**
+     * function to create report.
+     *
+     * @param format ReportFormat.
+     * @return TransportExporter.
+     */
     public TransportExporter create(ReportFormat format) {
         return switch (format) {
             case JSON -> new JsonTransportExporter();

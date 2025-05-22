@@ -5,10 +5,19 @@ import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * class of swagger configuration.
+ */
 @Configuration
 public class SwaggerConfig {
+
+    /**
+     * function to make OpenAPI.
+     *
+     * @return OpenAPI.
+     */
     @Bean
-    public OpenAPI customOpenAPI() {
+    public OpenAPI customOpenApi() {
         return new OpenAPI()
                 .info(new Info()
                         .title("HSE Car Service API")

@@ -49,7 +49,7 @@ public class ShipStorage implements ShipProviderInterface {
         );
 
         ships.add(car);
-        return car;// добавляем автомобиль
+        return car; // добавляем автомобиль
     }
 
     public boolean addExistingShip(Ship ship) {
