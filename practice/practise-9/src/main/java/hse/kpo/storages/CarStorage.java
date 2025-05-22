@@ -48,10 +48,10 @@ public class CarStorage implements CarProviderInterface {
         );
 
         cars.add(car);
-        return car;// добавляем автомобиль
+        return car; // добавляем автомобиль
     }
 
-    public boolean addExistingCar(Car car){
+    public boolean addExistingCar(Car car) {
         return cars.add(car);
     }
 }

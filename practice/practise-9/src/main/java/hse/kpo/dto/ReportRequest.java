@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * class of customer request.
+ */
 @RequiredArgsConstructor
 @Getter
 public class ReportRequest {

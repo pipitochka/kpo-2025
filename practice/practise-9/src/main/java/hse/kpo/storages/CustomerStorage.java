@@ -4,8 +4,6 @@ import hse.kpo.domains.objects.Customer;
 import hse.kpo.interfaces.providers.CustomerProviderInterface;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 /**

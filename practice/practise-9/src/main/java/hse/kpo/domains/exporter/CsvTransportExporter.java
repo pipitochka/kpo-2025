@@ -2,11 +2,13 @@ package hse.kpo.domains.exporter;
 
 import hse.kpo.interfaces.reports.TransportExporter;
 import hse.kpo.interfaces.transport.Transport;
-
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
+/**
+ * class of csv transport exporter.
+ */
 public class CsvTransportExporter implements TransportExporter {
     @Override
     public void export(List<Transport> transports, Writer writer) throws IOException {

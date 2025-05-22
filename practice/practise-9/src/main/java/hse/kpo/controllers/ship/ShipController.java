@@ -9,7 +9,7 @@ import hse.kpo.dto.CarRequest;
 import hse.kpo.dto.ShipRequest;
 import hse.kpo.enums.EngineTypes;
 import hse.kpo.facade.Hse;
-import hse.kpo.interfaces.FacadeIterface;
+import hse.kpo.interfaces.FacadeInterface;
 import hse.kpo.interfaces.engines.EngineInterface;
 import hse.kpo.services.HseShipService;
 import hse.kpo.storages.ShipStorage;
@@ -17,17 +17,27 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-
+/**
+ * class of ship controller.
+ */
 @Validated
 @RestController
 @RequestMapping("api/ships")
@@ -36,8 +46,14 @@ import java.util.List;
 public class ShipController {
     private final ShipStorage shipStorage;
     private final HseShipService hseShipService;
-    private final FacadeIterface hseFacade;
+    private final FacadeInterface hseFacade;
 
+    /**
+     * function to take ship by vim.
+     *
+     * @param vin of ship.
+     * @return ship or not found if ship not found.
+     */
     @GetMapping("/{vin}")
     @Operation(summary = "Получить корабль по VIN")
     public ResponseEntity<Ship> getShip(@PathVariable int vin) {
@@ -49,6 +65,13 @@ public class ShipController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * function to create ship.
+     *
+     * @param request information to create ship.
+     * @param bindingResult information about request if it corrects.
+     * @return information about ship if request correct else bad request.
+     */
     @PostMapping
     @Operation(summary = "Создать корабль",
             description = "Для PEDAL требуется pedalSize (1-15)")
@@ -84,6 +107,12 @@ public class ShipController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * function to sell ship by vim.
+     *
+     * @param vin of car.
+     * @return ok if it sold else not found.
+     */
     @PostMapping("/sell/{vin}")
     @Operation(summary = "Продать корабли по VIN")
     public ResponseEntity<Void> sellShip(@PathVariable int vin) {
@@ -109,7 +138,14 @@ public class ShipController {
         };
         return new Ship(engine, vin);
     }
-    
+
+    /**
+     * function to update information about ship.
+     *
+     * @param vin of ship.
+     * @param request new information.
+     * @return new ship information or not found if car will not be found.
+     */
     @PutMapping("/{vin}")
     @Operation(summary = "Обновить корабли")
     public ResponseEntity<Ship> updateShip(
@@ -135,11 +171,18 @@ public class ShipController {
         return removed ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
+    /**
+     * function to get all ships with filters.
+     *
+     * @param engineType for filter may be null.
+     * @param minVin for filter may be null.
+     * @return list of ships with filter.
+     */
     @GetMapping
     @Operation(summary = "Получить все корабли с фильтрацией",
             parameters = {
-                    @Parameter(name = "engineType", description = "Фильтр по типу двигателя"),
-                    @Parameter(name = "minVin", description = "Минимальный VIN")
+                @Parameter(name = "engineType", description = "Фильтр по типу двигателя"),
+                @Parameter(name = "minVin", description = "Минимальный VIN")
             })
     public List<Ship> getAllShips(
             @RequestParam(required = false) String engineType,

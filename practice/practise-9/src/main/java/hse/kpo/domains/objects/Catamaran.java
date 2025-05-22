@@ -18,7 +18,7 @@ public class Catamaran extends Car {
     }
 
     @Override
-    public String getTransportType(){
+    public String getTransportType() {
         return "Catamaran";
     }
 }

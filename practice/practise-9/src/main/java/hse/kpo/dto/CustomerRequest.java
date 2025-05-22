@@ -7,6 +7,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * class of customer request.
+ */
 @Getter
 @RequiredArgsConstructor
 public class CustomerRequest {

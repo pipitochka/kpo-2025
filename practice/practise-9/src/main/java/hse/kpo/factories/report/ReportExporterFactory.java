@@ -8,8 +8,18 @@ import hse.kpo.enums.ReportFormat;
 import hse.kpo.interfaces.reports.ReportExporter;
 import org.springframework.stereotype.Component;
 
+/**
+ * class of report exporter factory.
+ */
 @Component
 public class ReportExporterFactory {
+
+    /**
+     * function to create report.
+     *
+     * @param format ReportFormat.
+     * @return ReportExporter.
+     */
     public ReportExporter create(ReportFormat format) {
         return switch (format) {
             case JSON -> new JsonReportExporter();

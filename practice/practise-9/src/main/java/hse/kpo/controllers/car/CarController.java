@@ -6,8 +6,7 @@ import hse.kpo.domains.engines.PedalEngine;
 import hse.kpo.domains.objects.Car;
 import hse.kpo.dto.CarRequest;
 import hse.kpo.enums.EngineTypes;
-import hse.kpo.facade.Hse;
-import hse.kpo.interfaces.FacadeIterface;
+import hse.kpo.interfaces.FacadeInterface;
 import hse.kpo.interfaces.engines.EngineInterface;
 import hse.kpo.services.HseCarService;
 import hse.kpo.storages.CarStorage;
@@ -15,15 +14,25 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-
+/**
+ * class of car controller.
+ */
 @RestController
 @RequestMapping("/api/cars")
 @RequiredArgsConstructor
@@ -31,8 +40,14 @@ import java.util.List;
 public class CarController {
     private final CarStorage carStorage;
     private final HseCarService carService;
-    private final FacadeIterface hseFacade;
+    private final FacadeInterface hseFacade;
 
+    /**
+     * function to take car by vim.
+     *
+     * @param vin of car.
+     * @return car or not found if car not found.
+     */
     @GetMapping("/{vin}")
     @Operation(summary = "Получить автомобиль по VIN")
     public ResponseEntity<Car> getCarByVin(@PathVariable int vin) {
@@ -43,6 +58,13 @@ public class CarController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * function to create car.
+     *
+     * @param request information to create car.
+     * @param bindingResult information about request if it corrects.
+     * @return information about car if request correct else bad request.
+     */
     @PostMapping
     @Operation(summary = "Создать автомобиль",
             description = "Для PEDAL требуется pedalSize (1-15)")
@@ -78,6 +100,12 @@ public class CarController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * function to sell car by vim.
+     *
+     * @param vin of car.
+     * @return ok if it sold else not found.
+     */
     @PostMapping("/sell/{vin}")
     @Operation(summary = "Продать автомобиль по VIN")
     public ResponseEntity<Void> sellCar(@PathVariable int vin) {
@@ -95,6 +123,13 @@ public class CarController {
         return ResponseEntity.notFound().build();
     }
 
+    /**
+     * function to update information about car.
+     *
+     * @param vin of car.
+     * @param request new information.
+     * @return new car information or not found if car will not be found.
+     */
     @PutMapping("/{vin}")
     @Operation(summary = "Обновить автомобиль")
     public ResponseEntity<Car> updateCar(
@@ -113,6 +148,7 @@ public class CarController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+
     @DeleteMapping("/{vin}")
     @Operation(summary = "Удалить автомобиль")
     public ResponseEntity<Void> deleteCar(@PathVariable int vin) {
@@ -120,11 +156,18 @@ public class CarController {
         return removed ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
+    /**
+     * function to get all cars with filters.
+     *
+     * @param engineType for filter may be null.
+     * @param minVin for filter may be null.
+     * @return list of cars.
+     */
     @GetMapping
     @Operation(summary = "Получить все автомобили с фильтрацией",
             parameters = {
-                    @Parameter(name = "engineType", description = "Фильтр по типу двигателя"),
-                    @Parameter(name = "minVin", description = "Минимальный VIN")
+                @Parameter(name = "engineType", description = "Фильтр по типу двигателя"),
+                @Parameter(name = "minVin", description = "Минимальный VIN")
             })
     public List<Car> getAllCars(
             @RequestParam(required = false) String engineType,
