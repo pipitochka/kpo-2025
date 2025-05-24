@@ -1,7 +1,6 @@
 package hse.kpo.facade;
 
 import hse.kpo.domains.objects.Car;
-import hse.kpo.domains.objects.Catamaran;
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.domains.objects.Ship;
 import hse.kpo.domains.reports.Report;
@@ -10,7 +9,6 @@ import hse.kpo.enums.ReportFormat;
 import hse.kpo.factories.car.FlyingCarFactory;
 import hse.kpo.factories.car.HandCarFactory;
 import hse.kpo.factories.car.PedalCarFactory;
-import hse.kpo.factories.catamaran.CatamaranFactory;
 import hse.kpo.factories.report.ReportExporterFactory;
 import hse.kpo.factories.report.TransportExporterFactory;
 import hse.kpo.factories.ship.FlyingShipFactory;
@@ -55,7 +53,6 @@ public class Hse implements FacadeInterface {
     private final ShipProviderInterface shipStorage;
     private final CarProviderInterface carStorage;
     private final ReportSalesObserver reportSalesObserver;
-    private final CatamaranFactory catamaranFactory;
     private final ReportExporterFactory reportExporterFactory;
     private final TransportExporterFactory transportExporterFactory;
     private final SalesObserver salesObserver;
@@ -100,24 +97,6 @@ public class Hse implements FacadeInterface {
         return shipStorage.addShip(pedalShipFactory, new PedalEngineParams(pedalSize));
     }
 
-    public void addWilledCatamarand(Ship ship) {
-        carStorage.addCar(catamaranFactory, ship);
-    }
-
-    public Catamaran addPedalWilledCatamarand(int pedalSize) {
-        Ship ship = pedalShipFactory.createShip(new PedalEngineParams(pedalSize), 0);
-        return (Catamaran) carStorage.addCar(catamaranFactory, ship);
-    }
-
-    public Catamaran addHandWilledCatamarand() {
-        Ship ship = handShipFactory.createShip(EmptyEngineParams.DEFAULT, 0);
-        return (Catamaran) carStorage.addCar(catamaranFactory, ship);
-    }
-
-    public Catamaran addFlyingWilledCatamarand() {
-        Ship ship = flyingShipFactory.createShip(EmptyEngineParams.DEFAULT, 0);
-        return (Catamaran) carStorage.addCar(catamaranFactory, ship);
-    }
 
     public void sell() {
         hseCarService.sellCars();

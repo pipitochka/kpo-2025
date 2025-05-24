@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * main class to entry in program.
  */
 @SpringBootApplication
-public class KpoApplication {
+public class
+KpoApplication {
     /**
      * entry point of program.
      *
