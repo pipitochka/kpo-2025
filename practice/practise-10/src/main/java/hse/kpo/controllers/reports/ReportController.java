@@ -1,7 +1,6 @@
 package hse.kpo.controllers.reports;
 
-import hse.kpo.dto.ReportRequest;
-import hse.kpo.enums.ReportFormat;
+import hse.kpo.dto.request.ReportRequest;
 import hse.kpo.facade.Hse;
 import hse.kpo.interfaces.FacadeInterface;
 import io.swagger.v3.oas.annotations.tags.Tag;

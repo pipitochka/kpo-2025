@@ -8,9 +8,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hse.kpo.dto.CarRequest;
-import hse.kpo.dto.CustomerRequest;
-import hse.kpo.dto.ShipRequest;
+import hse.kpo.dto.request.CarRequest;
+import hse.kpo.dto.request.CustomerRequest;
+import hse.kpo.dto.request.ShipRequest;
 import hse.kpo.interfaces.FacadeInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

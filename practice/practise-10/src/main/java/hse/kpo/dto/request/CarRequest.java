@@ -1,4 +1,4 @@
-package hse.kpo.dto;
+package hse.kpo.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;
@@ -7,9 +7,12 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 
 /**
- * class of customer request.
+ * record of car request.
+ *
+ * @param engineType type of engine.
+ * @param pedalSize int size of pedal.
  */
-public record ShipRequest(
+public record CarRequest(
         @Schema(description = "Тип двигателя (PEDAL, HAND, LEVITATION)", example = "PEDAL")
         @Pattern(regexp = "PEDAL|HAND|LEVITATION", message = "Допустимые значения: PEDAL, HAND, LEVITATION")
         String engineType,

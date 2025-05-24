@@ -9,7 +9,6 @@ import lombok.ToString;
 /**
  * class of pedal engine.
  */
-@ToString
 @Getter
 public class PedalEngine implements EngineInterface {
     private final int size;

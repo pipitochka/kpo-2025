@@ -10,14 +10,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hse.kpo.dto.CarRequest;
-import hse.kpo.dto.CustomerRequest;
-import hse.kpo.dto.ReportRequest;
+import hse.kpo.dto.request.CarRequest;
+import hse.kpo.dto.request.ReportRequest;
 import hse.kpo.enums.ReportFormat;
 import hse.kpo.interfaces.FacadeInterface;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

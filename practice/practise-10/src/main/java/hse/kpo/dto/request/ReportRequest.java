@@ -1,11 +1,9 @@
-package hse.kpo.dto;
+package hse.kpo.dto.request;
 
 import hse.kpo.enums.ReportFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**

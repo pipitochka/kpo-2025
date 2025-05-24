@@ -1,5 +1,6 @@
 package hse.kpo;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -8,10 +9,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hse.kpo.dto.CarRequest;
-import hse.kpo.dto.CustomerRequest;
+import hse.kpo.dto.request.CarRequest;
+import hse.kpo.dto.request.CustomerRequest;
+import hse.kpo.dto.response.CarResponse;
+import hse.kpo.enums.EngineTypes;
 import hse.kpo.interfaces.FacadeInterface;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -159,5 +163,23 @@ public class CarControllerTest {
 
         mockMvc.perform(get("/api/cars")).andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(0));
+    }
+
+    @Test
+    @DisplayName("Создание педального автомобиля с валидными параметрами")
+    void createPedalCar_ValidData_Returns201() throws Exception {
+        CarRequest request =new CarRequest("PEDAL", 10);
+
+        String responseJson = mockMvc.perform(post("/api/cars")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isCreated())
+                .andReturn().getResponse().getContentAsString();
+
+        CarResponse response = objectMapper.readValue(responseJson, CarResponse.class);
+        assertAll(
+                () -> assertNotNull(response.vin(), "VIN должен быть присвоен"),
+                () -> assertEquals(EngineTypes.PEDAL.name(), response.engineType(), "Тип двигателя должен быть PEDAL")
+        );
     }
 }
