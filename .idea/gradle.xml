@@ -11,18 +11,10 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/practice/practise-10" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/practice/practise-11" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/practice/practise-10" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/practice/practise-9" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/practice/practise-9" />
+            <option value="$PROJECT_DIR$/practice/practise-11" />
           </set>
         </option>
       </GradleProjectSettings>
