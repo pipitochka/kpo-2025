@@ -1,6 +1,8 @@
 package hse.kpo;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -168,7 +170,7 @@ public class CarControllerTest {
     @Test
     @DisplayName("Создание педального автомобиля с валидными параметрами")
     void createPedalCar_ValidData_Returns201() throws Exception {
-        CarRequest request =new CarRequest("PEDAL", 10);
+        CarRequest request = new CarRequest("PEDAL", 10);
 
         String responseJson = mockMvc.perform(post("/api/cars")
                         .contentType(MediaType.APPLICATION_JSON)
