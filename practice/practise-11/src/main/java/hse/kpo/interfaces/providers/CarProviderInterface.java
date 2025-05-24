@@ -13,5 +13,5 @@ public interface CarProviderInterface {
 
     public List<Car> getCars();
 
-    public <ParamsT> Car addCar(CarFactoryInterface<ParamsT> carFactory, ParamsT carParams);
+    public <T> Car addCar(CarFactoryInterface<T> carFactory, T carParams);
 }

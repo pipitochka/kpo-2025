@@ -16,12 +16,11 @@ public class FlyingCarFactory implements CarFactoryInterface<EmptyEngineParams> 
      * Создает фабрику летающих бибик.
      *
      * @param carParams params which will be used in car constructor.
-     * @param carNumber unique number of a car.
      */
     @Override
-    public Car createCar(EmptyEngineParams carParams, int carNumber) {
+    public Car create(EmptyEngineParams carParams) {
         var engine = new FlyEngine();
 
-        return new Car(carNumber, engine);
+        return new Car(engine);
     }
 }

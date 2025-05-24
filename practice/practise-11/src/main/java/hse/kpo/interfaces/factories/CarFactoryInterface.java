@@ -5,8 +5,8 @@ import hse.kpo.domains.objects.Car;
 /**
  * inteface of car factory.
  *
- * @param <ParamsT> params which used to make a car.
+ * @param <T> params which used to make a car.
  */
-public interface CarFactoryInterface<ParamsT> {
-    Car createCar(ParamsT carParams, int carNumber);
+public interface CarFactoryInterface<T> {
+    Car create(T parameters);
 }
