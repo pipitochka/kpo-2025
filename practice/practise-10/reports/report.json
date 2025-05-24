@@ -1,1 +1,1 @@
-[{"engine":{"size":6},"vin":5,"transportType":"Car","engineType":"PEDAL"},{"engine":{"size":6},"vin":6,"transportType":"Car","engineType":"PEDAL"},{"engine":{},"vin":7,"transportType":"Car","engineType":"HAND"},{"engine":{},"vin":8,"transportType":"Catamaran","engineType":"HAND"}]
+[{"engine":{"size":6},"vin":5,"engineType":"PEDAL","transportType":"Car"},{"engine":{"size":6},"vin":6,"engineType":"PEDAL","transportType":"Car"},{"engine":{},"vin":7,"engineType":"HAND","transportType":"Car"},{"engine":{},"vin":8,"engineType":"HAND","transportType":"Catamaran"}]

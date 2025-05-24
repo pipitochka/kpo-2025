@@ -9,7 +9,6 @@ import lombok.ToString;
 /**
  * class of flying engine.
  */
-@ToString
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class FlyEngine implements EngineInterface {
 

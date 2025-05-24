@@ -4,7 +4,7 @@ import hse.kpo.domains.engines.FlyEngine;
 import hse.kpo.domains.engines.HandEngine;
 import hse.kpo.domains.engines.PedalEngine;
 import hse.kpo.domains.objects.Car;
-import hse.kpo.dto.CarRequest;
+import hse.kpo.dto.request.CarRequest;
 import hse.kpo.enums.EngineTypes;
 import hse.kpo.interfaces.FacadeInterface;
 import hse.kpo.interfaces.engines.EngineInterface;
