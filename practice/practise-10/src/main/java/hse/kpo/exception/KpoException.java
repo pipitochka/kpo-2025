@@ -2,6 +2,9 @@ package hse.kpo.exception;
 
 import lombok.Getter;
 
+/**
+ * class of exceptions.
+ */
 @Getter
 public class KpoException extends RuntimeException {
     private final int code;
