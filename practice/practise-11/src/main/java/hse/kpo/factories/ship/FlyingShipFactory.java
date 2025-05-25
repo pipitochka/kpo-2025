@@ -11,11 +11,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class FlyingShipFactory implements ShipFactoryInterface<EmptyEngineParams> {
+
     @Override
-    public Ship createShip(EmptyEngineParams shipParams, int shipNumber) {
+    public Ship create(EmptyEngineParams shipParams) {
         var engine = new FlyEngine();
 
-        return new Ship(engine, shipNumber);
+        return new Ship(engine);
     }
 
 }

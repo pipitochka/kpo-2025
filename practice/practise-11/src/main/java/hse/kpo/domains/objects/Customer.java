@@ -1,31 +1,47 @@
 package hse.kpo.domains.objects;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 
 /**
  * class of customer.
  */
 @Getter
+@Setter
+@Entity
+@Table(name = "customers")
+@NoArgsConstructor
 @ToString
 public class Customer {
-    private final String name;
 
-    private final int legPower;
-
-    private final int handPower;
-
-    @Setter
     @Getter
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "legPower")
+    private int legPower;
+
+    @Column(name = "handPower")
+    private int handPower;
+
+    @Column(name = "iq")
+    private int iq;
+
+    @Getter
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car")
     private Car car;
 
-    @Setter
     @Getter
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ship")
     private Ship ship;
 
-    @Getter
-    private final int iq;
+
 
     /**
      * Constructor with iq.

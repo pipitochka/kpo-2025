@@ -13,7 +13,6 @@ import lombok.ToString;
 /**
  * class of pedal engine.
  */
-@ToString
 @Getter
 @Entity
 @DiscriminatorValue("PEDAL")

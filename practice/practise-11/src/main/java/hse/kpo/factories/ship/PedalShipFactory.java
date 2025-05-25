@@ -11,9 +11,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class PedalShipFactory implements ShipFactoryInterface<PedalEngineParams> {
+
     @Override
-    public Ship createShip(PedalEngineParams shipParams, int shipNumber) {
+    public Ship create(PedalEngineParams shipParams) {
         var engine = new PedalEngine(shipParams.pedalSize());
-        return new Ship(engine, shipNumber);
+        return new Ship(engine);
     }
 }
