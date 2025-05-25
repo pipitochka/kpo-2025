@@ -1,24 +1,41 @@
 package hse.kpo.domains.objects;
 
+import hse.kpo.domains.engines.AbstractEngine;
 import hse.kpo.enums.ProductionTypes;
-import hse.kpo.interfaces.engines.EngineInterface;
 import hse.kpo.interfaces.transport.Transport;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 /**
  * class of ships.
  */
+@Getter
+@Setter
+@Entity
+@Table(name = "ships")
 @ToString
+@NoArgsConstructor
 public class Ship implements Transport {
 
     @Getter
-    private final EngineInterface engine;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "engine_id")
+    private AbstractEngine engine;
 
     @Getter
-    private final int vin;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int vin;
 
-    public Ship(EngineInterface engine, int vin) {
+    public Ship(AbstractEngine engine) {
+        this.engine = engine;
+    }
+
+
+    public Ship(AbstractEngine engine, int vin) {
         this.engine = engine;
         this.vin = vin;
     }

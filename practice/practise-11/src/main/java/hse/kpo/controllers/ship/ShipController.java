@@ -1,15 +1,16 @@
 package hse.kpo.controllers.ship;
 
+import hse.kpo.domains.engines.AbstractEngine;
 import hse.kpo.domains.engines.FlyEngine;
 import hse.kpo.domains.engines.HandEngine;
 import hse.kpo.domains.engines.PedalEngine;
 import hse.kpo.domains.objects.Ship;
+import hse.kpo.dto.request.CarRequest;
 import hse.kpo.dto.request.ShipRequest;
 import hse.kpo.enums.EngineTypes;
 import hse.kpo.interfaces.FacadeInterface;
 import hse.kpo.interfaces.engines.EngineInterface;
 import hse.kpo.services.HseShipService;
-import hse.kpo.storages.ShipStorage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,8 +41,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RequiredArgsConstructor
 @Tag(name = "Корабли", description = "Управление транспортными средствами")
 public class ShipController {
-    private final ShipStorage shipStorage;
-    private final HseShipService hseShipService;
+    private final HseShipService shipService;
     private final FacadeInterface hseFacade;
 
     /**
@@ -53,10 +53,7 @@ public class ShipController {
     @GetMapping("/{vin}")
     @Operation(summary = "Получить корабль по VIN")
     public ResponseEntity<Ship> getShip(@PathVariable int vin) {
-        return shipStorage.getShips()
-                .stream()
-                .filter(ship -> ship.getVin() == vin)
-                .findFirst()
+        return shipService.findByVin(vin)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -99,7 +96,7 @@ public class ShipController {
     @PostMapping("/sell")
     @Operation(summary = "Продать все доступные корабли")
     public ResponseEntity<Void> sellAllCars() {
-        hseShipService.sellShips();
+        shipService.sellShips();
         return ResponseEntity.ok().build();
     }
 
@@ -111,28 +108,12 @@ public class ShipController {
      */
     @PostMapping("/sell/{vin}")
     @Operation(summary = "Продать корабли по VIN")
-    public ResponseEntity<Void> sellShip(@PathVariable int vin) {
-        var shipOptional = shipStorage.getShips().stream()
-                .filter(c -> c.getVin() == vin)
-                .findFirst();
-
-        if (shipOptional.isPresent()) {
-            var ship = shipOptional.get();
-            shipStorage.getShips().remove(ship);
-            // Логика продажи (упрощенно)
+    public ResponseEntity<Object> sellShip(@PathVariable int vin) {
+        return shipService.findByVin(vin).map(car -> {
+            shipService.deleteByVin(car.getVin());
             hseFacade.sell();
             return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
-
-    private Ship createShipFromRequest(ShipRequest request, int vin) {
-        EngineInterface engine = switch (EngineTypes.valueOf(request.engineType())) {
-            case PEDAL -> new PedalEngine(request.pedalSize());
-            case HAND -> new HandEngine();
-            case LEVITATION -> new FlyEngine();
-        };
-        return new Ship(engine, vin);
+        }).orElse(ResponseEntity.notFound().build());
     }
 
     /**
@@ -148,14 +129,11 @@ public class ShipController {
             @PathVariable int vin,
             @Valid @RequestBody ShipRequest request) {
 
-        return shipStorage.getShips().stream()
-                .filter(ship -> ship.getVin() == vin)
-                .findFirst()
+        return shipService.findByVin(vin)
                 .map(existingCar -> {
-                    var updatedShip = createShipFromRequest(request, vin);
-                    shipStorage.getShips().remove(existingCar);
-                    shipStorage.addExistingShip(updatedShip);
-                    return ResponseEntity.ok(updatedShip);
+                    existingCar.setEngine(createEngineFromRequest(request));
+                    shipService.addExistingShip(existingCar);
+                    return ResponseEntity.ok(existingCar);
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -163,8 +141,8 @@ public class ShipController {
     @DeleteMapping("/{vin}")
     @Operation(summary = "Удалить корабли")
     public ResponseEntity<Void> deleteShip(@PathVariable int vin) {
-        boolean removed = shipStorage.getShips().removeIf(ship -> ship.getVin() == vin);
-        return removed ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        shipService.deleteByVin(vin);
+        return ResponseEntity.ok().build();
     }
 
     /**
@@ -184,10 +162,14 @@ public class ShipController {
             @RequestParam(required = false) String engineType,
             @RequestParam(required = false) Integer minVin) {
 
-        return shipStorage.getShips().stream()
-                .filter(ship -> engineType == null || ship.getEngineType().equals(engineType))
-                .filter(ship -> minVin == null || ship.getVin() >= minVin)
-                .toList();
+        return shipService.getShipsWithFiltration(engineType, minVin);
     }
 
+    private AbstractEngine createEngineFromRequest(ShipRequest request) {
+        return switch (EngineTypes.valueOf(request.engineType())) {
+            case PEDAL -> new PedalEngine(request.pedalSize());
+            case HAND -> new HandEngine();
+            case LEVITATION -> new FlyEngine();
+        };
+    }
 }

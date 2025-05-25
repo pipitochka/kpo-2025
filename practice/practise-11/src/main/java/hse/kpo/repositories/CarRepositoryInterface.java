@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface CarRepository extends JpaRepository<Car, Integer> {
+public interface CarRepositoryInterface extends JpaRepository<Car, Integer> {
     @Query("""
         SELECT c 
         FROM Car c 

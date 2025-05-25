@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import hse.kpo.repositories.CarRepository;
+import hse.kpo.repositories.CarRepositoryInterface;
+import hse.kpo.repositories.CustomerRepositoryInterface;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -32,9 +33,9 @@ public class HseCarService implements Observable, CarProviderInterface {
 
     private final List<SalesObserver> observers = new ArrayList<>();
 
-    private final CustomerProviderInterface customerProvider;
+    private final CustomerRepositoryInterface customerProvider;
 
-    private final CarRepository carRepository;
+    private final CarRepositoryInterface carRepository;
 
     public void addObserver(SalesObserver observer) {
         observers.add(observer);
