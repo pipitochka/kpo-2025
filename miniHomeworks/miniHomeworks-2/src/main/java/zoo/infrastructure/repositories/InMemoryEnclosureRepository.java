@@ -11,7 +11,7 @@ import zoo.application.interfaces.EnclosureRepository;
 import zoo.domains.entities.Enclosure;
 
 /**
- * realization of enclosure repository in memory.
+ * realizations of enclosure repository in memory.
  */
 @Component
 public class InMemoryEnclosureRepository implements EnclosureRepository {

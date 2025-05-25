@@ -5,7 +5,7 @@ import zoo.domains.animals.Animal;
 import zoo.interfaces.InterfaceVetClinic;
 
 /**
- * realization of interface of InterfaceVetClinic which check animal will they soon die.
+ * realizations of interface of InterfaceVetClinic which check animal will they soon die.
  */
 @Component
 public class MyVetClinic implements InterfaceVetClinic {
