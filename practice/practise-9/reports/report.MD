@@ -1,0 +1,28 @@
+<Vehicle>
+    <VIN>5</VIN>
+    <Type>Car</Type>
+    <Engine>
+        <Type>PEDAL</Type>
+    </Engine>
+</Vehicle>
+<Vehicle>
+    <VIN>6</VIN>
+    <Type>Car</Type>
+    <Engine>
+        <Type>PEDAL</Type>
+    </Engine>
+</Vehicle>
+<Vehicle>
+    <VIN>7</VIN>
+    <Type>Car</Type>
+    <Engine>
+        <Type>HAND</Type>
+    </Engine>
+</Vehicle>
+<Vehicle>
+    <VIN>8</VIN>
+    <Type>Catamaran</Type>
+    <Engine>
+        <Type>HAND</Type>
+    </Engine>
+</Vehicle>

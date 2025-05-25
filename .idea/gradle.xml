@@ -7,7 +7,15 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$/miniHomeworks/miniHomeworks-2" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/miniHomeworks/miniHomeworks-2" />
+            <option value="$PROJECT_DIR$" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/practice/practise-12" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/practice/practise-12" />
           </set>
         </option>
       </GradleProjectSettings>
