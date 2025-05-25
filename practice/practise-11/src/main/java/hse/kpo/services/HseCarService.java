@@ -9,13 +9,12 @@ import hse.kpo.interfaces.providers.CustomerProviderInterface;
 import hse.kpo.interfaces.sales.Observable;
 import hse.kpo.interfaces.sales.Sales;
 import hse.kpo.interfaces.sales.SalesObserver;
+import hse.kpo.repositories.CarRepositoryInterface;
+import hse.kpo.repositories.CustomerRepositoryInterface;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
-import hse.kpo.repositories.CarRepositoryInterface;
-import hse.kpo.repositories.CustomerRepositoryInterface;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
