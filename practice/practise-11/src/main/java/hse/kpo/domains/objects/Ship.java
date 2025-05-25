@@ -20,12 +20,10 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Ship implements Transport {
 
-    @Getter
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "engine_id")
     private AbstractEngine engine;
 
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int vin;
