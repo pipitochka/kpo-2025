@@ -10,7 +10,7 @@ import zoo.domains.entities.FeedingSchedule;
 
 
 /**
- * realization of feeding schedule repository in memory.
+ * realizations of feeding schedule repository in memory.
  */
 @Component
 public class InMemoryFeedingScheduleRepository implements FeedingScheduleRepository {

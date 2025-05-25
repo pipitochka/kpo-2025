@@ -15,7 +15,7 @@ import zoo.domains.entities.Enclosure;
 
 
 /**
- * realization of AnimalRepository in memory.
+ * realizations of AnimalRepository in memory.
  */
 @Component
 @RequiredArgsConstructor

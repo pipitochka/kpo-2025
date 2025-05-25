@@ -11,7 +11,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * realization class of operations.
+ * realizations class of operations.
  */
 @JsonDeserialize(as = HseOperation.class)
 @ToString

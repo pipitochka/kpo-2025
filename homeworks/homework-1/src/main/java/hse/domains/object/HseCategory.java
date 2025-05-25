@@ -9,7 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * realization class of category.
+ * realizations class of category.
  */
 @JsonDeserialize(as = HseCategory.class)
 @ToString

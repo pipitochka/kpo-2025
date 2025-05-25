@@ -10,7 +10,7 @@ import zoo.domains.things.Thing;
 import zoo.interfaces.InterfaceFileWriter;
 
 /**
- * realization of InterfaceFileWriter which write information if file.
+ * realizations of InterfaceFileWriter which write information if file.
  */
 @Component
 public class MyFileWriter implements InterfaceFileWriter {

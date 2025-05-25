@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
- * class of realization of event handler.
+ * class of realizations of event handler.
  */
 @Slf4j
 @Component

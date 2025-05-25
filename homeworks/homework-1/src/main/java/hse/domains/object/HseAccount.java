@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * realization class of accounts.
+ * realizations class of accounts.
  */
 @JsonDeserialize(as = HseAccount.class)
 @ToString
