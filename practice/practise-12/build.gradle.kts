@@ -4,6 +4,7 @@ plugins {
 	jacoco
 	id("org.springframework.boot") version "3.4.2"
 	id("io.spring.dependency-management") version "1.1.7"
+	id("org.liquibase.gradle") version "2.0.4"
 }
 
 group = "hse"
@@ -55,6 +56,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	runtimeOnly("org.postgresql:postgresql")
 
+	implementation("org.liquibase:liquibase-core")
+	liquibaseRuntime("org.liquibase:liquibase-core")
+	liquibaseRuntime("org.liquibase.ext:liquibase-hibernate6:5.0.0")
 }
 
 tasks.withType<Test> {

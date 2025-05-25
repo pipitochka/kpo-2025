@@ -4,6 +4,7 @@ import hse.kpo.builders.ReportBuilder;
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.domains.reports.Report;
 import hse.kpo.enums.ProductionTypes;
+import hse.kpo.interfaces.providers.CustomerProviderInterface;
 import hse.kpo.interfaces.sales.SalesObserver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class ReportSalesObserver implements SalesObserver {
-    private final hse.kpo.storages.CustomerStorage customerStorage;
+    private final CustomerProviderInterface customerStorage;
 
     private final ReportBuilder reportBuilder = new ReportBuilder();
 
