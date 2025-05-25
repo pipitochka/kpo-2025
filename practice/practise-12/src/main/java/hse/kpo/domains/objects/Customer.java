@@ -54,13 +54,6 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ship> ships;
 
-    @Getter
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ship")
-    private Ship ship;
-
-
-
     /**
      * Constructor with iq.
      *

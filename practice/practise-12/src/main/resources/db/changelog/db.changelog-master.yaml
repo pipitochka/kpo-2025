@@ -1,13 +1,4 @@
 databaseChangeLog:
-  - changeSet:
-      id: 1
-      author: you
-      changes:
-        - createTable:
-            tableName: test_table
-            columns:
-              - column:
-                  name: id
-                  type: INT
-                  constraints:
-                    primaryKey: true
+  - include:
+      file: release_0_1/db.changelog-release_0_1.yaml
+      relativeToChangelogFile: true
