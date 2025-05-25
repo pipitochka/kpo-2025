@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+/**
+ * class of fly engine.
+ */
 @Getter
 @Entity
 @DiscriminatorValue("LEVITATION")
