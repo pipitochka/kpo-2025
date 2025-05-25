@@ -31,7 +31,7 @@ public class HseShipService implements Observable, ShipProviderInterface {
 
     private final List<SalesObserver> observers = new ArrayList<>();
 
-    private final CustomerRepositoryInterface customerProvider;
+    private final CustomerProviderInterface customerProvider;
 
     private final ShipRepositoryInterface shipRepository;
 
@@ -53,19 +53,19 @@ public class HseShipService implements Observable, ShipProviderInterface {
     }
 
     /**
-     * function to sell all cars in cars pull to all sellers from sellers poll.
+     * Метод продажи машин
      */
     @Sales
     public void sellShips() {
-        // получаем список покупателей
-        var customers = customerProvider.getCustomers();
-        // пробегаемся по полученному списку
-        customers.stream().filter(customer -> Objects.isNull(customer.getShip()))
+        customerProvider.getCustomers().stream()
+                .filter(customer -> customer.getCars() == null || customer.getCars().isEmpty())
                 .forEach(customer -> {
-                    var car = this.takeShip(customer);
+                    Ship car = takeShip(customer);
                     if (Objects.nonNull(car)) {
-                        customer.setShip(car);
-                        notifyObserversForSale(customer, ProductionTypes.CATAMARAN, car.getVin());
+                        customer.getShips().add(car); // Добавляем автомобиль в список клиента
+                        car.setCustomer(customer);   // Устанавливаем ссылку на клиента в автомобиле
+                        shipRepository.save(car);     // Сохраняем изменения
+                        notifyObserversForSale(customer, ProductionTypes.CAR, car.getVin());
                     } else {
                         log.warn("No car in CarService");
                     }
