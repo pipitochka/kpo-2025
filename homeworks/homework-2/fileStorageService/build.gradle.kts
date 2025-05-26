@@ -59,6 +59,9 @@ dependencies {
 	implementation("org.liquibase:liquibase-core")
 	liquibaseRuntime("org.liquibase:liquibase-core")
 	liquibaseRuntime("org.liquibase.ext:liquibase-hibernate6:5.0.0")
+
+	testImplementation("com.h2database:h2")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<Test> {
