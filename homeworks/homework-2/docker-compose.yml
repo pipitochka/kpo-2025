@@ -52,5 +52,19 @@ services:
     depends_on:
       - filestorage-service
 
+  gateway-service:
+    build:
+      context: ./GatewayService
+    container_name: gateway_service
+    environment:
+      STORAGE_SERVICE_BASE_URL: http://filestorage-service:8080
+      ANALYSIS_SERVICE_BASE_URL: http://fileanalysis-service:8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      filestorage-service:
+        condition: service_healthy
+      fileanalysis-service:
+        condition: service_healthy
 volumes:
   postgres_data:
