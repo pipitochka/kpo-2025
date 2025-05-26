@@ -55,4 +55,12 @@ public class FileStorageServiceController {
             return ResponseEntity.notFound().build(); // 404 Not Found
         }
     }
+
+    @GetMapping("/{id}/content")
+    @Operation(summary = "Получить содержимое файла по id")
+    public ResponseEntity<String> getFileContentById(@PathVariable int id) {
+        return fileStorageService.getFileContentById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

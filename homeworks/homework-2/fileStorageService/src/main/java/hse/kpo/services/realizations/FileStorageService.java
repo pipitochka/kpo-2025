@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -48,6 +49,7 @@ public class FileStorageService implements FileStorageServiceInterface {
 
             Optional<FileRealization> existingFile = fileRepository.findByHash(hash);
             if (existingFile.isPresent()) {
+                log.warn("Попытка загрузить файл с уже существующим хэшем: {}", hash);
                 return fileMapper.toDto(existingFile.get());
             }
 
@@ -111,5 +113,18 @@ public class FileStorageService implements FileStorageServiceInterface {
 
         return false;
 
+    }
+
+    public Optional<String> getFileContentById(int fileId) {
+        return fileRepository.findById(fileId)
+                .map(file -> {
+                    try {
+                        Path path = Paths.get(file.getPath());
+                        return Files.readString(path); // Java 11+
+                    } catch (IOException e) {
+                        log.error("Ошибка при чтении файла: {}", e.getMessage());
+                        return null;
+                    }
+                });
     }
 }

@@ -25,7 +25,7 @@ public class FileRealization implements FileInterface {
     @Column(nullable = false, unique = true)
     private String path;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String hash;
 
     public FileRealization(String name, String path, String hash) {

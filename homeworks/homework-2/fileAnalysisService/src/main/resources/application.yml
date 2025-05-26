@@ -20,3 +20,7 @@ spring:
     change-log: classpath:db/changelog/db.changelog-master.yaml
 server:
   port: 8080
+
+remote:
+  filestorage-service:
+    base-url: ${FILESTORAGE_SERVICE_URL:http://localhost:8081}

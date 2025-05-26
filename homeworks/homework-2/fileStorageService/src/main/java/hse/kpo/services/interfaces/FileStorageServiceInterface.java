@@ -14,4 +14,6 @@ public interface FileStorageServiceInterface {
     List<FileDto> getAllFiles();
 
     boolean deleteFile(int id);
+
+    public Optional<String> getFileContentById(int fileId);
 }
