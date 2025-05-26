@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: artemakulov
+      changes:
+        - createTable:
+            tableName: analysis
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: file_id
+                  type: INT
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: word_count
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: paragraph_count
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: character_count
+                  type: INT
+                  constraints:
+                    nullable: false
+
