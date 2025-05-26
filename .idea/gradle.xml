@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$/homeworks/homework-2" />
             <option value="$PROJECT_DIR$/homeworks/homework-2/fileAnalysisService" />
             <option value="$PROJECT_DIR$/homeworks/homework-2/fileStorageService" />
+            <option value="$PROJECT_DIR$/homeworks/homework-2/gatewayService" />
           </set>
         </option>
       </GradleProjectSettings>
