@@ -1,4 +1,4 @@
-package hse.kpo.services.realization;
+package hse.kpo.services.realizations;
 
 import hse.kpo.domain.MultipartFileResource;
 import hse.kpo.dto.FileAnalysisDto;
@@ -28,7 +28,11 @@ import java.util.Optional;
 @Getter
 public class GatewayService implements GatewayServiceInterface {
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    public GatewayService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+    private RestTemplate restTemplate = new RestTemplate();
 
     @Value("${remote.filestorage-service.base-url}")
     private String fileStorageBaseUrl;

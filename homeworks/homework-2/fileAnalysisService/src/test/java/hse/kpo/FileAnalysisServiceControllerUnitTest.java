@@ -1,9 +1,9 @@
 package hse.kpo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hse.kpo.controllers.FileStorageServiceController;
-import hse.kpo.dto.FileDto;
-import hse.kpo.services.realizations.FileStorageService;
+import hse.kpo.controllers.FileAnalysisController;
+import hse.kpo.dto.FileAnalysisDto;
+import hse.kpo.services.interfaces.FileAnalysisServiceInterface;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,84 +17,59 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(FileStorageServiceController.class)
-class FileStorageServiceControllerUnitTest {
+@WebMvcTest(FileAnalysisController.class)
+class FileAnalysisServiceControllerUnitTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @MockBean
-    private FileStorageService fileStorageService;
+    private FileAnalysisServiceInterface service;
 
     @Test
-    void testGetFileById_Found() throws Exception {
-        FileDto fileDto = new FileDto(1, "test.txt", "text/plain", "123");
-        Mockito.when(fileStorageService.getFileById(1)).thenReturn(Optional.of(fileDto));
+    void getAnalysisByFileId_shouldReturnDto_whenFound() throws Exception {
+        FileAnalysisDto dto = new FileAnalysisDto(1, 1, 1, 1, 1);
+        when(service.getFileAnalysisByFileId(1)).thenReturn(Optional.of(dto));
 
-        mockMvc.perform(get("/api/files/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.name").value("test.txt"))
-                .andExpect(jsonPath("$.path").value("text/plain"))
-                .andExpect(jsonPath("$.hash").value("123"));
+        mockMvc.perform(get("/api/analysis/1"))
+                .andExpect(status().isOk());
     }
 
     @Test
-    void testGetFileById_NotFound() throws Exception {
-        Mockito.when(fileStorageService.getFileById(anyInt())).thenReturn(Optional.empty());
+    void getAnalysisByFileId_shouldReturnNotFound_whenNotFound() throws Exception {
+        when(service.getFileAnalysisByFileId(1)).thenReturn(Optional.empty());
 
-        mockMvc.perform(get("/api/files/99"))
+        mockMvc.perform(get("/api/analysis/1"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    void testCreateFile_Success() throws Exception {
-        MockMultipartFile mockFile = new MockMultipartFile(
-                "file", "filename.txt", "text/plain", "file content".getBytes());
+    void getAnalysis_shouldReturnList() throws Exception {
+        when(service.getAllFileAnalysis()).thenReturn(List.of(
+                new FileAnalysisDto(1, 1, 1, 1, 1)));
 
-        FileDto savedFile = new FileDto(1, "filename.txt", "text/plain", "12");
-        Mockito.when(fileStorageService.saveFile(any())).thenReturn(savedFile);
-
-        mockMvc.perform(multipart("/api/files").file(mockFile))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.name").value("filename.txt"));
+        mockMvc.perform(get("/api/analysis"))
+                .andExpect(status().isOk());
     }
 
     @Test
-    void testGetAllFiles() throws Exception {
-        List<FileDto> files = List.of(
-                new FileDto(1, "file1.txt", "text/plain", "10"),
-                new FileDto(2, "file2.txt", "text/plain", "20")
-        );
-        Mockito.when(fileStorageService.getAllFiles()).thenReturn(files);
+    void deleteAnalysis_shouldReturnNoContent_whenDeleted() throws Exception {
+        when(service.deleteFileAnalysis(1)).thenReturn(true);
 
-        mockMvc.perform(get("/api/files"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].name").value("file1.txt"));
-    }
-
-    @Test
-    void testDeleteFile_Success() throws Exception {
-        Mockito.when(fileStorageService.deleteFile(1)).thenReturn(true);
-
-        mockMvc.perform(delete("/api/files/1"))
+        mockMvc.perform(delete("/api/analysis/1"))
                 .andExpect(status().isNoContent());
     }
 
     @Test
-    void testDeleteFile_NotFound() throws Exception {
-        Mockito.when(fileStorageService.deleteFile(99)).thenReturn(false);
+    void deleteAnalysis_shouldReturnNotFound_whenNotFound() throws Exception {
+        when(service.deleteFileAnalysis(1)).thenReturn(false);
 
-        mockMvc.perform(delete("/api/files/99"))
+        mockMvc.perform(delete("/api/analysis/1"))
                 .andExpect(status().isNotFound());
     }
 }
