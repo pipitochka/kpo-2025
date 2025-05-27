@@ -12,4 +12,6 @@ public interface FileAnalysisServiceInterface {
     List<FileAnalysisDto> getAllFileAnalysis();
 
     boolean deleteFileAnalysis(int fileId);
+
+    public Optional<String> getFileContentFromFileStorage(int fileId);
 }

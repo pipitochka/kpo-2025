@@ -48,10 +48,10 @@ public class FileAnalysisService implements FileAnalysisServiceInterface {
         } catch (Exception e) {
             return Optional.empty();
         }
-        var fileContent = file.get();
-        if (fileContent == null || fileContent.isEmpty()) {
+        if (file.isEmpty() || file.get().isEmpty()) {
             return Optional.empty();
         }
+        var fileContent = file.get();
 
 
         AnalysisRealization newAnalysis = new AnalysisRealization();
@@ -102,7 +102,7 @@ public class FileAnalysisService implements FileAnalysisServiceInterface {
         return paragraphs.length;
     }
 
-    private Optional<String> getFileContentFromFileStorage(int fileId) {
+    public Optional<String> getFileContentFromFileStorage(int fileId) {
         String url = fileStorageBaseUrl + "/api/files/" + fileId + "/content";
         log.info("Requesting file content from: {}", url);
         try {
@@ -112,7 +112,7 @@ public class FileAnalysisService implements FileAnalysisServiceInterface {
             return Optional.empty();
         } catch (Exception e) {
             log.error("Ошибка при получении содержимого файла: {}", e.getMessage());
-            return null;
+            return Optional.empty();
         }
     }
 }
