@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -126,7 +125,7 @@ public class GatewayService implements GatewayServiceInterface {
 
     @Override
     public boolean deleteFile(int id) {
-        String url = fileAnalysisBaseUrl + "/api/files/" + id;
+        String url = fileStorageBaseUrl + "/api/files/" + id;
         try {
             restTemplate.delete(url);
             return true;
@@ -141,7 +140,7 @@ public class GatewayService implements GatewayServiceInterface {
 
     @Override
     public Optional<String> getFileContentById(int fileId) {
-        String url = fileAnalysisBaseUrl + "/api/files/" + fileId;
+        String url = fileStorageBaseUrl + "/api/files/" + fileId;
         try {
             String response = restTemplate.getForObject(url, String.class);
             return Optional.ofNullable(response);
