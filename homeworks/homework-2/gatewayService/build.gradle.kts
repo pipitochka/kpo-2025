@@ -53,15 +53,6 @@ dependencies {
 
 	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.2")
 
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	runtimeOnly("org.postgresql:postgresql")
-
-	implementation("org.liquibase:liquibase-core")
-	liquibaseRuntime("org.liquibase:liquibase-core")
-	liquibaseRuntime("org.liquibase.ext:liquibase-hibernate6:5.0.0")
-
-	testImplementation("com.h2database:h2")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<Test> {
