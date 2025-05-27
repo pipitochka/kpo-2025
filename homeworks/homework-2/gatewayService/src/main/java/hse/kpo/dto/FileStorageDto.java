@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * dto which received from storage microservice.
+ */
 @Getter
 @RequiredArgsConstructor
 public class FileStorageDto {

@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * dto which received from analysis microservice.
+ */
 @Getter
 @RequiredArgsConstructor
 public class FileAnalysisDto {

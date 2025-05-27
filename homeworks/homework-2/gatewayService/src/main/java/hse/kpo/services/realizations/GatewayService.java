@@ -22,6 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * class of gateway service which have all logic.
+ */
 @Log4j2
 @Component
 @RequiredArgsConstructor

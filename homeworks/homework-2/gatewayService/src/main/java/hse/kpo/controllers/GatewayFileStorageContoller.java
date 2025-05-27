@@ -13,6 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+/**
+ * class of Gateway File Storage Controller which resend all to Storage microservice.
+ */
 @RestController
 @RequestMapping("/api/files")
 @RequiredArgsConstructor
@@ -20,14 +23,26 @@ import java.util.List;
 public class GatewayFileStorageContoller {
     private final GatewayServiceInterface gatewayService;
 
+    /**
+     * funtion to take description of file by id.
+     *
+     * @param id file id.
+     * @return description of file.
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Получить файл по id")
-    public ResponseEntity<FileStorageDto> getFileById(@PathVariable int id){
+    public ResponseEntity<FileStorageDto> getFileById(@PathVariable int id) {
         return gatewayService.getFileDescriptionById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * funtion to upload a file.
+     *
+     * @param file file.
+     * @return descriprion of uploaded file.
+     */
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Загрузить файл")
     public ResponseEntity<FileStorageDto> createFile(
@@ -36,15 +51,26 @@ public class GatewayFileStorageContoller {
         return ResponseEntity.ok(savedFile);
     }
 
+    /**
+     * funtion to takes all files information.
+     *
+     * @return list of files descriptions.
+     */
     @GetMapping()
     @Operation(summary = "Получить все файлы")
-    public ResponseEntity<List<FileStorageDto>> getAllFiles(){
+    public ResponseEntity<List<FileStorageDto>> getAllFiles() {
         return ResponseEntity.ok(gatewayService.getAllFiles());
     }
 
+    /**
+     * function to delete file by id.
+     *
+     * @param id file id.
+     * @return ok or not found.
+     */
     @DeleteMapping("{id}")
     @Operation(summary = "Удалить файл")
-    public ResponseEntity<Void> deleteFileById(@PathVariable int id){
+    public ResponseEntity<Void> deleteFileById(@PathVariable int id) {
         boolean deleted = gatewayService.deleteFile(id);
         if (deleted) {
             return ResponseEntity.noContent().build(); // 204 No Content
@@ -53,6 +79,12 @@ public class GatewayFileStorageContoller {
         }
     }
 
+    /**
+     * function to get file.
+     *
+     * @param id file id
+     * @return string
+     */
     @GetMapping("/{id}/content")
     @Operation(summary = "Получить содержимое файла по id")
     public ResponseEntity<String> getFileContentById(@PathVariable int id) {
