@@ -24,3 +24,12 @@ server:
 remote:
   filestorage-service:
     base-url: ${FILESTORAGE_SERVICE_URL:http://localhost:8081}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always

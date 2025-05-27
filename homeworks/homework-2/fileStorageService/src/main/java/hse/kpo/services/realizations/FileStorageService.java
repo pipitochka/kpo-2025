@@ -41,6 +41,7 @@ public class FileStorageService implements FileStorageServiceInterface {
 
     @Override
     public FileDto saveFile(MultipartFile file) {
+        log.info("Обрабатываю файл");
         try{
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] fileBytes = file.getBytes();
