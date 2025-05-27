@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpHeaders;
 
@@ -41,13 +42,13 @@ public class FileAnalysisService implements FileAnalysisServiceInterface {
             return Optional.of(fileAnalysisMapper.toDto(analysis));
         }
 
-        String fileContent;
+        Optional<String> file;
         try {
-            fileContent = getFileContentFromFileStorage(fileId);
+            file = getFileContentFromFileStorage(fileId);
         } catch (Exception e) {
             return Optional.empty();
         }
-
+        var fileContent = file.get();
         if (fileContent == null || fileContent.isEmpty()) {
             return Optional.empty();
         }
@@ -101,11 +102,14 @@ public class FileAnalysisService implements FileAnalysisServiceInterface {
         return paragraphs.length;
     }
 
-    private String getFileContentFromFileStorage(int fileId) {
+    private Optional<String> getFileContentFromFileStorage(int fileId) {
         String url = fileStorageBaseUrl + "/api/files/" + fileId + "/content";
         log.info("Requesting file content from: {}", url);
         try {
-            return restTemplate.getForObject(url, String.class);
+            return Optional.ofNullable(restTemplate.getForObject(url, String.class));
+        } catch (HttpClientErrorException.NotFound e) {
+            log.warn("Файл с id {} не найден в FileStorage", fileId);
+            return Optional.empty();
         } catch (Exception e) {
             log.error("Ошибка при получении содержимого файла: {}", e.getMessage());
             return null;
