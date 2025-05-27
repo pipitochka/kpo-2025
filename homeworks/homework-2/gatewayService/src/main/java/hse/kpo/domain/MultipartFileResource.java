@@ -5,6 +5,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+/**
+ * class if MultipartFileResource to send to Storage microservice.
+ */
 public class MultipartFileResource extends InputStreamResource {
     private final String filename;
 

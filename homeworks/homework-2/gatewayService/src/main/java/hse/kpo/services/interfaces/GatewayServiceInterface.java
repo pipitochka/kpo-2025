@@ -7,6 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * interface of gateway service.
+ */
 public interface GatewayServiceInterface {
     Optional<FileAnalysisDto> getFileAnalysisByFileId(int fileId);
 
