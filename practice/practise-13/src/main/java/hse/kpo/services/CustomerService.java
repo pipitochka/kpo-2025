@@ -1,18 +1,20 @@
 package hse.kpo.services;
 
-import java.util.List;
-
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.dto.request.CustomerRequest;
 import hse.kpo.exception.KpoException;
 import hse.kpo.interfaces.providers.CustomerProviderInterface;
 import hse.kpo.repositories.CustomerRepositoryInterface;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * class of customer service.
+ */
 @RequiredArgsConstructor
 @Service
 public class CustomerService implements CustomerProviderInterface {
@@ -42,7 +44,8 @@ public class CustomerService implements CustomerProviderInterface {
             customer.setLegPower(request.getLegPower());
             return customerRepository.save(customer);
         }
-        throw new KpoException(HttpStatus.NOT_FOUND.value(), String.format("no customer with name: %s", request.getName()));
+        throw new KpoException(HttpStatus.NOT_FOUND.value(),
+                String.format("no customer with name: %s", request.getName()));
     }
 
 

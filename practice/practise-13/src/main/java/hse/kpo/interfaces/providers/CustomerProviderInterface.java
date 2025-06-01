@@ -2,7 +2,6 @@ package hse.kpo.interfaces.providers;
 
 import hse.kpo.domains.objects.Customer;
 import hse.kpo.dto.request.CustomerRequest;
-
 import java.util.List;
 
 /**

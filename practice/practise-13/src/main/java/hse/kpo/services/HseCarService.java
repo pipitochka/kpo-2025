@@ -53,7 +53,7 @@ public class HseCarService implements Observable, CarProviderInterface {
 
 
     /**
-     * Метод продажи машин
+     * Метод продажи машин.
      */
     @Sales
     public void sellCars() {

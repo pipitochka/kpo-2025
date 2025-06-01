@@ -53,7 +53,7 @@ public class HseShipService implements Observable, ShipProviderInterface {
     }
 
     /**
-     * Метод продажи машин
+     * Метод продажи машин.
      */
     @Sales
     public void sellShips() {
