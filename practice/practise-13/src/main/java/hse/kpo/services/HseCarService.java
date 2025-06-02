@@ -30,6 +30,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class HseCarService implements Observable, CarProviderInterface {
 
+    public void clear(){
+        carRepository.deleteAll();
+    }
+
     private final List<SalesObserver> observers = new ArrayList<>();
 
     private final CustomerProviderInterface customerProvider;

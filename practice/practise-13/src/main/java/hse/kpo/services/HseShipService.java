@@ -29,6 +29,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class HseShipService implements Observable, ShipProviderInterface {
 
+    public void clear(){
+        shipRepository.deleteAll();
+    }
+
     private final List<SalesObserver> observers = new ArrayList<>();
 
     private final CustomerProviderInterface customerProvider;

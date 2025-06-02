@@ -158,4 +158,10 @@ public class Hse implements FacadeInterface {
     public List<Customer> getCustomers() {
         return customerStorage.getCustomers();
     }
+
+    public void clear(){
+        customerStorage.clear();
+        shipStorage.clear();
+        carStorage.clear();
+    }
 }

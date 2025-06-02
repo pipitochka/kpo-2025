@@ -15,4 +15,7 @@ public interface CustomerProviderInterface {
     Customer updateCustomer(CustomerRequest customerRequest);
 
     boolean deleteCustomer(String name);
+
+    public void clear();
+
 }

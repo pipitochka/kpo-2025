@@ -19,6 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CustomerService implements CustomerProviderInterface {
 
+    public void clear(){
+        customerRepository.deleteAll();
+    }
+
     @Autowired
     private CustomerRepositoryInterface customerRepository;
 

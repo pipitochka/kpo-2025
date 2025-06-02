@@ -39,4 +39,6 @@ public interface FacadeInterface {
     public List<Ship> getShips();
 
     public List<Customer> getCustomers();
+
+    public void clear();
 }

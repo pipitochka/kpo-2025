@@ -14,4 +14,6 @@ public interface CarProviderInterface {
     public List<Car> getCars();
 
     public <T> Car addCar(CarFactoryInterface<T> carFactory, T carParams);
+
+    public void clear();
 }

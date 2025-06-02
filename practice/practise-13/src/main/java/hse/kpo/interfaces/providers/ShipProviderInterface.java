@@ -15,4 +15,6 @@ public interface ShipProviderInterface {
     List<Ship> getShips();
 
     public <ParamsT> Ship addShip(ShipFactoryInterface<ParamsT> shipFactory, ParamsT shipParams);
+
+    public void clear();
 }
