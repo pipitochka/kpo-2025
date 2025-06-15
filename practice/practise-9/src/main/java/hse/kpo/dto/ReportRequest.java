@@ -9,7 +9,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
- * class of customer request.
+ * class of customer requests.
  */
 @RequiredArgsConstructor
 @Getter

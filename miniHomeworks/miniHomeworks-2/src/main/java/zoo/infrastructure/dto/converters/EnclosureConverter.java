@@ -23,9 +23,9 @@ public class EnclosureConverter {
     }
 
     /**
-     * function to make enclosure from request.
+     * function to make enclosure from requests.
      *
-     * @param createEnclosureRequest request with description.
+     * @param createEnclosureRequest requests with description.
      * @return enclosure object.
      */
     public static Enclosure toEntity(CreateEnclosureRequest createEnclosureRequest) {

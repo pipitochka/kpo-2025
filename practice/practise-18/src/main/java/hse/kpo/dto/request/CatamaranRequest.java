@@ -1,4 +1,4 @@
-package hse.kpo.dto.request;
+package hse.kpo.dto.requests;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;

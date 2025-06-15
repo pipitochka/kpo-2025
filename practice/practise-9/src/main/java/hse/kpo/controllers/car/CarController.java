@@ -62,8 +62,8 @@ public class CarController {
      * function to create car.
      *
      * @param request information to create car.
-     * @param bindingResult information about request if it corrects.
-     * @return information about car if request correct else bad request.
+     * @param bindingResult information about requests if it corrects.
+     * @return information about car if requests correct else bad requests.
      */
     @PostMapping
     @Operation(summary = "Создать автомобиль",

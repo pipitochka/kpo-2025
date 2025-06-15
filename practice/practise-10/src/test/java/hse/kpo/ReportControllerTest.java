@@ -10,8 +10,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hse.kpo.dto.request.CarRequest;
-import hse.kpo.dto.request.ReportRequest;
+import hse.kpo.dto.requests.CarRequest;
+import hse.kpo.dto.requests.ReportRequest;
 import hse.kpo.enums.ReportFormat;
 import hse.kpo.interfaces.FacadeInterface;
 import java.nio.file.Files;

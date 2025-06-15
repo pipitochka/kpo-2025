@@ -58,7 +58,7 @@ public class EnclosureController {
     }
 
     /**
-     * function to create enclosure from request.
+     * function to create enclosure from requests.
      *
      * @param createEnclosureRequest description.
      * @return dto object of enclosure.

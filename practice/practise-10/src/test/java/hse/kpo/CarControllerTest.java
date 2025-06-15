@@ -11,8 +11,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hse.kpo.dto.request.CarRequest;
-import hse.kpo.dto.request.CustomerRequest;
+import hse.kpo.dto.requests.CarRequest;
+import hse.kpo.dto.requests.CustomerRequest;
 import hse.kpo.dto.response.CarResponse;
 import hse.kpo.enums.EngineTypes;
 import hse.kpo.interfaces.FacadeInterface;

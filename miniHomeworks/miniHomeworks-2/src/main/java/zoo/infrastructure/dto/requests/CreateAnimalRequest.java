@@ -12,7 +12,7 @@ import zoo.domains.valueobjects.enums.AnimalStatus;
 import zoo.domains.valueobjects.enums.AnimalTypes;
 
 /**
- * class of create animal request.
+ * class of create animal requests.
  */
 @Getter
 @Setter

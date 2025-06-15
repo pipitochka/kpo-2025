@@ -1,4 +1,4 @@
-package hse.kpo.dto.request;
+package hse.kpo.dto.requests;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

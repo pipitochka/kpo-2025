@@ -7,7 +7,7 @@ import lombok.Setter;
 import zoo.domains.valueobjects.enums.AnimalTypes;
 
 /**
- * class of statistic request.
+ * class of statistic requests.
  */
 @Getter
 @Setter

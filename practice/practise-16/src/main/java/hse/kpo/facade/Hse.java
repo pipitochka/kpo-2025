@@ -5,7 +5,7 @@ import hse.kpo.domains.CatamaranWithWheels;
 import hse.kpo.domains.Customer;
 import hse.kpo.domains.Report;
 import hse.kpo.domains.cars.Car;
-import hse.kpo.dto.request.CustomerRequest;
+import hse.kpo.dto.requests.CustomerRequest;
 import hse.kpo.enums.ReportFormat;
 import hse.kpo.export.transport.TransportExporter;
 import hse.kpo.factories.ReportExporterFactory;

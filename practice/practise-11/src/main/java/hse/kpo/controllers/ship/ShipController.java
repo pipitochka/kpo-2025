@@ -5,8 +5,8 @@ import hse.kpo.domains.engines.FlyEngine;
 import hse.kpo.domains.engines.HandEngine;
 import hse.kpo.domains.engines.PedalEngine;
 import hse.kpo.domains.objects.Ship;
-import hse.kpo.dto.request.CarRequest;
-import hse.kpo.dto.request.ShipRequest;
+import hse.kpo.dto.requests.CarRequest;
+import hse.kpo.dto.requests.ShipRequest;
 import hse.kpo.enums.EngineTypes;
 import hse.kpo.interfaces.FacadeInterface;
 import hse.kpo.interfaces.engines.EngineInterface;
@@ -62,8 +62,8 @@ public class ShipController {
      * function to create ship.
      *
      * @param request information to create ship.
-     * @param bindingResult information about request if it corrects.
-     * @return information about ship if request correct else bad request.
+     * @param bindingResult information about requests if it corrects.
+     * @return information about ship if requests correct else bad requests.
      */
     @PostMapping
     @Operation(summary = "Создать корабль",

@@ -34,8 +34,8 @@ public class ReportController {
      * function to create report.
      *
      * @param reportRequest information to create report.
-     * @param bindingResult information about request if it corrects.
-     * @return ok if request correct else bad request.
+     * @param bindingResult information about requests if it corrects.
+     * @return ok if requests correct else bad requests.
      */
     @PostMapping()
     public ResponseEntity<Void> createReport(@Valid @RequestBody ReportRequest reportRequest,

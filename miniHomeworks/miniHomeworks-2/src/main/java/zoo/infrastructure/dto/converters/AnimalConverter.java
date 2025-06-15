@@ -22,9 +22,9 @@ public class AnimalConverter {
     }
 
     /**
-     * function to move request to animal.
+     * function to move requests to animal.
      *
-     * @param createAnimalRequest request with animal description.
+     * @param createAnimalRequest requests with animal description.
      * @return constructed animal
      */
     public static Animal toEntity(CreateAnimalRequest createAnimalRequest) {

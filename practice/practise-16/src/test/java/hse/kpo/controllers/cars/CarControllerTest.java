@@ -1,7 +1,7 @@
 package hse.kpo.controllers.cars;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hse.kpo.dto.request.CarRequest;
+import hse.kpo.dto.requests.CarRequest;
 import hse.kpo.dto.response.CarResponse;
 import hse.kpo.enums.EngineTypes;
 import org.junit.jupiter.api.DisplayName;

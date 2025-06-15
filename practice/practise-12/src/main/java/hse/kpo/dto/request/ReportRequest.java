@@ -1,4 +1,4 @@
-package hse.kpo.dto.request;
+package hse.kpo.dto.requests;
 
 import hse.kpo.enums.ReportFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * class of customer request.
+ * class of customer requests.
  */
 @RequiredArgsConstructor
 @Getter

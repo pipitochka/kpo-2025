@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * class of move animal request.
+ * class of move animal requests.
  */
 @Getter
 @Setter

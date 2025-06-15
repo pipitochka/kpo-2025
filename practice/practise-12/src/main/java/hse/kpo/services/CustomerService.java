@@ -3,7 +3,7 @@ package hse.kpo.services;
 import java.util.List;
 
 import hse.kpo.domains.objects.Customer;
-import hse.kpo.dto.request.CustomerRequest;
+import hse.kpo.dto.requests.CustomerRequest;
 import hse.kpo.exception.KpoException;
 import hse.kpo.interfaces.providers.CustomerProviderInterface;
 import hse.kpo.repositories.CustomerRepositoryInterface;

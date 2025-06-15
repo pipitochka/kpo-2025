@@ -69,8 +69,8 @@ public class ShipController {
      * function to create ship.
      *
      * @param request information to create ship.
-     * @param bindingResult information about request if it corrects.
-     * @return information about ship if request correct else bad request.
+     * @param bindingResult information about requests if it corrects.
+     * @return information about ship if requests correct else bad requests.
      */
     @PostMapping
     @Operation(summary = "Создать корабль",

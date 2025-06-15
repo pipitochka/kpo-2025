@@ -40,8 +40,8 @@ public class CustomerController {
      * function to make a new customer.
      *
      * @param request with description of customer.
-     * @param bindingResult information about request if request corrects.
-     * @return information about customer if request correct else bad request
+     * @param bindingResult information about requests if requests corrects.
+     * @return information about customer if requests correct else bad requests
      */
     @PostMapping
     @Operation(summary = "Создать покупателя",

@@ -1,6 +1,6 @@
 package hse.kpo.controllers.reports;
 
-import hse.kpo.dto.request.ReportRequest;
+import hse.kpo.dto.requests.ReportRequest;
 import hse.kpo.facade.Hse;
 import hse.kpo.interfaces.FacadeInterface;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,8 +33,8 @@ public class ReportController {
      * function to create report.
      *
      * @param reportRequest information to create report.
-     * @param bindingResult information about request if it corrects.
-     * @return ok if request correct else bad request.
+     * @param bindingResult information about requests if it corrects.
+     * @return ok if requests correct else bad requests.
      */
     @PostMapping()
     public ResponseEntity<Void> createReport(@Valid @RequestBody ReportRequest reportRequest,

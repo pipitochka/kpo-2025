@@ -10,7 +10,7 @@ import zoo.domains.valueobjects.enums.AnimalFood;
 
 
 /**
- * class of create feeding schedule request.
+ * class of create feeding schedule requests.
  */
 @Getter
 @Setter

@@ -2,7 +2,7 @@ package hse.kpo.controllers.customers;
 
 import hse.kpo.domains.Customer;
 import hse.kpo.domains.cars.Car;
-import hse.kpo.dto.request.CustomerRequest;
+import hse.kpo.dto.requests.CustomerRequest;
 import hse.kpo.dto.response.CustomerResponse;
 import hse.kpo.facade.Hse;
 import hse.kpo.services.CustomerService;

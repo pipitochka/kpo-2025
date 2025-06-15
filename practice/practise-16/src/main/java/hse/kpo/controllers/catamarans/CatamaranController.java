@@ -3,7 +3,7 @@ package hse.kpo.controllers.catamarans;
 import java.util.List;
 import java.util.Objects;
 import hse.kpo.domains.catamarans.Catamaran;
-import hse.kpo.dto.request.CatamaranRequest;
+import hse.kpo.dto.requests.CatamaranRequest;
 import hse.kpo.enums.EngineTypes;
 import hse.kpo.facade.Hse;
 import hse.kpo.services.catamarans.HseCatamaranService;

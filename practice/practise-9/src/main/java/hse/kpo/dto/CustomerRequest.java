@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * class of customer request.
+ * class of customer requests.
  */
 @Getter
 @RequiredArgsConstructor

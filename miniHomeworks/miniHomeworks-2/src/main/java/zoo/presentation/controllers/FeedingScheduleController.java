@@ -44,7 +44,7 @@ public class FeedingScheduleController {
     }
 
     /**
-     * function to create feeding schedule from request.
+     * function to create feeding schedule from requests.
      *
      * @param createFeedingScheduleRequest description of feeding schedule.
      * @return dto object of feeding schedule.

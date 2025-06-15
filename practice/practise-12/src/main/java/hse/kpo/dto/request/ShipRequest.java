@@ -1,4 +1,4 @@
-package hse.kpo.dto.request;
+package hse.kpo.dto.requests;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;
@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 
 /**
- * class of customer request.
+ * class of customer requests.
  */
 public record ShipRequest(
         @Schema(description = "Тип двигателя (PEDAL, HAND, LEVITATION)", example = "PEDAL")

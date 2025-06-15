@@ -8,7 +8,7 @@ import lombok.Setter;
 import zoo.domains.valueobjects.enums.AnimalTypes;
 
 /**
- * class of create enclosure request.
+ * class of create enclosure requests.
  */
 @Getter
 @Setter

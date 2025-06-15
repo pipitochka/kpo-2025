@@ -5,7 +5,7 @@ import hse.kpo.domains.HandEngine;
 import hse.kpo.domains.LevitationEngine;
 import hse.kpo.domains.PedalEngine;
 import hse.kpo.domains.cars.Car;
-import hse.kpo.dto.request.CarRequest;
+import hse.kpo.dto.requests.CarRequest;
 import hse.kpo.enums.EngineTypes;
 import hse.kpo.facade.Hse;
 import hse.kpo.services.cars.HseCarService;

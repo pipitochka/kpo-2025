@@ -5,7 +5,7 @@ import hse.kpo.domains.engines.FlyEngine;
 import hse.kpo.domains.engines.HandEngine;
 import hse.kpo.domains.engines.PedalEngine;
 import hse.kpo.domains.objects.Car;
-import hse.kpo.dto.request.CarRequest;
+import hse.kpo.dto.requests.CarRequest;
 import hse.kpo.enums.EngineTypes;
 import hse.kpo.interfaces.FacadeInterface;
 import hse.kpo.interfaces.engines.EngineInterface;
@@ -60,8 +60,8 @@ public class CarController {
      * function to create car.
      *
      * @param request information to create car.
-     * @param bindingResult information about request if it corrects.
-     * @return information about car if request correct else bad request.
+     * @param bindingResult information about requests if it corrects.
+     * @return information about car if requests correct else bad requests.
      */
     @PostMapping
     @Operation(summary = "Создать автомобиль",

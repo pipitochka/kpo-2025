@@ -1,7 +1,7 @@
 package hse.kpo.controllers.cutomer;
 
 import hse.kpo.domains.objects.Customer;
-import hse.kpo.dto.request.CustomerRequest;
+import hse.kpo.dto.requests.CustomerRequest;
 import hse.kpo.interfaces.FacadeInterface;
 import hse.kpo.interfaces.providers.CustomerProviderInterface;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,8 +36,8 @@ public class CustomerController {
      * function to make a new customer.
      *
      * @param request with description of customer.
-     * @param bindingResult information about request if request corrects.
-     * @return information about customer if request correct else bad request
+     * @param bindingResult information about requests if requests corrects.
+     * @return information about customer if requests correct else bad requests
      */
     @PostMapping
     @Operation(summary = "Создать покупателя",

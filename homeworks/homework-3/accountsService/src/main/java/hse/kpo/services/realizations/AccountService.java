@@ -1,10 +1,13 @@
 package hse.kpo.services.realizations;
 
+import hse.kpo.domain.enums.OperationResult;
 import hse.kpo.domain.enums.OperationType;
 import hse.kpo.domain.interfaces.factories.IAccountFactory;
 import hse.kpo.domain.interfaces.factories.IOperationFactory;
 import hse.kpo.domain.interfaces.objects.IAccount;
+import hse.kpo.domain.interfaces.objects.IOperation;
 import hse.kpo.domain.realizations.objects.Account;
+import hse.kpo.domain.realizations.objects.Operation;
 import hse.kpo.dto.AccountDto;
 import hse.kpo.dto.OperationDto;
 import hse.kpo.dto.responses.AccountResponse;
@@ -12,9 +15,8 @@ import hse.kpo.dto.responses.OperationListResponse;
 import hse.kpo.dto.responses.OperationResponse;
 import hse.kpo.mappers.interfaces.IAccountMapper;
 import hse.kpo.mappers.interfaces.IOperationMapper;
-import hse.kpo.mappers.realizations.OperationMapper;
 import hse.kpo.repositories.IAccountRepository;
-import hse.kpo.repositories.IOperationRepositories;
+import hse.kpo.repositories.IOperationRepository;
 import hse.kpo.services.interfaces.IAccountService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +40,7 @@ public class AccountService implements IAccountService {
 
     private final IOperationFactory operationFactory;
 
-    private final IOperationRepositories operationRepositories;
+    private final IOperationRepository operationRepository;
 
     private final IAccountMapper accountMapper;
 
@@ -109,6 +111,7 @@ public class AccountService implements IAccountService {
         }
     }
 
+    @Transactional
     @Override
     public List<AccountDto> getAllAccounts() {
         return accountRepository
@@ -118,6 +121,7 @@ public class AccountService implements IAccountService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public boolean deleteAccount(Long accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
@@ -129,27 +133,110 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public OperationListResponse getOperationsByAccountId(Long accountId) {
-        return null;
-    }
-
-    @Override
+    @Transactional
     public OperationResponse getOperation(Long operationId) {
-        return null;
+        Optional<Operation> operation = operationRepository.findById(operationId);
+        if (operation.isPresent()) {
+            return new OperationResponse(
+                    true,
+                    operationMapper.toDto(operation.get()),
+                    null
+            );
+        } else {
+            return new OperationResponse(
+                    false,
+                    null,
+                    "no such operation"
+            );
+        }
     }
 
+    @Transactional
     @Override
     public boolean deleteOperation(Long operationId) {
+        Optional<Operation> operation = operationRepository.findById(operationId);
+        if (operation.isPresent()) {
+            operationRepository.delete(operation.get());
+            return true;
+        }
         return false;
     }
 
+    @Transactional
     @Override
-    public List<OperationDto> getAllOperations() {
-        return List.of();
+    public OperationListResponse getOperationsByAccountId(Long accountId) {
+        return new OperationListResponse(
+                true,
+                operationRepository.findByAccount_Id(accountId)
+                        .stream()
+                        .map(operationMapper::toDto)
+                        .collect(Collectors.toList()),
+                null
+        );
     }
 
+    @Transactional
+    @Override
+    public List<OperationDto> getAllOperations() {
+        return operationRepository.findAll()
+                .stream()
+                .map(operationMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
     @Override
     public OperationResponse applyOperation(String externalId, Long accountId, OperationType operationType, double amount) {
-        return null;
+        Optional<Account> optionalAccount = accountRepository.findById(accountId);
+        if (!optionalAccount.isPresent()) {
+            return new OperationResponse(
+                    false,
+                    null,
+                    "no such account"
+            );
+        }
+        Account account = optionalAccount.get();
+        Optional<Operation> old_operation = operationRepository.findByExternalId(externalId);
+        if (old_operation.isPresent()) {
+            return new OperationResponse(
+                    true,
+                    operationMapper.toDto(old_operation.get()),
+                    null
+            );
+        }
+        switch (operationType) {
+            case INCOME -> {
+                IOperation operation = operationFactory.createOperation(externalId, account, operationType, amount);
+                operation.setOperationResult(OperationResult.ACCEPTED);
+                operationRepository.save((Operation) operation);
+                account.setBalance(account.getBalance() + amount);
+                accountRepository.save(account);
+                account.addOperation((Operation) operation);
+                return new OperationResponse(
+                        true,
+                        operationMapper.toDto(operation),
+                        null
+                );
+            }
+            case EXPENSE -> {
+                IOperation operation = operationFactory.createOperation(externalId, account, operationType, amount);
+                if (account.getBalance() < amount) {
+                    operation.setOperationResult(OperationResult.REJECTED);
+                } else {
+                    account.setBalance(account.getBalance() - amount);
+                    operation.setOperationResult(OperationResult.ACCEPTED);
+                }
+                operationRepository.save((Operation) operation);
+                account.addOperation((Operation) operation);
+                accountRepository.save(account);
+                return new OperationResponse(
+                        true,
+                        operationMapper.toDto(operation),
+                        null
+                );
+            }
+        }
+
+        return new OperationResponse(false, null, "unsupported operation type");
     }
 }

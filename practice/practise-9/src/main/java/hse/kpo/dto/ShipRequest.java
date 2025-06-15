@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 
 /**
- * class of customer request.
+ * class of customer requests.
  */
 public record ShipRequest(
         @Schema(description = "Тип двигателя (PEDAL, HAND, LEVITATION)", example = "PEDAL")

@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "accounts")
 @Getter
@@ -22,4 +25,11 @@ public class Account implements IAccount {
 
     @Column(nullable = false)
     private double balance;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Operation> operations = new ArrayList<>();
+
+    public void addOperation(Operation operation) {
+        operations.add(operation);
+    }
 }

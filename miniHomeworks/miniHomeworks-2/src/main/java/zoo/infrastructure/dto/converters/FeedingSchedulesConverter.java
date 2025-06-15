@@ -22,9 +22,9 @@ public class FeedingSchedulesConverter {
     }
 
     /**
-     * function to make feeding schedule from request.
+     * function to make feeding schedule from requests.
      *
-     * @param createFeedingScheduleRequest request with description.
+     * @param createFeedingScheduleRequest requests with description.
      * @param animalId id of animal.
      * @return feeding schedule object
      */

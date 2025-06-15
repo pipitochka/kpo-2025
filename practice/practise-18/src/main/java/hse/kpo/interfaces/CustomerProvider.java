@@ -1,7 +1,7 @@
 package hse.kpo.interfaces;
 
 import hse.kpo.domains.Customer;
-import hse.kpo.dto.request.CustomerRequest;
+import hse.kpo.dto.requests.CustomerRequest;
 
 import java.util.List;
 

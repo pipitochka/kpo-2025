@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 
 /**
- * record of car request.
+ * record of car requests.
  *
  * @param engineType type of engine.
  * @param pedalSize int size of pedal.

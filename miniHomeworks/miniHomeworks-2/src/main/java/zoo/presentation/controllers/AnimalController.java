@@ -58,7 +58,7 @@ public class AnimalController {
     }
 
     /**
-     * function to create animal from request.
+     * function to create animal from requests.
      *
      * @param createAnimalRequest description of animal.
      * @return animal dto object.
