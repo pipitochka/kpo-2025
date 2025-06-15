@@ -11,6 +11,7 @@
         <module name="homework-3.paymentsService.main" />
         <module name="homework-3.gatewayService.main" />
         <module name="homework-3.main" />
+        <module name="homework-3.accountsService.main" />
         <module name="homework-3.ordersService.main" />
       </profile>
     </annotationProcessing>
