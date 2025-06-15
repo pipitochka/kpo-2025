@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-incomes-table
+      author: yourname
+      changes:
+        - createTable:
+            tableName: incomes
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  type: DOUBLE PRECISION
+              - column:
+                  name: status
+                  type: VARCHAR(20)

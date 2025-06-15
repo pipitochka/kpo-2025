@@ -28,7 +28,7 @@ public class PaymentConsumer {
         paymentOperationMessageResponce.setServiceName(message.getServiceName());
         paymentOperationMessageResponce.setResult(operationResponse.isSuccess() ?
                 operationResponse.getOperation().getOperationResult() : OperationResult.REJECTED);
-        paymentProducer.sendOperation("input-operations", paymentOperationMessageResponce);
+        paymentProducer.sendOperation("output-operations", paymentOperationMessageResponce);
     }
 
 }
