@@ -187,7 +187,7 @@ public class AccountService implements IAccountService {
     @Transactional
     @Override
     public OperationResponse applyOperation(String externalId, Long accountId, OperationType operationType, double amount) {
-        Optional<Account> optionalAccount = accountRepository.findById(accountId);
+        Optional<Account> optionalAccount = accountRepository.findByIdForUpdate(accountId);
         if (!optionalAccount.isPresent()) {
             return new OperationResponse(
                     false,
