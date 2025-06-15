@@ -9,6 +9,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "accounts")
 @Getter
+@Setter
 @RequiredArgsConstructor
 public class Account implements IAccount {
 
@@ -16,10 +17,9 @@ public class Account implements IAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
-    private String surname;
-
+    @Column(nullable = false)
     private double balance;
-
 }
