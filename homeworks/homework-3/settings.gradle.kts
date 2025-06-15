@@ -1,2 +1,4 @@
 rootProject.name = "homework-3"
-include("paymentService")
+include("paymentsService")
+include("ordersService")
+include("gatewayService")
