@@ -9,9 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$/homeworks/homework-3" />
             <option value="$PROJECT_DIR$/homeworks/homework-3/accountsService" />
-            <option value="$PROJECT_DIR$/homeworks/homework-3/gatewayService" />
-            <option value="$PROJECT_DIR$/homeworks/homework-3/ordersService" />
-            <option value="$PROJECT_DIR$/homeworks/homework-3/paymentsService" />
           </set>
         </option>
       </GradleProjectSettings>

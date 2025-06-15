@@ -62,6 +62,11 @@ dependencies {
 
 	testImplementation("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	implementation("org.springframework.kafka:spring-kafka")
+	implementation("com.fasterxml.jackson.core:jackson-databind")
+
+
 }
 
 tasks.withType<Test> {

@@ -26,7 +26,7 @@ public class AccountServiceController {
     @PostMapping()
     @Operation(summary = "Создать аккаунт с балансом")
     public ResponseEntity<AccountResponse> createAccount(@RequestBody CreateAccountRequest request) {
-        AccountResponse response = accountService.createAccount(request.getAccountName(), request.getAccountBalance());
+        AccountResponse response = accountService.createAccount(request.accountName(), request.accountBalance());
         return ResponseEntity.ok(response);
     }
 
