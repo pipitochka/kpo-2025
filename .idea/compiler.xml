@@ -10,6 +10,7 @@
         </processorPath>
         <module name="homework-3.incomeService.main" />
         <module name="homework-3.accountsService.main" />
+        <module name="homework-3.ordersService.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="21" />

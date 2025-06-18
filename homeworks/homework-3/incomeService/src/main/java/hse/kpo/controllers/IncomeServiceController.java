@@ -30,4 +30,5 @@ public class IncomeServiceController {
     public ResponseEntity<List<Income>> getIncomes() {
         return ResponseEntity.ok(incomeService.getAllIncomes());
     }
+
 }

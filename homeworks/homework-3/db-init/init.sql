@@ -1,2 +1,4 @@
 CREATE DATABASE accounts;
 CREATE DATABASE operations;
+CREATE DATABASE incomes;
+CREATE DATABASE orders;
