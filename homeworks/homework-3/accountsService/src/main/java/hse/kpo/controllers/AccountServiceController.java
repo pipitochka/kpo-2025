@@ -44,6 +44,7 @@ public class AccountServiceController {
     @GetMapping()
     @Operation(summary = "Получить все аккаунты")
     public ResponseEntity<List<AccountDto>> getAll(){
+
         return ResponseEntity.ok(accountService.getAllAccounts());
     }
 

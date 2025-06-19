@@ -1,6 +1,7 @@
 package hse.kpo.controllers;
 
 import hse.kpo.domain.objects.Income;
+import hse.kpo.dto.IncomeDto;
 import hse.kpo.services.interfaces.IIncomeService;
 import hse.kpo.services.realizations.IncomeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,13 +22,13 @@ public class IncomeServiceController {
 
     @PostMapping("/{id}")
     @Operation(summary = "Увеличить баланс по id")
-    public ResponseEntity<Income> addIncome(@PathVariable Long id, @RequestParam double amount) {
+    public ResponseEntity<IncomeDto> addIncome(@PathVariable Long id, @RequestParam double amount) {
         return ResponseEntity.ok(incomeService.createIncome(id, amount));
     }
 
     @GetMapping
     @Operation(summary = "Получить все увеличения счетов")
-    public ResponseEntity<List<Income>> getIncomes() {
+    public ResponseEntity<List<IncomeDto>> getIncomes() {
         return ResponseEntity.ok(incomeService.getAllIncomes());
     }
 

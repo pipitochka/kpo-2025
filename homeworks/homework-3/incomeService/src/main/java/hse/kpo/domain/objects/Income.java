@@ -2,6 +2,7 @@ package hse.kpo.domain.objects;
 
 import hse.kpo.domain.enums.IncomeStatus;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

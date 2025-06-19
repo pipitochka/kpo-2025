@@ -23,3 +23,45 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     depends_on:
       - zookeeper
+
+  account-service:
+    build: ./accountsService
+    ports:
+      - "8081:8080"
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    depends_on:
+      - kafka
+
+  income-service:
+    build: ./incomeService
+    ports:
+      - "8082:8080"
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    depends_on:
+      - kafka
+
+  orders-service:
+    build: ./ordersService
+    ports:
+      - "8083:8080"
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    depends_on:
+      - kafka
+
+  gateway-service:
+    build: ./gatewayService
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - REMOTE_ORDERS_SERVICE_BASE_URL=http://orders-service:8080
+      - REMOTE_INCOME_SERVICE_BASE_URL=http://income-service:8080
+      - REMOTE_ACCOUNTS_SERVICE_BASE_URL=http://account-service:8080
+    depends_on:
+      - kafka
+      - account-service
+      - income-service
+      - orders-service

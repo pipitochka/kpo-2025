@@ -2,6 +2,7 @@ package hse.kpo.services.realizations;
 
 import hse.kpo.domain.enums.IncomeStatus;
 import hse.kpo.domain.objects.Income;
+import hse.kpo.dto.IncomeDto;
 import hse.kpo.dto.Request;
 import hse.kpo.dto.Responce;
 import hse.kpo.kafka.producers.IncomeProducer;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
@@ -27,7 +29,7 @@ public class IncomeService implements IIncomeService {
 
     @Transactional
     @Override
-    public Income createIncome(Long accountId, double amount) {
+    public IncomeDto createIncome(Long accountId, double amount) {
         Income income = new Income();
         income.setAmount(amount);
         income.setStatus(IncomeStatus.PENDING);
@@ -38,13 +40,15 @@ public class IncomeService implements IIncomeService {
         request.setAccountId(accountId);
         request.setId(income.getId());
         incomeProducer.sendOperation("input-operations", request);
-        return income;
+        return new IncomeDto(income.getId(), income.getUserId(), income.getAmount(), income.getStatus());
     }
 
     @Transactional
     @Override
-    public List<Income> getAllIncomes() {
-        return incomeRepository.findAll();
+    public List<IncomeDto> getAllIncomes() {
+        return incomeRepository.findAll().stream().map(
+                x -> new IncomeDto(x.getId(), x.getUserId(), x.getAmount(), x.getStatus()))
+                .collect(Collectors.toList());
     }
 
     @Transactional
