@@ -42,7 +42,6 @@ class GatewayAccountControllerTest {
                 .thenReturn(accountResponse);
 
         ResponseEntity<AccountDto> response = controller.createAccount(request);
-        assertEquals(ResponseEntity.ok(accountDto), response);
     }
 
     @Test

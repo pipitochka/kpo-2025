@@ -1,20 +1,20 @@
 package hse.kpo.dto;
 
 import hse.kpo.domain.enums.IncomeStatus;
-import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class IncomeDto {
 
-    private final Long id;
+    private Long id;
 
-    private final Long userId;
+    private Long userId;
 
-    private final double amount;
+    private double amount;
 
-    private final IncomeStatus status;
+    private IncomeStatus status;
 }

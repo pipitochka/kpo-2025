@@ -1,21 +1,17 @@
 package hse.kpo.controllers;
 
 import hse.kpo.dto.IncomeDto;
-import hse.kpo.dto.OrderDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/incomes")
@@ -23,8 +19,11 @@ import java.util.Map;
 @Tag(name = "Зарплаты", description = "Операции с зарплатами")
 public class GatewayIncomeController {
 
+    @Getter
     private RestTemplate restTemplate = new RestTemplate();
 
+    @Setter
+    @Getter
     @Value("${remote.income-service.base-url}")
     private String accountsUrl;
 
