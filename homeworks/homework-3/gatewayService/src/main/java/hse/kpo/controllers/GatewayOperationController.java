@@ -42,7 +42,7 @@ public class GatewayOperationController {
         return response != null ? List.of(response) : List.of();
     }
 
-    @GetMapping("/account/{accountId}")
+    @GetMapping("/account/{id}")
     @Operation(summary = "Получить все операции аккаунта с id")
     public ResponseEntity<OperationListResponse> getAllOperationsByAccount(@PathVariable Long id){
         String url = accountsUrl + "/api/operations/account/" + id;

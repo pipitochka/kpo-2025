@@ -38,7 +38,7 @@ public class OperationController {
         return ResponseEntity.ok(accountService.getAllOperations());
     }
 
-    @GetMapping("/account/{accountId}")
+    @GetMapping("/account/{id}")
     @Operation(summary = "Получить все операции аккаунта с id")
     public ResponseEntity<OperationListResponse> getAllOperationsByAccount(@PathVariable Long id){
         OperationListResponse operationListResponse = accountService.getOperationsByAccountId(id);

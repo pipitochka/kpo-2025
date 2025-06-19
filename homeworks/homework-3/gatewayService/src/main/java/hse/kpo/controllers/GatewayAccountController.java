@@ -8,7 +8,9 @@ import hse.kpo.dto.responses.OperationListResponse;
 import hse.kpo.dto.responses.OperationResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,17 +26,20 @@ import java.util.List;
 @Tag(name = "Аккаунты", description = "Операции с созданием/удалением/получением информации")
 public class GatewayAccountController {
 
+
     private RestTemplate restTemplate = new RestTemplate();
 
+    @Getter
+    @Setter
     @Value("${remote.account-service.base-url}")
-    private String accountsUrl;
+    public String accountsUrl;
 
 
     @PostMapping()
     @Operation(summary = "Создать аккаунт с балансом")
     public ResponseEntity<AccountDto> createAccount(@RequestBody CreateAccountRequest request){
         String url = accountsUrl + "/api/accounts";
-        AccountResponse account = restTemplate.getForObject(url, AccountResponse.class);
+        AccountResponse account = restTemplate.postForObject(url, request, AccountResponse.class);
         if (account == null || !account.isSuccess()) {
             return ResponseEntity.notFound().build();
         }

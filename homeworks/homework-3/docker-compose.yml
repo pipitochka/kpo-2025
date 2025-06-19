@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_DB: kpo_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d
+
   zookeeper:
     image: confluentinc/cp-zookeeper:7.3.0
     container_name: zookeeper
@@ -19,37 +32,42 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     depends_on:
       - zookeeper
+      - postgres
 
   account-service:
     build: ./accountsService
     ports:
-      - "8081:8080"
+      - "8081:8081"
     environment:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+
     depends_on:
       - kafka
+      - postgres
 
   income-service:
     build: ./incomeService
     ports:
-      - "8082:8080"
+      - "8082:8082"
     environment:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     depends_on:
       - kafka
+      - postgres
 
   orders-service:
     build: ./ordersService
     ports:
-      - "8083:8080"
+      - "8083:8083"
     environment:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     depends_on:
       - kafka
+      - postgres
 
   gateway-service:
     build: ./gatewayService
@@ -57,11 +75,14 @@ services:
       - "8080:8080"
     environment:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-      - REMOTE_ORDERS_SERVICE_BASE_URL=http://orders-service:8080
-      - REMOTE_INCOME_SERVICE_BASE_URL=http://income-service:8080
-      - REMOTE_ACCOUNTS_SERVICE_BASE_URL=http://account-service:8080
+      - REMOTE_ORDERS_SERVICE_BASE_URL=http://orders-service:8083
+      - REMOTE_INCOME_SERVICE_BASE_URL=http://income-service:8082
+      - REMOTE_ACCOUNTS_SERVICE_BASE_URL=http://account-service:8081
     depends_on:
       - kafka
       - account-service
       - income-service
       - orders-service
+
+volumes:
+  postgres_data:
